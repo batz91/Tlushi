@@ -1,10 +1,15 @@
-# project-template
+# Tlushi
 
-A template repository with wiki for a team project at JCE's software engineering course (replace with the mission of your project).
+Many of us are victims of workers rights violation by the employer but the problem is left untreated due to lack of awareness to the rights, misunderstanding the paycheck and mostly laziness and unwillingness to deal with bureaurucracy and numbers.  
 
-(See also:rRecommended [checklist](https://github.com/ddbeck/readme-checklist/blob/master/checklist.md) for a README) 
+HERES WHERE TLUSHI COMES IN!
 
-![project logo (this one for is taken from basecamp - a project management service)](https://www.klipfolio.com/sites/default/files/integrations/basecamp.png)
+With Tlushi you can examine your paycheck only by tacking a photo of it.
+
+In a short time you will recive email with a simple and clear report about the irregularities and violations of workers rights.
+
+![project logo (this one for is taken from basecamp - a project management service)](https://static.wixstatic.com/media/9bf7c4_9a35ce0918ca4a11828ada3ac827fd80.png/v1/fill/w_446,h_120,al_c,usm_0.66_1.00_0.01/9bf7c4_9a35ce0918ca4a11828ada3ac827fd80.png)
+
 
 ## Tools & Practices
 We're trying to use the best tools and practices in order to produce a quality enginneered product.
@@ -14,21 +19,21 @@ We're trying to use the best tools and practices in order to produce a quality e
 |---|---|
 | Version Control System| git & github |
 | Recommended IDE | [VSCode](https://code.visualstudio.com) |
-| Group Chat | [![Join the chat at https://gitter.im/jce-il/project-template](https://badges.gitter.im/jce-il/project-template.svg)](https://gitter.im/jce-il/project-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
-| Build Status (CI) |  [![Build Status](https://travis-ci.org/jce-il/project-template.svg?branch=master)](https://travis-ci.org/jce-il/project-template) |
-| Dependencies | [![David](https://img.shields.io/david/dev/idleberg/vscode-badges.svg?style=flat-square)](https://david-dm.org/jce-il/project-template?type=dev) |
+| Group Chat | [![Join the chat at https://gitter.im/batz91/Tlushi](https://badges.gitter.im/batz91/Tlushi.svg)](https://gitter.im/batz91/Tlushi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
+| Build Status (CI) |  [![Build Status](https://travis-ci.org/batz91/Tlushi.svg?branch=master)](https://travis-ci.org/batz91/Tlushi) |
+| Dependencies | [![David](https://img.shields.io/david/dev/idleberg/vscode-badges.svg?style=flat-square)](https://david-dm.org/batz91/Tlushi?type=dev) |
 | License | [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/) |
-| Test Coverege | [![codecov.io](https://codecov.io/github/jce-il/project-template/coverage.svg?branch=master)](https://codecov.io/github/jce-il/project-template?branch=master) |
-| Code Quality | [![Code Climate](https://codeclimate.com/github/jce-il/project-template.svg)](https://codeclimate.com/github/jce-il/project-template) |
-| Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/jce-il/project-template) |
-| Current Release | [![Current Version](https://img.shields.io/github/release/jce-il/project-template.svg?style=flat)](https://github.com/jce-il/project-template/releases) |
-| Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/jce-il/project-template/issues) |
-| Project Management Board| [here](https://github.com/jce-il/project-template/projects/1) |
+| Test Coverege | [![codecov.io](https://codecov.io/github/batz91/Tlushi/coverage.svg?branch=master)](https://codecov.io/github/batz91/Tlushi?branch=master) |
+| Code Quality | [![Code Climate](https://codeclimate.com/github/batz91/Tlushi.svg)](https://codeclimate.com/github/jce-il/batz91/Tlushi) |
+| Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/batz91/Tlushi) |
+| Current Release | [![Current Version](https://img.shields.io/github/release/batz91/Tlushi.svg?style=flat)](https://github.com/batz91/Tlushi/releases) |
+| Github Issues | [![GitHub issues](https://img.shields.io/github/issues/batz91/Tlushi.svg?style=flat)](https://github.com/batz91/Tlushi/issues) |
+| Project Management Board| [here](https://github.com/batz91/Tlushi/projects/1) |
 | Deployment | [![Heroku](http://heroku-badge.herokuapp.com/?app=my-app&style=flat&svg=1&root=index.html)] |
-| Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
+| Security | [![Known Vulnerabilities](https://snyk.io/test/github/batz91/Tlushi/badge.svg)](https://snyk.io/test/github/batz91/Tlushi) |
 | Project Course Status | ... |
 
-## Please visit our [live application](https://demo.reactstarterkit.com/)
+## Please visit our [live application](https://www.tlooshy.com/)
 - Alright, currently only a landing page...
 
 
