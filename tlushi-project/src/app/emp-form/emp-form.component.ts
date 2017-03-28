@@ -5,6 +5,7 @@ import { Component, OnInit  } from '@angular/core';
   templateUrl: './emp-form.component.html',
   styleUrls: ['./emp-form.component.css']
 })
+
 export class EmpFormComponent implements OnInit {
   
   constructor() {

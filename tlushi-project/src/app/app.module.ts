@@ -11,7 +11,7 @@ import { EmpFormComponent } from './emp-form/emp-form.component';
     AppComponent,
     EmpFormComponent
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     FormsModule,
     HttpModule
@@ -20,3 +20,8 @@ import { EmpFormComponent } from './emp-form/emp-form.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+var angular = require('angular');
+angular
+  .module('myApp', [require('angular-image-cropper')])
+  .controller(/*...*/);
