@@ -6,8 +6,9 @@
         <header>
         </header>
 		<main>
-		<aside class= "form-style-5">
-			<form id = "Form" action = "#">
+		<aside>
+			<div class= "form-style-5">
+			<form id = "FormGeneralInformation" action = "#">
 				<fieldset>
 					<legend><span class='number'>1</span> פרטים כלליים </legend>
 						<input type='text' id = 'txtName' placeholder='שם העובד'>
@@ -17,6 +18,10 @@
 							<option id = 'txtGlobalHoursNo'> לא</option>
 						</select>
 				</fieldset>
+			</form>
+			</div>
+			<div class= "form-style-5">
+			<form id = "FormPaycheckInformation" action = "#">
 				<fieldset>
 					<legend><span class='number'>2</span> נתוני משכרות </legend>
 					<label> תאריך משכורת </label>
@@ -33,8 +38,12 @@
 					<input type='number' id = 'txtEx150Payment' placeholder='סה"כ תשלום על שעות עבודה נוספות 150'  step='0.01'>
 					<input type='number' id = 'txtTravelPayment' placeholder='נסיעות/חופשי חודשי'  step='0.01'>
 				</fieldset>
+			</form>
+			</div>
+			<div class= "form-style-5">
+			<form id = "FormGeneralInformationRights" action = "#">
 				<fieldset>
-					<legend><span class='number'>2</span> נתוני משכורת- זכויות </legend>
+					<legend><span class='number'>3</span> נתוני משכורת- זכויות </legend>
 					<input type='number' id = 'txtWorkerPension ' placeholder='הפרשת עובד לפנסיה'  step='0.01'>
 					<input type='number' id = 'txtEmployePension ' placeholder='הפרשת מעביד לפנסיה'  step='0.01'>
 					<input type='number' id = 'txtCompensationFund' placeholder='הפרשה לקרן פיצויים'  step='0.01'>
@@ -48,6 +57,7 @@
 					<input type='number' id = 'txtInvalidDeduction' placeholder='ניכוי לא חוקי'  step='0.01'>
 				</fieldset>
 			</form>
+			</div>
 		</aside>
 			<aside class= "camera">
 			</aside>
