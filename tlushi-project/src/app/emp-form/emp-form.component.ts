@@ -14,6 +14,7 @@ export class EmpFormComponent implements OnInit {
   ngOnInit() {
       
   }
+  /*
   previewFile(){
         var preview = document.querySelector('img'); //selects the query named img
         var file;   // = document.querySelector('input[type=file]').files[0]; //sames as here
@@ -27,13 +28,5 @@ export class EmpFormComponent implements OnInit {
         } else {
             preview.src = "";
         }
-   }
-
-   hello(){
-     alert("hello");
-   }
- 
-
- 
- 
+   }*/
 }
