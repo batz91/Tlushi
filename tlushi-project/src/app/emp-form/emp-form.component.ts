@@ -6,7 +6,7 @@ import { Component, OnInit  } from '@angular/core';
   styleUrls: ['./emp-form.component.css']
 })
 export class EmpFormComponent implements OnInit {
-  
+
   constructor() {
     
    }
@@ -14,7 +14,9 @@ export class EmpFormComponent implements OnInit {
   ngOnInit() {
       
   }
+
   previewFile(){
+
         var preview = document.querySelector('img'); //selects the query named img
         var input: any = document.getElementById('fileInput');
         var file = input.files[0];
@@ -29,4 +31,34 @@ export class EmpFormComponent implements OnInit {
             preview.src = "";
         }
    }
+
+   calc(txtName
+		, txtGlobalHours
+		, txtDate
+		, txtDaysOfWork
+		, txtPayForHouer
+		, txtSeniorYears
+		, txtSeniorMounths
+		, txtRegularWorkHours
+		, txtRegularPayment
+		, txtEx150WorkHours
+		, txtEx150Payment
+		, txtTravelPayment
+		, txtWorkerPension
+		, txtEmployePension
+		, txtCompensationFund
+		, txtUsedDaysOff
+		, txtPayForFaysOff
+		, txtAccumulatedDaysOff
+		, txtHolidaysPay
+		, txtConvalescencePay
+		, txtSicksDays
+		, txtSicksDaysPays
+		, txtInvalidDeduction){
+
+           
+          
+   }
+
+  
 }
