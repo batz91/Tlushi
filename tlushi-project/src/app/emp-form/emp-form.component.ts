@@ -7,6 +7,8 @@ import { Component, OnInit  } from '@angular/core';
 })
 export class EmpFormComponent implements OnInit {
 
+  
+
   constructor() {
     
    }
@@ -56,9 +58,18 @@ export class EmpFormComponent implements OnInit {
 		, txtSicksDaysPays
 		, txtInvalidDeduction){
 
-           
-          
+        var standart_month_hours=186;
+        var standart_week_hours=43;              // check
+
+        var month_extra_hours="";
+
+        if(txtGlobalHours-standart_month_hours<=8 && txtGlobalHours-standart_month_hours>0)
+        {}
+
+
+        
    }
+   
 
   
 }
