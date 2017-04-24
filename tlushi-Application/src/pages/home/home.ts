@@ -17,7 +17,7 @@ export class HomePage {
   constructor(private navCtrl: NavController, private camera: Camera ) {
     this.photoTaken = false;
   }
-
+itai
   selectFromGallery() {
     var options = {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
