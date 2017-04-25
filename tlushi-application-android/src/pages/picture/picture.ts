@@ -22,6 +22,8 @@ export class Picture {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.FILE_URI,
+        targetWidth: 1000,
+        targetHeight: 1000,
         // In this app, dynamically set the picture source, Camera or photo gallery
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
@@ -41,7 +43,9 @@ export class Picture {
   openCamera() {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI
+      destinationType: this.camera.DestinationType.FILE_URI,
+      targetWidth: 1000,
+      targetHeight: 1000,
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
