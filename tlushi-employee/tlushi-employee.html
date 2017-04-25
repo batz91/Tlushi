@@ -1,6 +1,7 @@
 <!doctype html5>
-<html>
+<html lang="he">
     <head>
+		<meta charset="utf-8" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<link href="css/tlushi-employee.css" rel='stylesheet' type='text/css' />
 		<script src="js/tlushi-employee.js"></script>
@@ -28,7 +29,6 @@
 						<form id = "Form" action = "#">
 							<fieldset>
 								<legend><span class='number'>2</span> נתוני משכרות </legend>
-								<label> תאריך תלוש </label>
 								<input id = 'txtDate' type= 'date' placeholder='תאריך המשכורת' required autofocus>
 								<input type='number' id = 'txtDaysOfWork' placeholder='ימי עבודה' min = '0'>
 								<input type='number' step='0.01' id = 'txtPayForHouer' placeholder='שכר לשעה' min = '0'>
@@ -67,8 +67,14 @@
 				</div>
 			</aside>
 			<aside class= "left">
-				<input type="file" id="fileInput" (change)='previewFile()'><br>
-				<img src="" height="150%" width="100%" alt="Image preview...">
+				<div id="zoom" class="zoom">
+    					<img alt="" id="zoom-out" height="25" src="zoom-out-icon.png" width="25">
+    					<img alt="" id="zoom-in" height="25" src="zoom-in-icon.png" width="25">
+				</div>
+				<input type="file" id="fileInput"><br>
+				<div class="payCheckImg">
+					<img src="" id="pic" alt="Image preview..." height="100%" width="100%">
+				</div>
 			</aside>
 	
 		</main>
