@@ -40,7 +40,7 @@ export class HomePage {
     this.camera.getPicture(options).then((imageData) => {
       this.cameraData = 'data:image/jpeg;base64,' + imageData;
       this.photoTaken = true;
-      this.photoSelected = false;
+      this.photoSelected = true;
     }, (err) => {
       // Handle error
     });
