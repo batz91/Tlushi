@@ -9,10 +9,10 @@ import { Camera } from '@ionic-native/camera';
 })
 
 export class HomePage {
-  cameraData: string;
   photoTaken: boolean;
   cameraUrl: string;
   photoSelected: boolean;
+  allowEdit: boolean;
 
   constructor(private navCtrl: NavController, private camera: Camera ) {
     this.photoTaken = false;
@@ -20,11 +20,18 @@ export class HomePage {
 
   selectFromGallery() {
     var options = {
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.FILE_URI
+        quality: 50,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        allowEdit: true,
+        correctOrientation: true  //Corrects Android orientation quirks
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
+      this.allowEdit = true;
       this.photoSelected = true;
       this.photoTaken = false;
   }, (err) => {
@@ -35,14 +42,16 @@ export class HomePage {
   openCamera() {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.DATA_URL
+      destinationType: this.camera.DestinationType.FILE_URI
     };
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraData = 'data:image/jpeg;base64,' + imageData;
+      this.cameraUrl = imageData;
       this.photoTaken = true;
-      this.photoSelected = false;
+      this.allowEdit = true;
+      this.photoSelected = true;
     }, (err) => {
         console.log(err);
     });
   }
+  
 }

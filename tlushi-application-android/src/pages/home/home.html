@@ -1,12 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Test</ion-title>
+    <ion-title>תלושי</ion-title>
   </ion-navbar>
 </ion-header>
  
 <ion-content padding class="home">
-  <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(cameraData)" *ngIf="photoTaken">
-  <img [src]="cameraUrl" *ngIf="photoSelected">
+  <img [src]="cameraUrl" *ngIf="cameraUrl">
 <ion-fab right bottom>
     <button ion-fab color="primary" (click)="openCamera()">
         <ion-icon name="md-camera"></ion-icon>
