@@ -1,18 +1,35 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>תלושי</ion-title>
+    <ion-title style="text-align: center">תלושי</ion-title>
   </ion-navbar>
 </ion-header>
- 
-<ion-content padding class="home">
-  <img [src]="cameraUrl" *ngIf="cameraUrl">
-<ion-fab right bottom>
-    <button ion-fab color="primary" (click)="openCamera()">
-        <ion-icon name="md-camera"></ion-icon>
-    </button>
-</ion-fab><ion-fab left bottom>
-    <button ion-fab color="secondary" (click)="selectFromGallery()">
-        <ion-icon name="md-images"></ion-icon>
-    </button>
-</ion-fab>
-</ion-content>
+<ion-content padding class="getstart" scroll="false">
+<ion-list dir="rtl">
+  <ion-item>
+    <ion-label style="text-align: right" color="primary" stacked>שם מלא:</ion-label>
+    <ion-input placeholder="הכנס שם"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label style="text-align: right" color="primary" stacked>מספר טלפון:</ion-label>
+    <ion-input type="number" placeholder="טלפון"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label style="text-align: right" color="primary" stacked>אימייל:</ion-label>
+    <ion-input type="email" placeholder="הכנס כתובת אימייל"></ion-input>
+  </ion-item>
+
+</ion-list>
+
+<ion-row>
+     <ion-col width-50 style="text-align: center">
+        <button ion-button (click)= "showPicturePage()" class= "pictureButton">צלם משכורת</button>
+      </ion-col>
+   </ion-row>
+    </ion-content>
+    <ion-footer>
+  <ion-toolbar dir="rtl">
+    <ion-title style="font-size: 5px">תלושי- זכויות יוצרים</ion-title>
+  </ion-toolbar>
+</ion-footer>
