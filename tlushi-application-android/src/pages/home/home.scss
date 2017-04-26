@@ -1,10 +1,30 @@
 page-home {
 
 }
+.homeBackground{
+    background-image: url(/img/home-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .getstart{
-    margin-top: 2%;
+    margin-top: 5%;
 }
 .pictureButton{
     text-align: center;
-    padding-top: 10%;
+    padding-top: 4%;
+}
+.input{
+margin-left: auto;
+margin-right: auto;
+width: 32%;     
+}
+.tlushiImg{
+    position: relative;
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 8%;
+    width: 13%; 
+    height: 13%;
+    display: block;
+    align-items: center;
 }

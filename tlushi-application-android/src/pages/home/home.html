@@ -3,33 +3,29 @@
     <ion-title style="text-align: center">תלושי</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding class="getstart" scroll="false">
-<ion-list dir="rtl">
-  <ion-item>
-    <ion-label style="text-align: right" color="primary" stacked>שם מלא:</ion-label>
-    <ion-input placeholder="הכנס שם"></ion-input>
+<ion-content class="homeBackground" scroll="false">
+  <ion-img class="tlushiImg" src="/img/tlushi.png"></ion-img>
+<ion-list class="getstart" dir="rtl">
+  <ion-item class="input">
+    <ion-input placeholder="שם מלא"></ion-input>
   </ion-item>
 <br>
-  <ion-item>
-    <ion-label style="text-align: right" color="primary" stacked>מספר טלפון:</ion-label>
+  <ion-item class="input">
     <ion-input type="number" placeholder="טלפון"></ion-input>
   </ion-item>
 <br>
-  <ion-item>
-    <ion-label style="text-align: right" color="primary" stacked>אימייל:</ion-label>
+  <ion-item class="input">
     <ion-input type="email" placeholder="הכנס כתובת אימייל"></ion-input>
   </ion-item>
 <br>
+
 </ion-list>
 
 <ion-row class= "pictureButton">
      <ion-col>
-        <button ion-button (click)= "showPicturePage()">צלם משכורת</button>
+        <button ion-button round style= "background : gray; font-size:16px;" (click)= "showPicturePage()">צלם משכורת</button>
       </ion-col>
    </ion-row>
     </ion-content>
     <ion-footer>
-  <ion-toolbar dir="rtl">
-    <ion-title style="font-size: 5px">תלושי- זכויות יוצרים</ion-title>
-  </ion-toolbar>
 </ion-footer>
