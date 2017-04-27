@@ -9,6 +9,7 @@ var employeeAPI = function() {
         $("#fileInput").change(previewFile);
         $('#zoom-in').click(zoomIn); 
         $('#zoom-out').click(zoomOut);
+        $('#reset-zoom').click(zoomReset);
     };
 
     var calc = function() {
@@ -20,9 +21,14 @@ var employeeAPI = function() {
         $('#pic').height($('#pic').height()*1.2)
     }
 
-      var zoomOut = function(){
+    var zoomOut = function(){
         $('#pic').width($('#pic').width()/1.2)
         $('#pic').height($('#pic').height()/1.2)
+    }
+
+    var zoomReset = function(){
+        $('#pic').width("100%");
+        $('#pic').height("100%");
     }
 
      var previewFile = function(){
