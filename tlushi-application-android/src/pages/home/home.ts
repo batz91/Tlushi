@@ -20,18 +20,22 @@ export class HomePage {
     this.userName = name.value;
     this.userEmail = email.value;
     this.userPhone = number.value;
+    var nameFalg, emailFlag, userPhoneFlag;
+
     if(!(/^[a-z\u0590-\u05fe]+$/i.test(this.userName)))
      {
-      let alert = this.alertCtrl.create({
-       title: 'שדה חסר',
-       subTitle: 'נא למלא שם מלא',
-       buttons: ['אשר']
-       });
-  alert.present();
-      return false;
+       nameFalg = true;
       }
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
       {
+        emailFlag=true;
+      }
+//    if(!(/^[a-z\u0590-\u05fe]+$/i.test(this.userName)))
+ //      {
+  //        alert("sds");
+   //    } 
+/*    if(this.userName == "" || this.userEmail == "" || this.userPhone == "")
+      return false;
       let alert = this.alertCtrl.create({
        title: 'שדה חסר',
        subTitle: 'נא למלא אימייל חוקי',
@@ -39,10 +43,7 @@ export class HomePage {
        });
   alert.present();
       return false;
-      }
-    if(this.userName == "" || this.userEmail == "" || this.userPhone == "")
-      return false;
-    this.navCtrl.push(Picture);
+*/    this.navCtrl.push(Picture);
 }
 
   
