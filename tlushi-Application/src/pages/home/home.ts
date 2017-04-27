@@ -35,12 +35,12 @@ export class HomePage {
   openCamera() {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.DATA_URL
+      destinationType: this.camera.DestinationType.FILE_URI
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraData = 'data:image/jpeg;base64,' + imageData;
       this.photoTaken = true;
-      this.photoSelected = true;
+      this.photoSelected = false;
     }, (err) => {
       // Handle error
     });
