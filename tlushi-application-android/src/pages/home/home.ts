@@ -32,7 +32,7 @@ export class HomePage {
         emailFlag=true;
         message+="נא למלא אימייל חוקי\n";
       }
-    if(!(/^[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
+    if(!(/[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
       {
           userPhoneFlag= true;
           message+="נא למלא טלפון חוקי\n"
@@ -46,6 +46,6 @@ export class HomePage {
       alert.present();
       return false;
     }
-    this.navCtrl.push(Picture);
+    this.navCtrl.push(Picture, {userName: this.userName, userPhone: this.userPhone, userEmail:this.userEmail});
     }
 }

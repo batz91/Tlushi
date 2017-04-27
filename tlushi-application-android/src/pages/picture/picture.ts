@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
+
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 
 @Component({
@@ -12,10 +14,17 @@ export class Picture {
   cameraUrl: string;
   photoSelected: boolean;
   allowEdit: boolean;
+  userName: string;
+  userPhone;
+  userEmail;
+  item: FirebaseObjectObservable<any>;
 
-  constructor(private navCtrl: NavController, private camera: Camera ) {
+  constructor(private navParams: NavParams, private af: AngularFire, private navCtrl: NavController, private camera: Camera ) {
+    this.item = af.database.object('/item');
     this.photoTaken = false;
-
+    this.userName= navParams.get('userName');
+    this.userPhone= navParams.get('userPhone');
+    this.userEmail= navParams.get('userEmail'); 
   }
   selectFromGallery() {
     var options = {
@@ -55,6 +64,9 @@ export class Picture {
     }, (err) => {
         console.log(err);
     });
+  }
+    uploadObj() {
+      this.item.set({ name: this.userName, phone: this.userPhone, email: this.userEmail});
   }
   
 }
