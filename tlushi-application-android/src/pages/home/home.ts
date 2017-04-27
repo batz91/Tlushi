@@ -30,11 +30,11 @@ export class HomePage {
       {
         emailFlag=true;
       }
-//    if(!(/^[a-z\u0590-\u05fe]+$/i.test(this.userName)))
- //      {
-  //        alert("sds");
-   //    } 
-/*    if(this.userName == "" || this.userEmail == "" || this.userPhone == "")
+    if(!(/^[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
+      {
+          userPhoneFlag= true;
+      } 
+    if(this.userName == "" || this.userEmail == "" || this.userPhone == "")
       return false;
       let alert = this.alertCtrl.create({
        title: 'שדה חסר',
@@ -43,7 +43,7 @@ export class HomePage {
        });
   alert.present();
       return false;
-*/    this.navCtrl.push(Picture);
+    this.navCtrl.push(Picture);
 }
 
   
