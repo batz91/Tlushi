@@ -1,4 +1,7 @@
 var employeeAPI = function() {
+//  VARIABLES 
+    var minimumWage = 30;   // שכר מינימום
+    var fare = 7;   // תעריך נסיעה  
 
 //	Create the initial appearance of the site
 	var initModule = function() {
@@ -21,6 +24,22 @@ var employeeAPI = function() {
         $('#pic').width($('#pic').width()/1.2)
         $('#pic').height($('#pic').height()/1.2)
     }
+
+     var previewFile = function(){
+        var preview = document.getElementById('pic'); //selects the query named img
+        var input = document.getElementById('fileInput');
+        var file = input.files[0];
+        var reader  = new FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+       
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+   }
 
     var fillOutput = function(){
         var text = 
