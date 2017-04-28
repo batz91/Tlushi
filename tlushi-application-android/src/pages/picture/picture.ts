@@ -68,11 +68,10 @@ export class Picture {
   }
 //  firebase function
     uploadObj() {
+      alert("uploading data");
       var image= this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
-      else
-        image= "data:image/jpeg;base64," + this.cameraUrl
       this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: image});
   }
   

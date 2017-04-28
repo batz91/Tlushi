@@ -32,7 +32,7 @@ export class HomePage {
         emailFlag=true;
         message+="נא למלא אימייל חוקי\n";
       }
-    if(!(/[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
+    if(!(/^[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
       {
           userPhoneFlag= true;
           message+="נא למלא טלפון חוקי\n"
