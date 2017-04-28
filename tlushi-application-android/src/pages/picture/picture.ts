@@ -72,7 +72,21 @@ export class Picture {
       var image= this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
+/*
+    // upload picture test
+
+    let storageRef = firebase.storage().ref('/userPaychecks/'+this.cameraUrl);
+    // Create a timestamp as filename
+    const filename = Math.floor(Date.now() / 1000);
+
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child(`images/${filename}.jpg`);
+
+    imageRef.putString(this.cameraUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
+     // Do something here when the data is succesfully uploaded!
+    });
+  */
       this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: image});
   }
-  
+ 
 }
