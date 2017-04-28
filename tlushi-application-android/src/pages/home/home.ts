@@ -32,12 +32,13 @@ export class HomePage {
         emailFlag=true;
         message+="נא למלא אימייל חוקי\n";
       }
-    if(!(/^[05]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
+      // Rejex not working
+ /*   if(!(/^[0]+[5]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
       {
           userPhoneFlag= true;
           message+="נא למלא טלפון חוקי\n"
       }
-      if(message!=""){
+ */     if(message!=""){
        let alert = this.alertCtrl.create({
        title: 'שדה חסר',
        subTitle: message,

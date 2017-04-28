@@ -4,7 +4,7 @@ import { Camera } from '@ionic-native/camera';
 
 //  FireBase import
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-picture',
@@ -72,21 +72,17 @@ export class Picture {
       var image= this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
-/*
-    // upload picture test
-
-    let storageRef = firebase.storage().ref('/userPaychecks/'+this.cameraUrl);
+    
+    // firebase storage folder
+    let storageRef = firebase.storage().ref();
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
-
-    // Create a reference to 'images/todays-date.jpg'
-    const imageRef = storageRef.child(`images/${filename}.jpg`);
-
-    imageRef.putString(this.cameraUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
-     // Do something here when the data is succesfully uploaded!
-    });
-  */
-      this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: image});
+    // firebase upload image to storage
+    storageRef.child(`${this.userName}${filename}.jpeg`)
+          .putString(image, 'base64', { contentType: 'image/jpeg' }).then((savedPicture) => {
+    // create new user in DB
+    this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: savedPicture.downloadURL});
+        });
   }
  
 }
