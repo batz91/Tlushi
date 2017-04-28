@@ -3,7 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
 //  FireBase import
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 
 @Component({
@@ -18,10 +18,10 @@ export class Picture {
   userName: string;
   userPhone;
   userEmail;
-  item: FirebaseObjectObservable<any>;
+  user: FirebaseListObservable<any>;
 
   constructor(private navParams: NavParams, private af: AngularFire, private navCtrl: NavController, private camera: Camera ) {
-    this.item = af.database.object('/item');
+    this.user = af.database.list('/user');
     this.photoTaken = false;
     this.userName= navParams.get('userName');
     this.userPhone= navParams.get('userPhone');
@@ -68,7 +68,12 @@ export class Picture {
   }
 //  firebase function
     uploadObj() {
-      this.item.set({ name: this.userName, phone: this.userPhone, email: this.userEmail});
+      var image= this.cameraUrl;
+      if(this.cameraUrl == undefined)
+        image= "none";
+      else
+        image= "data:image/jpeg;base64," + this.cameraUrl
+      this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: image});
   }
   
 }
