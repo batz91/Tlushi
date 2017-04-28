@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
+//  FireBase import
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 
@@ -65,6 +66,7 @@ export class Picture {
         console.log(err);
     });
   }
+//  firebase function
     uploadObj() {
       this.item.set({ name: this.userName, phone: this.userPhone, email: this.userEmail});
   }

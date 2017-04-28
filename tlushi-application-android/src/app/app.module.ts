@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {Picture} from '../pages/picture/picture';
 
+// fire base import
 import { AngularFireModule } from 'angularfire2';
 
 // Must export the config
@@ -28,7 +29,8 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-        AngularFireModule.initializeApp(firebaseConfig),
+    //fire base
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
