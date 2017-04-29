@@ -22,10 +22,10 @@ export class HomePage {
     this.userPhone = number.value;
     var nameFalg, emailFlag, userPhoneFlag;
     var message ="";
-    if(!(/^[a-z\u0590-\u05fe]+$/i.test(this.userName)))
+    if(!(/^[a-z\u0590-\u05fe]+(\s)[a-z\u0590-\u05fe]+$/i.test(this.userName)))
      {
        nameFalg = true;
-       message+="נא למלא שם\n";
+       message+="נא להכניס שם מלא\n";
       }
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
       {
@@ -33,12 +33,12 @@ export class HomePage {
         message+="נא למלא אימייל חוקי\n";
       }
       // Rejex not working
- /*   if(!(/^[0]+[5]+[0-9]{8}$/i.test(this.userPhone)) || !(/^[0]+[0-9]{8}$/i.test(this.userPhone)))
+    if(!(/^[0-9]{9,10}$/.test(this.userPhone)))
       {
           userPhoneFlag= true;
           message+="נא למלא טלפון חוקי\n"
       }
- */     if(message!=""){
+      if(message!=""){
        let alert = this.alertCtrl.create({
        title: 'שדה חסר',
        subTitle: message,
