@@ -11,7 +11,6 @@ import * as firebase from 'firebase';
   templateUrl: 'picture.html',
 })
 export class Picture {
-    platform: any;
   photoTaken: boolean;
   cameraUrl: string;
   photoSelected: boolean;
