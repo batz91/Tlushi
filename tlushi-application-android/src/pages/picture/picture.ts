@@ -68,7 +68,6 @@ export class Picture {
   }
 //  firebase function
    
-  
     uploadObj() {
       var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
@@ -82,7 +81,11 @@ export class Picture {
     storageRef.child(`${this.userName}${filename}.png`)
           .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
     // create new user in DB
-    this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: savedPicture.downloadURL});
+    this.user.push({
+      name: this.userName, 
+      phone: this.userPhone, 
+      email: this.userEmail, 
+      paycheck: savedPicture.downloadURL});
         });
  alert("upload success"); 
 }
