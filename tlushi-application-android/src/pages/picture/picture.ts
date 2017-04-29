@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
   templateUrl: 'picture.html',
 })
 export class Picture {
+    platform: any;
   photoTaken: boolean;
   cameraUrl: string;
   photoSelected: boolean;
@@ -31,11 +32,11 @@ export class Picture {
     var options = {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: this.camera.DestinationType.FILE_URI,
+        destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 1000,
         targetHeight: 1000,
         // In this app, dynamically set the picture source, Camera or photo gallery
-        encodingType: this.camera.EncodingType.JPEG,
+        encodingType: this.camera.EncodingType.PNG,
         mediaType: this.camera.MediaType.PICTURE,
         allowEdit: true,
         correctOrientation: true  //Corrects Android orientation quirks
@@ -53,7 +54,7 @@ export class Picture {
   openCamera() {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI,
+     destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
       targetHeight: 1000,
     };
@@ -67,9 +68,10 @@ export class Picture {
     });
   }
 //  firebase function
+   
+  
     uploadObj() {
-      alert("uploading data");
-      var image= this.cameraUrl;
+      var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
     
@@ -78,11 +80,12 @@ export class Picture {
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // firebase upload image to storage
-    storageRef.child(`${this.userName}${filename}.jpeg`)
-          .putString(image, 'base64', { contentType: 'image/jpeg' }).then((savedPicture) => {
+    storageRef.child(`${this.userName}${filename}.png`)
+          .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
     // create new user in DB
     this.user.push({ name: this.userName, phone: this.userPhone, email: this.userEmail, paycheck: savedPicture.downloadURL});
         });
-  }
+ alert("upload success"); 
+}
  
 }
