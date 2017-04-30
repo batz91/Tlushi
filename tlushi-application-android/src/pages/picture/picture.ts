@@ -85,7 +85,8 @@ export class Picture {
       name: this.userName, 
       phone: this.userPhone, 
       email: this.userEmail, 
-      paycheck: savedPicture.downloadURL});
+      paycheck: savedPicture.downloadURL,
+      status: "false"});
         });
  alert("upload success"); 
 }
