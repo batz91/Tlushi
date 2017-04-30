@@ -1,5 +1,6 @@
 var employeeAPI = function() {
 //  VARIABLES 
+    var angle = 0;
     var minimumWage = 30;   // שכר מינימום
     var fare = 7;   // תעריך נסיעה  
 
@@ -9,8 +10,8 @@ var employeeAPI = function() {
         $("#fileInput").click(openPic);
         $('#zoom-in').click(zoomIn); 
         $('#zoom-out').click(zoomOut);
-        $('#reset-zoom').click(rotate);
-        //$('#rotate').click(rotate);
+        $('#reset-zoom').click(zoomReset);
+        $('#rotate').click(rotate);
     };
 
     var openPic = function(){
@@ -25,7 +26,7 @@ var employeeAPI = function() {
                     preview.src = childData.paycheck;
                     var key=childSnapshot.key;
                     database.ref("user/"+key+"/status").set("true");
-                    return;
+                    exit();
                 }
              });
         });
