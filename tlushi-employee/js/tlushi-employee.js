@@ -5,13 +5,29 @@ var employeeAPI = function() {
 
 //	Create the initial appearance of the site
 	var initModule = function() {
-		$("#butCalc").click(calc);
+		$("#butCalc").click(openPic);
         $("#fileInput").change(previewFile);
         $('#zoom-in').click(zoomIn); 
         $('#zoom-out').click(zoomOut);
         $('#reset-zoom').click(zoomReset);
     };
 
+    var openPic = function(){
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        leadsRef.on('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                if(childData.status == "false")
+                {
+                    var preview = document.getElementById('pic'); //selects the query named img
+                    preview.src = childData.paycheck;
+                    return;
+                }
+             });
+        });
+    }
+    
     var calc = function() {
         fillOutput();
     };
