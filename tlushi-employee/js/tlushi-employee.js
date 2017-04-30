@@ -36,7 +36,6 @@ var employeeAPI = function() {
                 }
              });
         });
-        alert("אין תלוש לבדיקה");
 };
     var openProgress = function(){
         var list = $("#progress");
