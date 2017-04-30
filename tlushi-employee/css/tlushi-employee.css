@@ -20,6 +20,40 @@ header{
     height: 100%;
 }
 
+#container {
+  width: 820px;
+  height: 100px;
+  overflow: hidden;
+}
+#container.rotate90,
+#container.rotate270 {
+  width: 100px;
+  height: 820px
+}
+#pic {
+  transform-origin: top left;
+  /* IE 10+, Firefox, etc. */
+  -webkit-transform-origin: top left;
+  /* Chrome */
+  -ms-transform-origin: top left;
+  /* IE 9 */
+}
+#container.rotate90 #pic {
+  transform: rotate(90deg) translateY(-100%);
+  -webkit-transform: rotate(90deg) translateY(-100%);
+  -ms-transform: rotate(90deg) translateY(-100%);
+}
+#container.rotate180 #pic {
+  transform: rotate(180deg) translate(-100%, -100%);
+  -webkit-transform: rotate(180deg) translate(-100%, -100%);
+  -ms-transform: rotate(180deg) translateX(-100%, -100%);
+}
+#container.rotate270 #pic {
+  transform: rotate(270deg) translateX(-100%);
+  -webkit-transform: rotate(270deg) translateX(-100%);
+  -ms-transform: rotate(270deg) translateX(-100%);
+}
+
 .output{
     text-align: center;
 

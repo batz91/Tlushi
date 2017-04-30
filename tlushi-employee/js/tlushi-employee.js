@@ -5,11 +5,12 @@ var employeeAPI = function() {
 
 //	Create the initial appearance of the site
 	var initModule = function() {
-		$("#butCalc").click(openPic);
-        $("#fileInput").change(previewFile);
+		$("#butCalc").click(calc);
+        $("#fileInput").click(openPic);
         $('#zoom-in').click(zoomIn); 
         $('#zoom-out').click(zoomOut);
-        $('#reset-zoom').click(zoomReset);
+        $('#reset-zoom').click(rotate);
+        //$('#rotate').click(rotate);
     };
 
     var openPic = function(){
@@ -22,6 +23,8 @@ var employeeAPI = function() {
                 {
                     var preview = document.getElementById('pic'); //selects the query named img
                     preview.src = childData.paycheck;
+                    var key=childSnapshot.key;
+                    database.ref("user/"+key+"/status").set("true");
                     return;
                 }
              });
@@ -45,6 +48,12 @@ var employeeAPI = function() {
     var zoomReset = function(){
         $('#pic').width("100%");
         $('#pic').height("100%");
+    }
+
+    var rotate = function(){
+        img = document.getElementById('container');
+        angle = (angle + 90) % 360;
+        img.className = "rotate" + angle;
     }
 
      var previewFile = function(){
