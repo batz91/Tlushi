@@ -22,7 +22,7 @@ export class HomePage {
     this.userPhone = number.value;
     var nameFalg, emailFlag, userPhoneFlag;
     var message ="";
-    if(!(/^[a-z\u0590-\u05fe]+(\s)[a-z\u0590-\u05fe]+$/i.test(this.userName)))
+    if(!(/^[a-z\u0590-\u05fe]+(\s)+[a-z\u0590-\u05fe]+$/i.test(this.userName)))
      {
        nameFalg = true;
        message+="נא להכניס שם מלא\n";
