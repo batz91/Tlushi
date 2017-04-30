@@ -17,18 +17,22 @@ var employeeAPI = function() {
     };
 
     var openPic = function(){
+        var flag= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
         leadsRef.on('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {                     
+            snapshot.forEach(function(childSnapshot) {
+                if(flag == true)
+                    return;                     
                 var childData = childSnapshot.val();
                 if(childData.status == "false")
                 {
+                    flag= true;
                     var preview = document.getElementById('pic'); //selects the query named img
                     preview.src = childData.paycheck;
                     var key=childSnapshot.key;
                     database.ref("user/"+key+"/status").set("true");
-                    exit();
+                    return;
                 }
              });
         });
