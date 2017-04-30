@@ -9,15 +9,28 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {Picture} from '../pages/picture/picture';
 
+// fire base import
+import { AngularFireModule } from 'angularfire2';
+
+// Must export the config
+export const firebaseConfig = {
+    apiKey: "AIzaSyC5AyQEvVVZORu4UG74JPkOgEwH6r4Kwg8",
+    authDomain: "tlushi-3d18f.firebaseapp.com",
+    databaseURL: "https://tlushi-3d18f.firebaseio.com",
+    storageBucket: "tlushi-3d18f.appspot.com",
+    messagingSenderId: "330250783415"
+};
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    Picture,
-    
+    Picture
   ],
   imports: [
     BrowserModule,
+    //fire base
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
