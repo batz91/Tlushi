@@ -7,6 +7,8 @@ var employeeAPI = function() {
 	var initModule = function() {
 		$("#butCalc").click(calc);
         $("#fileInput").click(openPic);
+        $("#fileProgress").click(openProgress);
+        $("#fileProgressUpload").click(uploadInProgress);
         $('#zoom-in').click(zoomIn); 
         $('#zoom-out').click(zoomOut);
         $('#reset-zoom').click(rotate);
@@ -29,8 +31,35 @@ var employeeAPI = function() {
                 }
              });
         });
-    }
-    
+    };
+    var openProgress = function(){
+        var list = $("#progress");
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        leadsRef.on('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                if(childData.status == "true")
+                {
+                    list.append(new Option(childData.email, childData.email));
+                }
+             });
+        });
+    };
+    var uploadInProgress = function(){
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        leadsRef.on('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                if($("#progress option:selected").text() == childData.email)
+                {
+                     var preview = document.getElementById('pic'); //selects the query named img
+                    preview.src = childData.paycheck;
+                }
+             });
+        });
+    };
     var calc = function() {
         fillOutput();
     };
