@@ -25,18 +25,17 @@ export class HomePage {
     if(!(/^[a-z\u0590-\u05fe]+(\s)+[a-z\u0590-\u05fe]+$/i.test(this.userName)))
      {
        nameFalg = true;
-       message+="נא להכניס שם מלא\n";
+       message+="<p> שם מלא לא חוקי</p>";
+      }
+     if(!(/^[0-9]{9,10}$/.test(this.userPhone)))
+      {
+          userPhoneFlag= true;
+          message+="<p> מספר טלפון לא חוקי </p>"
       }
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
       {
         emailFlag=true;
-        message+="נא למלא אימייל חוקי\n";
-      }
-      // Rejex not working
-    if(!(/^[0-9]{9,10}$/.test(this.userPhone)))
-      {
-          userPhoneFlag= true;
-          message+="נא למלא טלפון חוקי\n"
+        message+="<p> אימייל לא חוקי </p>";
       }
       if(message!=""){
        let alert = this.alertCtrl.create({
