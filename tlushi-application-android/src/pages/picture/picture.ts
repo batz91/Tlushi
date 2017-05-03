@@ -3,7 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
 //  FireBase import
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
+import { AngularFire } from 'angularfire/AngularFire';
 import * as firebase from 'firebase';
 
 @Component({
