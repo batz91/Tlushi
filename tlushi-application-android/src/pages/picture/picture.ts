@@ -4,7 +4,7 @@ import { Camera } from '@ionic-native/camera';
 
 //  FireBase import
 import {DomSanitizer} from '@angular/platform-browser';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
 import * as firebase from 'firebase';
 
 @Component({
@@ -21,8 +21,8 @@ export class Picture {
   userEmail;
   user: FirebaseListObservable<any>;
 
-  constructor(public _DomSanitizationService: DomSanitizer, private navParams: NavParams, private af: AngularFire, private navCtrl: NavController, private camera: Camera ) {
-    this.user = af.database.list('/user');
+  constructor(public _DomSanitizationService: DomSanitizer, private navParams: NavParams, private af: AngularFireDatabase, private navCtrl: NavController, private camera: Camera ) {
+    this.user = af.list('/user');
     this.photoTaken = false;
     this.userName= navParams.get('userName');
     this.userPhone= navParams.get('userPhone');
