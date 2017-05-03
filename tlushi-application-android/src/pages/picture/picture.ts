@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
+import { EndPage } from '../endpage/endpage';
 
 //  FireBase import
 import {DomSanitizer} from '@angular/platform-browser';
@@ -89,7 +90,8 @@ export class Picture {
       paycheck: savedPicture.downloadURL,
       status: "false"});
         });
- alert("upload success"); 
+     this.navCtrl.push(EndPage, {userName: this.userName, userEmail:this.userEmail});
+
 }
  
 }
