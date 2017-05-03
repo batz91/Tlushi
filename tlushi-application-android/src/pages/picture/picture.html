@@ -10,7 +10,7 @@
 </ion-header>
  
 <ion-content padding class="home">
-  <img [src]="'data:image/png;base64,'+cameraUrl" *ngIf="cameraUrl">
+  <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/png;base64,' +cameraUrl)" *ngIf="cameraUrl">
 <ion-fab right bottom>
     <button ion-fab color="primary" (click)="openCamera()">
         <ion-icon name="md-camera"></ion-icon>
