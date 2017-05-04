@@ -1,8 +1,12 @@
 var employeeAPI = function() {
+    var angle = 0;      // for rotate
+
 //  VARIABLES 
-    var angle = 0;
-    var minimumWage = 30;   // שכר מינימום
-    var fare = 7;   // תעריך נסיעה  
+    var minHour = 26.88;   // שכר מינימום לשעה
+    var minMonth = 4999.68; // שכר מינימום חודשי
+    var travelDay = 22.6;   // נסיעות ליום  
+    var weekHours = 186;    // שעות שבועיות
+
 
 //	Create the initial appearance of the site
 	var initModule = function() {
@@ -66,7 +70,15 @@ var employeeAPI = function() {
         });
     };
     var calc = function() {
-        fillOutput();
+        var payForHouer = $("#txtPayForHouer").val;
+        var regularWorkHours = $("#txtRegularWorkHours").val;
+
+        // Minimum wage gap
+        var minWageGap = 0;
+        if(payForHouer<minHour)
+            minWageGap = (minHour-payForHouer)*regularWorkHours;
+        alert(minWageGap);
+        //fillOutput();
     };
 
     var zoomIn = function(){
