@@ -89,8 +89,10 @@ var employeeAPI = function() {
             if(payForHour*regularWorkHours>regularPayment)
                  basicWageGap=payForHour*regularWorkHours-regularPayment;
         }
-        console.log("minWageGap"+minWageGap);
-        console.log("basicWageGap"+basicWageGap);
+
+        
+        console.log("minWageGap = "+minWageGap);
+        console.log("basicWageGap = "+basicWageGap);
         //fillOutput();
     };
 
