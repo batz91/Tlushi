@@ -2,14 +2,25 @@ var employeeAPI = function() {
     var angle = 0;      // for rotate
 
 //  VARIABLES 
-    var minHour = 26.88;   // שכר מינימום לשעה
-    var minMonth = 4999.68; // שכר מינימום חודשי
-    var travelDay = 22.6;   // נסיעות ליום  
-    var weekHours = 186;    // שעות שבועיות
+    var minHour;   // שכר מינימום לשעה
+    var minMonth; // שכר מינימום חודשי
+    var travelDay;   // נסיעות ליום  
+    var weekHours;    // שעות שבועיות
 
 
 //	Create the initial appearance of the site
 	var initModule = function() {
+        var database = firebase.database();
+        var leadsRef = database.ref('Settings');
+        leadsRef.on('value', function(snapshot) { 
+            snapshot.forEach(function(childSnapshot) {             
+            var childData = childSnapshot.val();
+            minHour= parseFloat(childData.minHour);
+            minMonth= parseFloat(childData.minMonth);
+            travelDay= parseFloat(childData.travelDay);
+            weekHours= parseFloat(childData.weekHours);
+            });
+        });
 		$("#butCalc").click(calc);
         $("#fileInput").click(openPic);
         $("#fileProgress").click(openProgress);
