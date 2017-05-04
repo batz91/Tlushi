@@ -29,8 +29,22 @@ var employeeAPI = function() {
         $('#zoom-out').click(zoomOut);
         $('#reset-zoom').click(zoomReset);
         $('#rotate').click(rotate);
+        $('#SettingButton').click(settings);
     };
 
+    var settings = function(){
+        var email = window.prompt("Enter your email","");
+        var password = window.prompt("Enter your password","");
+      firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+          alert("works");
+          }).catch(function(error) {
+            // Handle Errors here.
+            alert("fail");
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+    }
     var openPic = function(){
         var flag= false;
         var database = firebase.database();
