@@ -72,14 +72,25 @@ var employeeAPI = function() {
         });
     };
     var calc = function() {
-        var payForHouer = $("#txtPayForHouer").val;
-        var regularWorkHours = $("#txtRegularWorkHours").val;
-
+        var payForHour = parseFloat($("#txtPayForHour").val());    // שכר לשעה
+        var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
+        var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
         // Minimum wage gap
         var minWageGap = 0;
-        if(payForHouer<minHour)
-            minWageGap = (minHour-payForHouer)*regularWorkHours;
-        alert(minWageGap);
+        if(payForHour<minHour)
+            minWageGap = (minHour-payForHour)*regularWorkHours;
+        
+        // Basic wage gap
+        var basicWageGap = 0;
+        if(payForHour<minHour)
+            basicWageGap=minHour*regularWorkHours-regularPayment;
+        else
+        {
+            if(payForHour*regularWorkHours>regularPayment)
+                 basicWageGap=payForHour*regularWorkHours-regularPayment;
+        }
+        console.log("minWageGap"+minWageGap);
+        console.log("basicWageGap"+basicWageGap);
         //fillOutput();
     };
 
