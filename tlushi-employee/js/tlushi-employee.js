@@ -83,27 +83,46 @@ var employeeAPI = function() {
         });
     };
     var calc = function() {
-        var payForHour = parseFloat($("#txtPayForHour").val());    // שכר לשעה
+        var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
-        // Minimum wage gap
-        var minWageGap = 0;
-        if(payForHour<minHour)
-            minWageGap = (minHour-payForHour)*regularWorkHours;
+        var employeePension = parseFloat($("#txtWorkerPension").val()); // הפרשת עובד לפנסיה
+        var employeePension = parseFloat($("#txtEmployerPension").val()); // הפרשת מעביד לפנסיה
         
-        // Basic wage gap
+        // פער משכר מינימום
+        var minWageGap = 0;
+        if(hourWage<minHour)
+            minWageGap = (minHour-hourWage)*regularWorkHours;
+        
+        // פער משכר יסוד
         var basicWageGap = 0;
-        if(payForHour<minHour)
+        if(hourWage<minHour)
             basicWageGap=minHour*regularWorkHours-regularPayment;
         else
         {
-            if(payForHour*regularWorkHours>regularPayment)
-                 basicWageGap=payForHour*regularWorkHours-regularPayment;
+            if(hourWage*regularWorkHours>regularPayment)
+                 basicWageGap=hourWage*regularWorkHours-regularPayment;
         }
 
+        // פער בהפרשת פנסיה של העובד
+        var employeePensionGap = 0;
+        if(hourWage<minHour)
+            employeePensionGap = minHour*regularWorkHours*0.06-employeePension;
+        else
+            employeePensionGap = hourWage*regularWorkHours*0.06-employeePension;
+
         
+        // פער בהפרשת פנסיה של המעביד
+        var employerPensionGap = 0;
+         if(hourWage<minHour)
+            employerPensionGap = minHour*regularWorkHours*0.125-employerPension;
+        else
+            employerPensionGap = hourWage*regularWorkHours*0.125-employerPension;
+
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
+        console.log("employeePensionGap = "+employeePensionGap);
+        console.log("employerPensionGap = "+employerPensionGap);
         //fillOutput();
     };
 
