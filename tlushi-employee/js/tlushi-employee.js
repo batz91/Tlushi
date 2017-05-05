@@ -168,6 +168,7 @@ var employeeAPI = function() {
              });
         });
     };
+
     var uploadInProgress = function(){
         var database = firebase.database();
         var leadsRef = database.ref('user');
@@ -182,12 +183,16 @@ var employeeAPI = function() {
              });
         });
     };
+
     var calc = function() {
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
         var employeePension = parseFloat($("#txtWorkerPension").val()); // הפרשת עובד לפנסיה
         var employeePension = parseFloat($("#txtEmployerPension").val()); // הפרשת מעביד לפנסיה
+        var travelPayment = parseFloat($("#txtTravelPayment").val());   //נסיעות / חופי חודשי
+        var daysOfWork = parseFloat($("#txtDaysOfWork").val());     // ימי עבודה
+        
         
         // פער משכר מינימום
         var minWageGap = 0;
@@ -218,6 +223,13 @@ var employeeAPI = function() {
             employerPensionGap = minHour*regularWorkHours*0.125-employerPension;
         else
             employerPensionGap = hourWage*regularWorkHours*0.125-employerPension;
+
+        // סה"כ הפסד בש"ח על בסיס דמי נסיעות
+        var travelFeesLoss = 0;
+        if(travelPayment<daysOfWork*travelDay)
+            travelFeesLoss = daysOfWork*travelDay-travelPayment;
+
+        //
 
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
