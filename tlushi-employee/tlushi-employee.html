@@ -27,6 +27,28 @@
         <header>
         </header>
 		<main>
+			
+			<!-- 	POPUP ADMIN -->
+			<div id="id01" class="modal">
+				<form class="modal-content animate">
+					<div class="imgcontainer" id="imgcontainer">
+						<span onclick="location.reload()" class="close" title="סגירה">&times;</span>
+						<img src="img_avatar2.png" alt="Avatar" class="avatar" id="Avatar">
+					</div>
+					<div class="container" id="containarPopUp">
+						<label>אימייל:</label>
+						<input type="text" class="textPopUp" id="emailAdmin" placeholder="הכנס אימייל" required>
+						<label>סיסמא:</label>
+						<input type="password" class="textPopUp" id="passwordAdmin" placeholder="הכנס סיסמא" required>	
+						<button id= "buttonLogInAdmin"class="buttonPopUp" type="submit">התחבר</button>
+					</div>
+					<div class="container" id="footerPopUp" style="background-color:#f1f1f1">
+						<span class="psw" id="signUpAdmin"><a href="#">הרשם</a>&emsp;</span>
+						<span class="psw" id="forgetPassword">שכחת <a href="#">סיסמא?</a></span>
+					</div>
+				</form>
+			</div>
+
 			<aside class="right">
 				<div class= "form-style-9">
 					<form id = "FormGeneralInformation" action = "#">
@@ -91,7 +113,7 @@
     					<img alt="" id="zoom-out" height="25" src="zoom-out-icon.png" width="25">
 						<img alt="" id="zoom-in" height="25" src="zoom-in-icon.png" width="25">
 				</div>
-				<button id="SettingButton">הגדרות מנהל</button>
+				<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">הגדרות מנהל</button>
 				<br>
 				<button id="fileInput">טען תלוש</button>
 				<br>

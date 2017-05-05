@@ -29,21 +29,107 @@ var employeeAPI = function() {
         $('#zoom-out').click(zoomOut);
         $('#reset-zoom').click(zoomReset);
         $('#rotate').click(rotate);
-        $('#SettingButton').click(settings);
+        $('#buttonLogInAdmin').click(buttonPopUp);
+        $('#forgetPassword').click(forgetPassword);
+        $('#signUpAdmin').click(signUpAdmin);
     };
-
-    var settings = function(){
-        var email = window.prompt("Enter your email","");
-        var password = window.prompt("Enter your password","");
+    // הרשרמת מנהל נוסף
+    var signUpAdmin= function(){
+         var email =$("#emailAdmin").val();
+        var password = $("#passwordAdmin").val();
       firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-          alert("works");
+          var newEmail= window.prompt("הכנס אימייל ליצירת משתמש");
+          var newPassword= window.prompt("הכנס סיסמא (אורך הסיסמא לפחות 6 תווים)");
+          var newPasswordRe= window.prompt("חזור על הסיסמא");
+          if(newPassword != newPasswordRe || newPassword.length < 6){
+              alert("סיסמא לא תקינה");
+              return false;
+          }
+          else{
+            firebase.auth().createUserWithEmailAndPassword(newEmail, newPassword).then(function(){
+                alert("נוצר משתמש חדש");
+            }).catch(function(error){
+             // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            // ...
+            });
+          }
           }).catch(function(error) {
             // Handle Errors here.
-            alert("fail");
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            alert("להרשמת מנהל חדש יש להכניס אימייל וסיסמא של מנהל נוכחי")
             // ...
         });
+        return false;
+    }
+
+    // מנהל שכח סיסמא
+    var forgetPassword= function(){
+        var auth = firebase.auth();
+        var email =$("#emailAdmin").val();
+        auth.sendPasswordResetEmail(email).then(function() {
+            alert("נשלח אימייל לשחזור סיסמא")
+        // Email sent.
+    }, function(error) {
+        // An error happened.
+         var errorCode = error.code;
+         var errorMessage = error.message;
+        // alert(errorCode);
+         alert(errorMessage);
+        });
+    }
+
+    // עידכון המשתנים הקבועים במסד נתונים
+    var updateAdminValues= function(){
+        var database = firebase.database();
+        var leadsRef = database.ref('Settings');
+        leadsRef.on('value', function(snapshot) { 
+            snapshot.forEach(function(childSnapshot) {             
+            var childData = childSnapshot.val();
+            var key=childSnapshot.key;
+            database.ref("Settings/"+key+"/minHour").set(parseFloat($("#txtSettingsMinHour").val()));
+            database.ref("Settings/"+key+"/minMonth").set(parseFloat($("#txtSettingsMinMounth").val()));
+            database.ref("Settings/"+key+"/travelDay").set(parseFloat($("#txtTravelDay").val()));
+            database.ref("Settings/"+key+"/weekHours").set(parseFloat($("#txtSettingsWeekHours").val()));      
+            });
+        });
+        alert("השינויים בוצעו בהצלחה");
+        location.reload();        
+    }
+    // הצגת הדף למנהל עם עידכון הפרטים האפשריים
+    var adminSettings= function(){
+        var content= "<label>שכר מינימום לשעה:</label>"+
+                     "<input type='number' class='textPopUp' id='txtSettingsMinHour' step='0.01' required>"+
+                     "<label>שכר מינימום חודשי:</label>"+
+                     "<input type='number' class='textPopUp' id='txtSettingsMinMounth' step='0.01' required>"+
+                     "<label>מספר שעות עבודה בחודש:</label>"+
+                     "<input type='number' class='textPopUp' id='txtSettingsWeekHours' step='0.01' required>"+
+                     "<label>דמי נסיעות:</label>"+
+                     "<input type='number' class='textPopUp' id='txtTravelDay' step='0.01' required>"+
+                     "<button id= 'buttonUpdateAdmin' class='buttonPopUp' type='button'>עדכן נתונים</button>";
+        $("#footerPopUp").html("");
+        $("#containarPopUp").html(content);
+        $("#txtSettingsMinHour").val(minHour);
+        $("#txtSettingsMinMounth").val(minMonth);
+        $("#txtSettingsWeekHours").val(weekHours);
+        $("#txtTravelDay").val(travelDay);
+        $('#buttonUpdateAdmin').click(updateAdminValues);
+    }
+    // פתיחת מסך התחברות למנהל 
+    var buttonPopUp = function(){
+        var email =$("#emailAdmin").val();
+        var password = $("#passwordAdmin").val();
+      firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+          adminSettings();
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorCode);
+            alert(errorMessage);
+            // ...
+        });
+        return false;
     }
     var openPic = function(){
         var flag= false;
