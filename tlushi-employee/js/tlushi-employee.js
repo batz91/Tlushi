@@ -189,7 +189,7 @@ var employeeAPI = function() {
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
         var employeePension = parseFloat($("#txtWorkerPension").val()); // הפרשת עובד לפנסיה
-        var employeePension = parseFloat($("#txtEmployerPension").val()); // הפרשת מעביד לפנסיה
+        var employerPension = parseFloat($("#txtEmployerPension").val()); // הפרשת מעביד לפנסיה
         var travelPayment = parseFloat($("#txtTravelPayment").val());   //נסיעות / חופי חודשי
         var daysOfWork = parseFloat($("#txtDaysOfWork").val());     // ימי עבודה
         
