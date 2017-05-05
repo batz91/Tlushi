@@ -80,7 +80,7 @@ export class Picture {
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // firebase upload image to storage
-    storageRef.child(`${this.userName}${filename}.png`)
+    storageRef.child(`paycheck/${this.userName}${filename}.png`)
           .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
     // create new user in DB
     this.user.push({
