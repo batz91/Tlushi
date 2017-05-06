@@ -85,6 +85,8 @@ var employeeAPI = function() {
 
     // עידכון המשתנים הקבועים במסד נתונים
     var updateAdminValues= function(){
+        var holidayArray = ($("#txtDaysHolidayArray").val().split(",")).map(Number);
+        var recoveryArray = ($("#txtDaysRecoveryArray").val().split(",")).map(Number);
         var database = firebase.database();
         var leadsRef = database.ref('Settings');
         leadsRef.on('value', function(snapshot) { 
@@ -94,7 +96,9 @@ var employeeAPI = function() {
             database.ref("Settings/"+key+"/minHour").set(parseFloat($("#txtSettingsMinHour").val()));
             database.ref("Settings/"+key+"/minMonth").set(parseFloat($("#txtSettingsMinMounth").val()));
             database.ref("Settings/"+key+"/travelDay").set(parseFloat($("#txtTravelDay").val()));
-            database.ref("Settings/"+key+"/weekHours").set(parseFloat($("#txtSettingsWeekHours").val()));      
+            database.ref("Settings/"+key+"/weekHours").set(parseFloat($("#txtSettingsWeekHours").val()));
+            database.ref("Settings/"+key+"/daysOff").set(holidayArray);                  
+            database.ref("Settings/"+key+"/daysRecovery").set(recoveryArray);                  
             });
         });
         alert("השינויים בוצעו בהצלחה");
@@ -110,6 +114,10 @@ var employeeAPI = function() {
                      "<input type='number' class='textPopUp' id='txtSettingsWeekHours' step='0.01' required>"+
                      "<label>דמי נסיעות:</label>"+
                      "<input type='number' class='textPopUp' id='txtTravelDay' step='0.01' required>"+
+                     "<label>ימי חופשה לפי ותק (מערך):</label>"+
+                     "<input class='textPopUp' id='txtDaysHolidayArray' required>"+
+                     "<label>ימי הבראה לפי ותק (מערך):</label>"+
+                     "<input class='textPopUp' id='txtDaysRecoveryArray' required>"+
                      "<button id= 'buttonUpdateAdmin' class='buttonPopUp' type='button'>עדכן נתונים</button>";
         $("#footerPopUp").html("");
         $("#containarPopUp").html(content);
@@ -117,6 +125,8 @@ var employeeAPI = function() {
         $("#txtSettingsMinMounth").val(minMonth);
         $("#txtSettingsWeekHours").val(weekHours);
         $("#txtTravelDay").val(travelDay);
+        $("#txtDaysHolidayArray").val(daysHolidayArray);
+        $("#txtDaysRecoveryArray").val(daysRecoveryArray);
         $('#buttonUpdateAdmin').click(updateAdminValues);
     }
     // פתיחת מסך התחברות למנהל 
