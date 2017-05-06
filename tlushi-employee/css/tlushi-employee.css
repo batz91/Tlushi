@@ -4,7 +4,10 @@ body{
 header{
     text-align: center;
 }
-
+.buttonsSettings{
+    float: right;
+    direction: rtl;
+}
 .left{
     direction: ltr;
     float:left;
@@ -80,7 +83,7 @@ td, th {
 }
 
 .zoom{
-    float:right;
+    float:left;
     margin-right: 20px; 
 }
 

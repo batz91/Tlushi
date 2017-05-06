@@ -6,6 +6,8 @@ var employeeAPI = function() {
     var minMonth; // שכר מינימום חודשי
     var travelDay;   // נסיעות ליום  
     var weekHours;    // שעות שבועיות
+    var daysHolidayArray= [12,12,12,12,12,14,15,16,17,18,19,20,20,20];      // ימי חופשה לפי ותק
+    var daysRecoveryArray= [5,6,6,7,7,7,7,7,7,7,8,8,8,8,8,9,9,9,9,10];  // ימי הבראה לפי ותק
 
 
 //	Create the initial appearance of the site
@@ -156,6 +158,7 @@ var employeeAPI = function() {
 };
     var openProgress = function(){
         var list = $("#progress");
+        list.empty();
         var database = firebase.database();
         var leadsRef = database.ref('user');
         leadsRef.on('value', function(snapshot) {
@@ -167,6 +170,7 @@ var employeeAPI = function() {
                 }
              });
         });
+        return false;
     };
 
     var uploadInProgress = function(){
@@ -192,7 +196,11 @@ var employeeAPI = function() {
         var employerPension = parseFloat($("#txtEmployerPension").val()); // הפרשת מעביד לפנסיה
         var travelPayment = parseFloat($("#txtTravelPayment").val());   //נסיעות / חופי חודשי
         var daysOfWork = parseFloat($("#txtDaysOfWork").val());     // ימי עבודה
-        
+        var extraHours125Pays= parseFloat($("#txtEx125Payment").val()); // סה"כ תשלום על שעות נוספות 125
+        var extraHours150Pays= parseFloat($("#txtEx150Payment").val()); // סה"כ תשלום על שעות נוספות 150
+        var accumulatedDaysOff= parseFloat($("#txtAccumulatedDaysOff").val()); // מספר ימי החופשה שנצברו
+        var seniorYears= parseInt($("#txtSeniorYears").val());                  // ותק בשנים
+        var convalescencePay= parseFloat($("#txtConvalescencePay").val());      // דמי הבראה
         
         // פער משכר מינימום
         var minWageGap = 0;
@@ -229,12 +237,48 @@ var employeeAPI = function() {
         if(travelPayment<daysOfWork*travelDay)
             travelFeesLoss = daysOfWork*travelDay-travelPayment;
 
+        // סה"כ הפסד על שעות נוספות
+        var extraHouresLoss= 0;
+        if(regularWorkHours == 187)
+            extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25);
+        if(regularWorkHours == 188)
+             extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2);
+        if(regularWorkHours > 188)
+             extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
+
+        // ימי חופשה נוספים שמגיעים לך
+        var daysOffDeserve= 0;
+        var daysOffSeniority= 0;
+        if(seniorYears > 14)
+            daysOffSeniority= 20;
+        else
+            daysOffSeniority= daysHolidayArray[seniorYears-1];
+        if(accumulatedDaysOff < daysOffSeniority){
+            daysOffDeserve= daysOffSeniority- accumulatedDaysOff;
+        }
+
+        // הפסד כסף על חישוב הבראה לא נכון
+        var daysRecoveryLoss= 0;
+        var daysRecoverySeniority= 0;
+        if(seniorYears > 20)
+            daysRecoverySeniority= 10;
+        else
+            daysRecoverySeniority= daysRecoveryArray[seniorYears-1];
+        if(regularWorkHours > 186)
+            daysRecoveryLoss= daysRecoverySeniority*378-convalescencePay;
+        else
+            daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378;
+
         //
 
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
         console.log("employeePensionGap = "+employeePensionGap);
         console.log("employerPensionGap = "+employerPensionGap);
+        console.log("travelFeesLoss = "+ travelFeesLoss);
+        console.log("extraHouresLoss = "+ extraHouresLoss);
+        console.log("daysOffDeserve = "+ daysOffDeserve);
+        console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
         //fillOutput();
     };
 
