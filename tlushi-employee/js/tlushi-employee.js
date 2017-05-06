@@ -271,7 +271,7 @@ var employeeAPI = function() {
         else
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378;
 
-        //
+        // הפסד על דמי חבר וניכויים- לא ברור
 
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
