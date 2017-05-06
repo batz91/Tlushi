@@ -203,7 +203,8 @@ var employeeAPI = function() {
         var accumulatedDaysOff= parseFloat($("#txtAccumulatedDaysOff").val()); // מספר ימי החופשה שנצברו
         var seniorYears= parseInt($("#txtSeniorYears").val());                  // ותק בשנים
         var convalescencePay= parseFloat($("#txtConvalescencePay").val());      // דמי הבראה
-        
+        var premiumWage= parseFloat($("#txtPremiumWage").val());                // פרמיה
+  
         // פער משכר מינימום
         var minWageGap = 0;
         if(hourWage<minHour)
@@ -271,6 +272,25 @@ var employeeAPI = function() {
         else
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378;
 
+        // פער בהפרשת פנסיה של העובד עם פרמיה
+        var employeePremiumGap= 0;
+        if(!(isNaN(premiumWage)))
+        {
+            if(hourWage < minHour)
+                employeePremiumGap= (minHour*regularWorkHours+premiumWage)*0.06-employeePension;
+            else
+                 employeePremiumGap= (hourWage*regularWorkHours+premiumWage)*0.06-employeePension;
+        }
+
+        // פער בהפרשה פנסיה של המעביד עם פרמיה
+        var employerPremiumGap= 0;
+        if(!(isNaN(premiumWage)))
+        {
+             if(hourWage < minHour)
+                employerPremiumGap= (minHour*regularWorkHours+premiumWage)*0.125-employerPension;
+             else
+                 employerPremiumGap= (hourWage*regularWorkHours+premiumWage)*0.125-employerPension;
+        }
         // הפסד על דמי חבר וניכויים- לא ברור
 
         console.log("minWageGap = "+minWageGap);
@@ -281,6 +301,8 @@ var employeeAPI = function() {
         console.log("extraHouresLoss = "+ extraHouresLoss);
         console.log("daysOffDeserve = "+ daysOffDeserve);
         console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
+        console.log("employeePremiumGap= "+employeePremiumGap);
+        console.log("employerPremiumGap= "+employerPremiumGap);
         //fillOutput();
     };
 
