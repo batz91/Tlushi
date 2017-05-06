@@ -6,8 +6,8 @@ var employeeAPI = function() {
     var minMonth; // שכר מינימום חודשי
     var travelDay;   // נסיעות ליום  
     var weekHours;    // שעות שבועיות
-    var daysHolidayArray= [12,12,12,12,12,14,15,16,17,18,19,20,20,20];      // ימי חופשה לפי ותק
-    var daysRecoveryArray= [5,6,6,7,7,7,7,7,7,7,8,8,8,8,8,9,9,9,9,10];  // ימי הבראה לפי ותק
+    var daysHolidayArray;      // ימי חופשה לפי ותק
+    var daysRecoveryArray;  // ימי הבראה לפי ותק
 
 
 //	Create the initial appearance of the site
@@ -21,6 +21,8 @@ var employeeAPI = function() {
             minMonth= parseFloat(childData.minMonth);
             travelDay= parseFloat(childData.travelDay);
             weekHours= parseFloat(childData.weekHours);
+            daysHolidayArray= childData.daysOff;
+            daysRecoveryArray= childData.daysRecovery;
             });
         });
 		$("#butCalc").click(calc);
