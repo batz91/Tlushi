@@ -4,8 +4,13 @@ import { Camera } from '@ionic-native/camera';
 import { EndPage } from '../endpage/endpage';
 
 //  FireBase import
+<<<<<<< HEAD
+import { FirebaseListObservable } from 'angularfire2/database';
+import { AngularFire } from 'angularfire/AngularFire';
+=======
 import {DomSanitizer} from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
+>>>>>>> 63f0fa88303fad32cd38ae3b7f961bcd6517cb9a
 import * as firebase from 'firebase';
 
 @Component({
