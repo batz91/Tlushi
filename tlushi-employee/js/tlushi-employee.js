@@ -411,7 +411,9 @@ var employeeAPI = function() {
         $("#save").click(function(){document.getElementById('save').style.visibility='hidden';
                                     html2canvas(document.body, {
   onrendered: function(canvas) {
-    document.body.appendChild(canvas);
+            var data = canvas.toDataURL("image/png", 1);
+
+      window.open(data);     
   }
 }); 
                                     window.print();
