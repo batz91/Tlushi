@@ -54,8 +54,8 @@ Please visit our wiki for furthur project info:
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)
-- [Iteration 1 - MVP](../../wiki/Iter1-MVP)
-- [Iteration 2 - FireBase](../../wiki/Iteration-2---Firebase)
+- [Iteration 1 - Application basic design & functionality](https://github.com/batz91/Tlushi/wiki/Iter1---Application-basic-design-&-functionality)
+- [Iteration 2 - Firebase](https://github.com/batz91/Tlushi/wiki/Iteration-2---Firebase)
 - [Iteration 3 - Feature Y]()
 - [Iteration 4 - Feature Z]()
 

@@ -4,6 +4,7 @@ import { Camera } from '@ionic-native/camera';
 import { EndPage } from '../endpage/endpage';
 
 //  FireBase import
+import { AngularFire } from 'angularfire/AngularFire';
 import {DomSanitizer} from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
 import * as firebase from 'firebase';
@@ -34,8 +35,6 @@ export class Picture {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000,
         // In this app, dynamically set the picture source, Camera or photo gallery
         encodingType: this.camera.EncodingType.PNG,
         mediaType: this.camera.MediaType.PICTURE,
@@ -56,8 +55,6 @@ export class Picture {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
@@ -80,7 +77,7 @@ export class Picture {
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // firebase upload image to storage
-    storageRef.child(`${this.userName}${filename}.png`)
+    storageRef.child(`paycheck/${this.userName}${filename}.png`)
           .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
     // create new user in DB
     this.user.push({
