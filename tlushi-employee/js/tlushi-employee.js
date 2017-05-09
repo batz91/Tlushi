@@ -214,7 +214,8 @@ var employeeAPI = function() {
         var seniorYears= parseInt($("#txtSeniorYears").val());                  // ותק בשנים
         var convalescencePay= parseFloat($("#txtConvalescencePay").val());      // דמי הבראה
         var premiumWage= parseFloat($("#txtPremiumWage").val());                // פרמיה
-  
+        var deductionsText= ($("#selectDeductions option:selected").text());        // ניכויים מלל
+        var deductionsAmount= parseFloat($("#txtInvalidDeduction").val());      // ניכויים סכום
         // פער משכר מינימום
         var minWageGap = 0;
         if(hourWage<minHour)
@@ -301,7 +302,10 @@ var employeeAPI = function() {
              else
                  employerPremiumGap= (hourWage*regularWorkHours+premiumWage)*0.125-employerPension;
         }
-        // הפסד על דמי חבר וניכויים- לא ברור
+        // הפסד על דמי חבר וניכויים
+        var deductionsLoss= 0;
+        if(deductionsText == "אחר")
+            deductionsLoss= deductionsAmount;
 
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
@@ -313,6 +317,7 @@ var employeeAPI = function() {
         console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
         console.log("employeePremiumGap= "+employeePremiumGap);
         console.log("employerPremiumGap= "+employerPremiumGap);
+        console.log("deductionsLoss= "+ deductionsLoss);
         fillOutput();
     };
 
