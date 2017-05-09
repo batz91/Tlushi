@@ -11,7 +11,7 @@ header{
 .left{
     direction: ltr;
     float:left;
-    height: 94%;
+    height: 90%;
     width: 54%;
     display: inline-block;
 }
@@ -88,10 +88,9 @@ td, th {
 }
 
 .form-style-9{
-    
     background: #FAFAFA;
     padding: 5px;
-    margin: 5px auto;
+    margin: 20px auto;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     border: 6px solid #305A72;
@@ -103,7 +102,7 @@ td, th {
 }
 .form-style-9 ul li{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     min-height: 35px;
 }
 .form-style-9 ul li  .field-style{
@@ -140,6 +139,7 @@ td, th {
 }
 
 .form-style-9 input{
+    margin: 2px;
     width: 240px;
 }
 
