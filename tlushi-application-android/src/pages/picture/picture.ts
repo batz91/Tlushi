@@ -4,13 +4,9 @@ import { Camera } from '@ionic-native/camera';
 import { EndPage } from '../endpage/endpage';
 
 //  FireBase import
-<<<<<<< HEAD
-import { FirebaseListObservable } from 'angularfire2/database';
 import { AngularFire } from 'angularfire/AngularFire';
-=======
 import {DomSanitizer} from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2';
->>>>>>> 63f0fa88303fad32cd38ae3b7f961bcd6517cb9a
 import * as firebase from 'firebase';
 
 @Component({
@@ -39,8 +35,6 @@ export class Picture {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000,
         // In this app, dynamically set the picture source, Camera or photo gallery
         encodingType: this.camera.EncodingType.PNG,
         mediaType: this.camera.MediaType.PICTURE,
@@ -61,8 +55,6 @@ export class Picture {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
