@@ -54,14 +54,10 @@
 				<div class= "form-style-9">
 					<form id = "FormGeneralInformation" action = "#">
 						<fieldset>
-							<legend><span class='number'>1</span> פרטים כלליים </legend>
-							<input type='text' id = 'txtName' placeholder='שם העובד'>
+							<legend><span class='number'>1</span> פרטי ממלא הדוח  </legend>
+							<input type='text' id = 'txtName' placeholder='שם ממלא הטופס'>
 							<br>
-							<label> חתום על הסכם להסדר שעות גלובליות? </label>
-							<select id = 'txtGlobalHours'>
-								<option id = 'txtGlobalHoursYes'> כן</option>
-								<option id = 'txtGlobalHoursNo'> לא</option>
-							</select>
+							<input id = 'txtDate' type= 'date' placeholder='תאריך' required autofocus>
 					</fieldset>
 				</form>
 				</div>
@@ -69,39 +65,34 @@
 						<form id = "Form" action = "#">
 							<fieldset>
 								<legend><span class='number'>2</span> נתוני משכרות </legend>
-								<input id = 'txtDate' type= 'date' placeholder='תאריך המשכורת' required>
 								<input type='number' id = 'txtDaysOfWork' placeholder='ימי עבודה' min = '0'>
 								<input type='number' step='0.01' id = 'txtPayForHour' placeholder='שכר לשעה' min = '0'>
-								<input type='number' id = 'txtSeniorYears' placeholder='ותק' min = '1'>
+								<input type='number' id = 'txtSeniorYears' placeholder='ותק שנים' min = '0'>
 								<input type='number' id = 'txtSeniorMounths' placeholder='ותק חודשים'  min = '0'>
-								<input type='number' id = 'txtRegularWorkHours' placeholder='שעות עבודה רגילות'  min = '0' step='0.01'>
+								<input type='number' id = 'txtDaysOfWork' placeholder='ימי עבודה' min = '0'>
+								<input type='number' step='0.01' id = 'txtPayForHour' placeholder='שכר לשעה' min = '0'>
+								<input type='number' id = 'txtRegularWorkHours' placeholder='שעות עבודה רגילות בתלוש'  min = '0' step='0.01'>
 								<input type='number' id = 'txtRegularPayment' placeholder='סה"כ תשלום על שעות עבודה רגילות'  step='0.01'>
-								<input type='number' id = 'txtEx125WorkHours' placeholder='שעות נוספות 125 בתלוש'  step='0.01'>
 								<input type='number' id = 'txtEx125Payment' placeholder='סה"כ תשלום על שעות עבודה נוספות 125'  step='0.01'>
-								<input type='number' id = 'txtEx150WorkHours' placeholder='שעות נוספות 150 בתלוש'  step='0.01'>
 								<input type='number' id = 'txtEx150Payment' placeholder='סה"כ תשלום על שעות עבודה נוספות 150'  step='0.01'>
 								<input type='number' id = 'txtTravelPayment' placeholder='נסיעות/חופשי חודשי'  step='0.01'>
+								<input type='number' id = 'txtWorkerPension' placeholder='הפרשת עובד לפנסיה'  step='0.01'>
+								<input type='number' id = 'txtEmployePension' placeholder='הפרשת מעביד לפנסיה'  step='0.01'>
+								<input type='number' id = 'txtAccumulatedDaysOff' placeholder='מספר ימי חופשה שנצברו'  step='0.01'>
+								<input type='number' id = 'txtConvalescencePay' placeholder='דמי הבראה'  step='0.01'>
+								<input type='number' id = 'txtInvalidDeduction' placeholder='ניכויים (סכום)'  step='0.01'>
+								<label> ניכויים (מלל) </label>
+								<select>
+									<option value="orgEmployee">ארגון עובדים</option>
+									<option value="advance">מקדמה</option>
+									<option value="depth">חוב</option>
+									<option value="fine">קנס</option>
+									<option value="other">אחר</option>
+								</select>
 							</fieldset>
 						</form>
 					</div>
-				<div class= "form-style-9">
-					<form id = "FormGeneralInformationRights" action = "#">
-						<fieldset>
-							<legend><span class='number'>3</span> נתוני משכורת- זכויות </legend>
-							<input type='number' id = 'txtWorkerPension' placeholder='הפרשת עובד לפנסיה'  step='0.01'>
-							<input type='number' id = 'txtEmployerPension' placeholder='הפרשת מעביד לפנסיה'  step='0.01'>
-							<input type='number' id = 'txtCompensationFund' placeholder='הפרשה לקרן פיצויים'  step='0.01'>
-							<input type='number' id = 'txtUsedDaysOff' placeholder='מספר ימי חופשה שנוצלו'>
-							<input type='number' id = 'txtPayForFaysOff' placeholder='תשלום כולל בגין ימי חופשה שנוצלו'  step='0.01'>
-							<input type='number' id = 'txtAccumulatedDaysOff' placeholder='מספר ימי חופשה שנצברו'  step='0.01'>
-							<input type='number' id = 'txtHolidaysPay' placeholder='תשלום על ימי חג'  step='0.01'>
-							<input type='number' id = 'txtConvalescencePay' placeholder='דמי הבראה'  step='0.01'>
-							<input type='number' id = 'txtSicksDays' placeholder='מספר ימי מחלה המופיעים בתלוש'  step='0.01'>
-							<input type='number' id = 'txtSicksDaysPays' placeholder='תשלום עבור ימי מחלה'  step='0.01'>
-							<input type='number' id = 'txtPremiumWage' placeholder='פרמיה'  step='0.01'>
-						</fieldset>
-					</form>
-				</div>
+
 					<div class= "form-style-9">
 						<input id= 'butCalc' type='submit'/>
 				</div>
