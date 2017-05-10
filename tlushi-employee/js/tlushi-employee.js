@@ -29,9 +29,9 @@ var employeeAPI = function() {
         $("#fileInput").click(openPic);
         $("#fileProgress").click(openProgress);
         $("#fileProgressUpload").click(uploadInProgress);
-        $('#zoom-in').click(zoomIn); 
-        $('#zoom-out').click(zoomOut);
-        $('#reset-zoom').click(zoomReset);
+        $('#zoom-in').click({msg: 'pic'},zoomIn); 
+        $('#zoom-out').click({msg: 'pic'},zoomOut);
+        $('#reset-zoom').click({msg: 'pic'},zoomReset);
         $('#rotate').click(rotate);
         $('#buttonLogInAdmin').click(buttonPopUp);
         $('#forgetPassword').click(forgetPassword);
@@ -105,20 +105,63 @@ var employeeAPI = function() {
         location.reload();        
     }
     // הצגת הדף למנהל עם עידכון הפרטים האפשריים
+
+    var findEndForm= function(){
+        if($("#txtFindForm").val() == undefined)
+        {
+            alert('הכנס אימייל לקוח');
+            return;
+        }
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        leadsRef.on('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                if($("#txtFindForm").val() == childData.email && childData.status == "done")
+                {
+                    var preview = document.getElementById('loadFormAdmin'); //selects the query named img
+                    preview.src = childData.paycheck;
+                }
+             });
+        });
+    };
+
     var adminSettings= function(){
-        var content= "<label>שכר מינימום לשעה:</label>"+
-                     "<input type='number' class='textPopUp' id='txtSettingsMinHour' step='0.01' required>"+
-                     "<label>שכר מינימום חודשי:</label>"+
-                     "<input type='number' class='textPopUp' id='txtSettingsMinMounth' step='0.01' required>"+
-                     "<label>מספר שעות עבודה בחודש:</label>"+
-                     "<input type='number' class='textPopUp' id='txtSettingsWeekHours' step='0.01' required>"+
-                     "<label>דמי נסיעות:</label>"+
-                     "<input type='number' class='textPopUp' id='txtTravelDay' step='0.01' required>"+
-                     "<label>ימי חופשה לפי ותק (מערך):</label>"+
-                     "<input class='textPopUp' id='txtDaysHolidayArray' required>"+
-                     "<label>ימי הבראה לפי ותק (מערך):</label>"+
-                     "<input class='textPopUp' id='txtDaysRecoveryArray' required>"+
-                     "<button id= 'buttonUpdateAdmin' class='buttonPopUp' type='button'>עדכן נתונים</button>";
+        var content= "<div class='tab'>"+
+                        "<button class='tablinks' id='defaultOpen'>משתנים</button>"+
+                        "<button class='tablinks' id='showReportsId'>צפיה בדוחות</button>"+
+                     "</div>"+
+                     "<div id='changeValues' class='tabcontent'>"+
+                        "<label>שכר מינימום לשעה:</label>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsMinHour' step='0.01' required>"+
+                        "<label>שכר מינימום חודשי:</label>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsMinMounth' step='0.01' required>"+
+                        "<label>מספר שעות עבודה בחודש:</label>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsWeekHours' step='0.01' required>"+
+                        "<label>דמי נסיעות:</label>"+
+                        "<input type='number' class='textPopUp' id='txtTravelDay' step='0.01' required>"+
+                        "<label>ימי חופשה לפי ותק (מערך):</label>"+
+                        "<input class='textPopUp' id='txtDaysHolidayArray' required>"+
+                        "<label>ימי הבראה לפי ותק (מערך):</label>"+
+                        "<input class='textPopUp' id='txtDaysRecoveryArray' required>"+
+                        "<button id= 'buttonUpdateAdmin' class='buttonPopUp' type='button'>עדכן נתונים</button>"+
+                     "</div>"+
+                     "<div id='showReports' class='tabcontent'>"+
+                        "<div class='form-style-9'>"+
+                            "<label>חפש דוחות לפי אימייל לקוח:</label>"+
+                            "<input type='text' id = 'txtFindForm' placeholder= 'אימייל'>"+
+                            "<button id= 'buttonFindForm' type='button'>חפש</button>"+
+                            "<div id ='container'>"+
+                            "<div id='zoom' class='zoom'>"+
+                                    "<img alt='' id='reset-zoomAdmin' height='25' src='./reset-zoom-icon.png' width='25'>"+
+                                    "<img alt='' id='rotateAdmin' height='25' src='./rotate-icon.png' width='25'>"+
+                                    "<img alt='' id='zoom-outAdmin' height='25' src='./zoom-out-icon.png' width='25'>"+
+                                    "<img alt='' id='zoom-inAdmin' height='25' src='./zoom-in-icon.png' width='25'>"+
+                                "</div>"+
+                                "<img src='' id='loadFormAdmin' height='100%' width='100%'>"+
+                            "</div>"+
+                        "</div>"+       
+                     "</div>";        
         $("#footerPopUp").html("");
         $("#containarPopUp").html(content);
         $("#txtSettingsMinHour").val(minHour);
@@ -128,6 +171,25 @@ var employeeAPI = function() {
         $("#txtDaysHolidayArray").val(daysHolidayArray);
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
         $('#buttonUpdateAdmin').click(updateAdminValues);
+        $('#buttonFindForm').click(findEndForm);
+         tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent[1].style.display = "none";
+        $('#defaultOpen').click(function(){
+            tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent[1].style.display = "none";
+            tabcontent[0].style.display = "block";
+            return false;
+        });        
+        $('#showReportsId').click(function(){
+            tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent[0].style.display = "none";
+            tabcontent[1].style.display = "block";
+            $('#zoom-inAdmin').click({msg: 'admin'},zoomIn); 
+            $('#zoom-outAdmin').click({msg: 'admin'},zoomOut);
+            $('#reset-zoomAdmin').click({msg: 'admin'},zoomReset);
+            $('#rotateAdmin').click(rotate);   
+            return false;
+        });        
     }
     // פתיחת מסך התחברות למנהל 
     var buttonPopUp = function(){
@@ -321,19 +383,43 @@ var employeeAPI = function() {
         fillOutput();
     };
 
-    var zoomIn = function(){
-        $('#pic').width($('#pic').width()*1.2)
-        $('#pic').height($('#pic').height()*1.2)
+    var zoomIn = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()*1.2);
+            $('#pic').height($('#pic').height()*1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()*1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()*1.2);
+        }
+}
+
+    var zoomOut = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()/1.2);
+            $('#pic').height($('#pic').height()/1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()/1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()/1.2);
+        }
     }
 
-    var zoomOut = function(){
-        $('#pic').width($('#pic').width()/1.2)
-        $('#pic').height($('#pic').height()/1.2)
-    }
-
-    var zoomReset = function(){
-        $('#pic').width("100%");
-        $('#pic').height("100%");
+    var zoomReset = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width("100%");
+            $('#pic').height("100%");
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width("100%");
+            $('#loadFormAdmin').height("100%");
+        }    
     }
 
     var rotate = function(){
