@@ -415,15 +415,14 @@ var employeeAPI = function() {
         $("body").html(text);
         $("#save").click(function(){document.getElementById('save').style.visibility='hidden';
                                     html2canvas(document.body, {
-  onrendered: function(canvas) {
-            var data = canvas.toDataURL("image/png", 1);
-
-      window.open(data);     
-  }
-}); 
-                                    window.print();
-                                    document.getElementById('save').style.visibility='visible'});
-
+                                        background:'#fff',
+                                        onrendered: function(canvas) {
+                                            var data = canvas.toDataURL("image/png", 1);
+                                            window.open(data);     
+                                        }
+                                    }); 
+        //window.print();
+        document.getElementById('save').style.visibility='visible'});
     }
 
     return {
