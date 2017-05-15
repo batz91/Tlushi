@@ -151,13 +151,13 @@ var employeeAPI = function() {
                             "<label>חפש דוחות לפי אימייל לקוח:</label>"+
                             "<input type='text' id = 'txtFindForm' placeholder= 'אימייל'>"+
                             "<button id= 'buttonFindForm' type='button'>חפש</button>"+
-                            "<div id ='container'>"+
                             "<div id='zoom' class='zoom'>"+
                                     "<img alt='' id='reset-zoomAdmin' height='25' src='./reset-zoom-icon.png' width='25'>"+
                                     "<img alt='' id='rotateAdmin' height='25' src='./rotate-icon.png' width='25'>"+
                                     "<img alt='' id='zoom-outAdmin' height='25' src='./zoom-out-icon.png' width='25'>"+
                                     "<img alt='' id='zoom-inAdmin' height='25' src='./zoom-in-icon.png' width='25'>"+
-                                "</div>"+
+                            "</div>"+
+                            "<div id ='container'>"+
                                 "<img src='' id='loadFormAdmin' height='100%' width='100%'>"+
                             "</div>"+
                         "</div>"+       
