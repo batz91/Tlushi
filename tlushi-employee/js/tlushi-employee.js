@@ -447,7 +447,7 @@ var employeeAPI = function() {
     var fillOutput = function(){
         var text = 
             "<div class='output' dir='rtl'>"+
-            "<img src='./labelTlushi.jpg' height='200px' width='200px'>"+
+            "<img src='./labelTlushi.jpg' height='170px' width='200px'>"+
                 "<table cellpadding='0' cellspacing='0' width='100%'>"+
                 "<tbody>"+
                 "<tr>"+
@@ -475,8 +475,7 @@ var employeeAPI = function() {
                     "<p align='right' dir='RTL'>"+
                         "שכר"+
                     "</p>"+
-                   "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא בדיקה"+
-                    "מלאה"+
+                   "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא בדיקה מלאה"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
@@ -514,7 +513,7 @@ var employeeAPI = function() {
                     "<p align='right' dir='RTL'>"+
                         "<strong>עובד </strong>"+
                         "- נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+
-                        "בדיקה מלאה"+
+                        " בדיקה מלאה"+
                     "</p>"+
                     "<strong>מעביד </strong>"+
                     "<strong> נראה כי המעסיק לא הפריש עבורך לפנסיה בסך </strong>"+
@@ -536,6 +535,7 @@ var employeeAPI = function() {
             "</tr>"+
             "<tr>"+
                 "<td width='79' valign='top'>"+
+                     "<img src='./siz.png' height='60px' width='60px'>"+                
                 "</td>"+
                 "<td width='475'>"+
                     "<p align='right' dir='RTL'>"+
@@ -545,6 +545,7 @@ var employeeAPI = function() {
             "</tr>"+
             "<tr>"+
                 "<td width='79' valign='top'>"+
+                      "<img src='./holiday.png' height='60px' width='60px'>"+               
                 "</td>"+
                 "<td width='475'>"+
                     "<p align='right' dir='RTL'>"+
@@ -556,8 +557,7 @@ var employeeAPI = function() {
                 "<td width='554' colspan='2'>"+
                     "<p align='center' dir='RTL'>"+
                         "<u>סיכום</u>"+
-                        ": נראה כי הנך זכאי\ת ל1150₪ נוספים בתלוש המשכורת כל"+
-                        "חודש!"+
+                        ": נראה כי הנך זכאי\ת ל1150₪ נוספים בתלוש המשכורת כל חודש!"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
@@ -576,6 +576,7 @@ var employeeAPI = function() {
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
+                        "<img src='./note.png' height='20px' width='28px'>"+
                         "אימות הנתונים והניתוח באופן ודאי ועל פי נתונים אישיים"+
                     "</p>"+
                 "</td>"+
@@ -583,20 +584,23 @@ var employeeAPI = function() {
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                        "<u>בחינה שנתית של הניתוח</u>"+
+                        "<img src='./note.png' height='20px' width='28px'>"+
+                        "בחינה שנתית של הניתוח"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                        "<u>התאמה של הנתונים לדוח השעות </u>"+
+                        "<img src='./note.png' height='20px' width='28px'>"+
+                        "התאמה של הנתונים לדוח השעות"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
+                    "<img src='./note.png' height='20px' width='28px'>"+
                         "צבירת ימי מחלה"+
                     "</p>"+
                 "</td>"+
@@ -604,6 +608,7 @@ var employeeAPI = function() {
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
+                    "<img src='./note.png' height='20px' width='28px'>"+
                         "ביטוח לאומי"+
                     "</p>"+
                 "</td>"+
@@ -622,23 +627,23 @@ var employeeAPI = function() {
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
                         "הנתונים המופיעים בדוח אינם מהווים ייעוץ משפטי או"+
-                        "חשבונאי או ייעוץ מכל סוג שהוא, אלא סיכום של ניתוח"+
-                        "נתונים המבוסס על תלוש משכורת אחד, אשר אין בידו לספק"+
-                        "תמונה שלמה של זכויות העובד ומילוין על ידי המעסיק."+
+                        " חשבונאי או ייעוץ מכל סוג שהוא, אלא סיכום של ניתוח"+
+                        " נתונים המבוסס על תלוש משכורת אחד, אשר אין בידו לספק"+
+                        " תמונה שלמה של זכויות העובד ומילוין על ידי המעסיק."+
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
                         "ייתכן שהתלוש שנשלח מכיל סעיפים נוספים שלא נבדקו על"+
-                        "ידנו, וייתכן כי בסעיפים האלה מסתתר ההפרש שמגיע לך. חשוב"+
-                        "לציין, כי ציון סעיפים בצורה לא מובנת הוא עבירה על החוק"+
-                        "וניתן לקבל עבורו פיצויים על פי חוק."+
+                        " ידנו, וייתכן כי בסעיפים האלה מסתתר ההפרש שמגיע לך. חשוב"+
+                        " לציין, כי ציון סעיפים בצורה לא מובנת הוא עבירה על החוק"+
+                        " וניתן לקבל עבורו פיצויים על פי חוק."+
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
                         "בדיקה מהימנה ומקיפה של התלוש וזכויות העובד\ת תוכל"+
-                        "להתבצע רק לאחר שליחת נתונים שנתיים מלאים."+
+                        " להתבצע רק לאחר שליחת נתונים שנתיים מלאים."+
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
                         "לשאלות ובירורים בנוגע לתוצאות ניתן לפנות אלינו במייל:"+
-                        "info@tlooshy.com."+
+                        " info@tlooshy.com."+
                     "</p>"+
                 "</div>"+
             "</td>"+
