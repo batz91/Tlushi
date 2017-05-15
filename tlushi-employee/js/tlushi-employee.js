@@ -567,7 +567,7 @@ var employeeAPI = function() {
 "<p dir='RTL'>"+
     "<u></u>"+
 "</p>"+
-"<p align='right' dir='RTL'>"+
+"<p align='center' dir='RTL'>"+
     "<u>מה לא בדקנו:</u>"+
 "</p>"+
 "<div align='right' dir='rtl'>"+
