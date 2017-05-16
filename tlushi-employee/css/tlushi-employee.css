@@ -31,10 +31,6 @@ header{
     float:left;
 }
 
-.send{
-    margin-top: 11%;
-}
-
 #container {
   overflow:auto;
   width: 99%;
