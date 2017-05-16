@@ -9,6 +9,11 @@ var employeeAPI = function() {
     var daysHolidayArray;      // ימי חופשה לפי ותק
     var daysRecoveryArray;  // ימי הבראה לפי ותק
     var currentEmail;
+    var salaryOutPut;
+    var extraHouresOutPut;
+    var travelFeesOutPut;
+    var employeePensionOutPut;
+    var employerPensionOutPut;
 
 
 //	Create the initial appearance of the site
@@ -268,6 +273,7 @@ var employeeAPI = function() {
     };
 
     var calc = function() {
+        var goodOutPut= "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא בדיקה מלאה";
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
@@ -297,7 +303,10 @@ var employeeAPI = function() {
             if(hourWage*regularWorkHours>regularPayment)
                  basicWageGap=hourWage*regularWorkHours-regularPayment;
         }
-
+        if (basicWageGap > 0)
+            salaryOutPut= "נראה כי המעסיק לא שילם לך שכר בסך "+ basicWageGap;
+        else
+            salaryOutPut= goodOutPut;
         // פער בהפרשת פנסיה של העובד
         var employeePensionGap = 0;
         if(hourWage<minHour)
@@ -316,8 +325,12 @@ var employeeAPI = function() {
         // סה"כ הפסד בש"ח על בסיס דמי נסיעות
         var travelFeesLoss = 0;
         if(travelPayment<daysOfWork*travelDay)
+        {
             travelFeesLoss = daysOfWork*travelDay-travelPayment;
-
+            travelFeesOutPut= "נראה כי המעסיק לא שילם לך עבור נסיעות בסך של "+ travelFeesLoss+"₪";
+        }
+        else
+            travelFeesOutPut= goodOutPut;
         // סה"כ הפסד על שעות נוספות
         var extraHouresLoss= 0;
         if(regularWorkHours == 187)
@@ -326,6 +339,10 @@ var employeeAPI = function() {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2);
         if(regularWorkHours > 188)
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
+        if(extraHouresLoss > 0)
+            extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ extraHouresLoss+"₪";
+        else
+            extraHouresOutPut= goodOutPut;
 
         // ימי חופשה נוספים שמגיעים לך
         var daysOffDeserve= 0;
@@ -373,6 +390,19 @@ var employeeAPI = function() {
         var deductionsLoss= 0;
         if(deductionsText == "אחר")
             deductionsLoss= deductionsAmount;
+        
+        // פנסיה עובד רגילה+פרמיה
+        var employeePensionSum= employeePensionGap+employeePremiumGap;
+        if(employeePensionSum > 0)
+            employeePensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + employeePensionSum+"₪";
+        else
+            employeePensionOutPut= goodOutPut;
+        // פנסיה הפרשת מעביד+פרמיה
+        var employerPensionSum= employerPensionGap+employerPremiumGap;
+        if(employerPensionSum > 0)
+            employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + employerPensionSum+"₪";
+        else 
+            employerPensionOutPut= goodOutPut;
 
         console.log("minWageGap = "+minWageGap);
         console.log("basicWageGap = "+basicWageGap);
@@ -479,7 +509,7 @@ var employeeAPI = function() {
                     "<p align='right' dir='RTL'>"+
                         "שכר"+
                     "</p>"+
-                   "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא בדיקה מלאה"+
+                        salaryOutPut+
                 "</td>"+
             "</tr>"+
             "<tr>"+
@@ -490,8 +520,7 @@ var employeeAPI = function() {
                     "<p align='right' dir='RTL'>"+
                         "תשלום על שעות נוספות"+
                     "</p>"+
-                        "נראה כי המעסיק לא שילם לך עבור 12 שעות נוספות בסך של"+
-                        "420₪"+
+                        extraHouresOutPut+
                 "</td>"+
             "<tr>"+
                 "<td class='tdImg' valign='top'>"+
@@ -502,7 +531,7 @@ var employeeAPI = function() {
                         "נסיעות"+
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
-                        "נראה כי המעסיק לא שילם לך עבור נסיעות בסך של 430₪"+
+                        travelFeesOutPut+
                     "</p>"+
                 "</td>"+
             "</tr>"+
@@ -516,12 +545,10 @@ var employeeAPI = function() {
                     "</p>"+
                     "<p align='right' dir='RTL'>"+
                         "<strong>עובד </strong>"+
-                        "- נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+
-                        " בדיקה מלאה"+
+                        employeePensionOutPut+
                     "</p>"+
                     "<strong>מעביד </strong>"+
-                    "<strong> נראה כי המעסיק לא הפריש עבורך לפנסיה בסך </strong>"+
-                    "<strong>של 430₪</strong>"+
+                     employerPensionOutPut+
                 "</td>"+
             "</tr>"+
             "<tr>"+
