@@ -729,7 +729,7 @@ var employeeAPI = function() {
         "</tr>"+
     "</tbody>"+
 "</table>"+
-"</div";
+"</div>"+
                 "<button id = 'save' class='form-style-9'>שמור</button>"+
             "</div>";
         $("body").html(text);
