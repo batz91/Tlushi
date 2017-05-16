@@ -226,8 +226,10 @@ var employeeAPI = function() {
                     }
                 }
              });
-             if(flag == false)
-                alert("אין טופס לבדיקה");   
+             if(flag == false){
+                alert("אין טופס לבדיקה"); 
+                location.reload();  
+             }
         });
 };
     var openProgress = function(){

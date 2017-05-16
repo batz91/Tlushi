@@ -12,15 +12,27 @@ header{
     direction: ltr;
     float:left;
     height: 90%;
-    width: 40%;
+    width: 35%;
     display: inline-block;
 }
 
 .right{
     direction: rtl;
     float:right;
-    width: 58%;
+    width: 63%;
     height: 100%;
+}
+
+.topic{
+    margin-bottom: 10px;
+}
+
+.settings{
+    float:left;
+}
+
+.send{
+    margin-top: 11%;
 }
 
 #container {
@@ -31,7 +43,7 @@ header{
 
 #container.rotate90,
 #container.rotate270 {
-  width: 100%;
+  width: 130%;
   height: 100%
 }
 #pic,#loadFormAdmin {
@@ -91,7 +103,9 @@ td, th {
 .form-style-9{
     background: #FAFAFA;
     padding: 5px;
-    margin: 20px auto;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     border: 6px solid #305A72;
@@ -141,7 +155,7 @@ td, th {
 
 .form-style-9 input{
     margin: 2px;
-    width: 240px;
+    width: 235px;
 }
 
 .form-style-9 input[type="button"], 
