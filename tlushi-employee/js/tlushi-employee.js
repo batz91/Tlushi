@@ -8,6 +8,7 @@ var employeeAPI = function() {
     var weekHours;    // שעות שבועיות
     var daysHolidayArray;      // ימי חופשה לפי ותק
     var daysRecoveryArray;  // ימי הבראה לפי ותק
+    var currentEmail;
 
 
 //	Create the initial appearance of the site
@@ -223,6 +224,7 @@ var employeeAPI = function() {
                         preview.src = childData.paycheck;
                         var key=childSnapshot.key;
                         database.ref("user/"+key+"/status").set("true");
+                        currentEmail= childData.email;
                     }
                 }
              });
@@ -257,7 +259,8 @@ var employeeAPI = function() {
                 var childData = childSnapshot.val();
                 if($("#progress option:selected").text() == childData.email)
                 {
-                     var preview = document.getElementById('pic'); //selects the query named img
+                    currentEmail= childData.email;
+                    var preview = document.getElementById('pic'); //selects the query named img
                     preview.src = childData.paycheck;
                 }
              });
@@ -449,13 +452,13 @@ var employeeAPI = function() {
     var fillOutput = function(){
         var text = 
             "<div class='output' dir='rtl'>"+
-            "<img src='./labelTlushi.jpg' height='170px' width='200px'>"+
+            "<img src='./labelTlushi.jpg' height='100px' width='200px'>"+
                 "<table cellpadding='0' cellspacing='0' width='100%'>"+
                 "<tbody>"+
                 "<tr>"+
                     "<td>"+
                         "<div>"+
-                            "<p align='center' dir='rtl'>"+
+                            "<p align='center' style='font-size:25px;' dir='rtl'>"+
                             "תלוש השכר שלך במילים פשוטות"+
                             "</p>"+
                         "</div>"+
@@ -463,17 +466,16 @@ var employeeAPI = function() {
                 "</tr>"+
                 "</tbody>"+
                 "</table>"+
-                "<p dir='rtl'>"+
-                "<u>מה בדקנו</u>"+
+                "<p align='center' style='font-size:20px;' dir='rtl'>"+
+                "<strong><u>מה בדקנו</u></strong>"+
                 "</p>"+
                 "<div align='right' dir='rtl'>"+
-    "<table dir='rtl' border='1' cellspacing='0' cellpadding='0'>"+
-        "<tbody>"+
+    "<table dir='rtl' border='1' cellspacing='0'>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                     "<img src='./money.png' height='60px' width='60px'>"+
+                "<td class='tdImg' valign='top'>"+
+                     "<img src='./money.png' height='45px' width='45px'>"+
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "שכר"+
                     "</p>"+
@@ -481,10 +483,10 @@ var employeeAPI = function() {
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                     "<img src='./clock.png' height='60px' width='60px'>"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src='./clock.png' height='45px' width='45px'>"+                
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "תשלום על שעות נוספות"+
                     "</p>"+
@@ -492,10 +494,10 @@ var employeeAPI = function() {
                         "420₪"+
                 "</td>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                     "<img src='./car.png' height='60px' width='60px'>"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src='./car.png' height='45px' width='45px'>"+                
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "נסיעות"+
                     "</p>"+
@@ -505,10 +507,10 @@ var employeeAPI = function() {
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                   "<img src='./oldMan.jpg' height='60px' width='60px'>"+
+                "<td class='tdImg' valign='top'>"+
+                   "<img src='./oldMan.jpg' height='45px' width='45px'>"+
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "הפרשה לפנסיה"+
                     "</p>"+
@@ -523,10 +525,10 @@ var employeeAPI = function() {
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                "<img src='./undo.png' height='60px' width='60px'>"+
+                "<td class='tdImg' valign='top'>"+
+                "<img src='./undo.png' height='45px' width='45px'>"+
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "דמי הבראה"+
                     "</p>"+
@@ -536,20 +538,20 @@ var employeeAPI = function() {
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                     "<img src='./siz.png' height='60px' width='60px'>"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src='./siz.png' height='45px' width='45px'>"+                
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "<strong>ניכויי רשות</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width='79' valign='top'>"+
-                      "<img src='./holiday.png' height='60px' width='60px'>"+               
+                "<td class='tdImg' valign='top'>"+
+                      "<img src='./holiday.png' height='45px' width='45px'>"+               
                 "</td>"+
-                "<td width='475'>"+
+                "<td class='tdExp'>"+
                     "<p align='right' dir='RTL'>"+
                         "חופשה"+
                     "</p>"+
@@ -563,14 +565,13 @@ var employeeAPI = function() {
                     "</p>"+
                 "</td>"+
             "</tr>"+
-        "</tbody>"+
     "</table>"+
 "</div>"+
 "<p dir='RTL'>"+
     "<u></u>"+
 "</p>"+
-"<p align='center' dir='RTL'>"+
-    "<u>מה לא בדקנו:</u>"+
+ "<p align='center' style='font-size:20px;' dir='rtl'>"+
+    "<strong><u>מה לא בדקנו:</u></strong>"+
 "</p>"+
 "<div align='right' dir='rtl'>"+
     "<table dir='rtl' border='0' cellspacing='0' cellpadding='0' width='558'>"+
@@ -578,40 +579,40 @@ var employeeAPI = function() {
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                        "<img src='./note.png' height='20px' width='28px'>"+
-                        "אימות הנתונים והניתוח באופן ודאי ועל פי נתונים אישיים"+
+                        "<img src='./note.png' height='22px' width='37px'>"+
+                        "<strong>אימות הנתונים והניתוח באופן ודאי ועל פי נתונים אישיים</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                        "<img src='./note.png' height='20px' width='28px'>"+
-                        "בחינה שנתית של הניתוח"+
+                        "<img src='./note.png' height='22px' width='37px'>"+
+                        "<strong>בחינה שנתית של הניתוח</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                        "<img src='./note.png' height='20px' width='28px'>"+
-                        "התאמה של הנתונים לדוח השעות"+
+                        "<img src='./note.png' height='22px' width='37px'>"+
+                        "<strong>התאמה של הנתונים לדוח השעות</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                    "<img src='./note.png' height='20px' width='28px'>"+
-                        "צבירת ימי מחלה"+
+                        "<img src='./note.png' height='22px' width='37px'>"+
+                        "<strong>צבירת ימי מחלה</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
                 "<td width='558'>"+
                     "<p align='right' dir='RTL'>"+
-                    "<img src='./note.png' height='20px' width='28px'>"+
-                        "ביטוח לאומי"+
+                        "<img src='./note.png' height='22px' width='37px'>"+
+                        "<strong>ביטוח לאומי</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
@@ -658,8 +659,7 @@ var employeeAPI = function() {
             "<td>"+
                 "<div>"+
                     "<p align='right' dir='RTL'>"+
-                        "<u>זיהוי משתמש</u>"+
-                        ": yossi@gmail.com"+
+                        "<u>זיהוי משתמש: "+currentEmail+"</u>"+
                     "</p>"+
                 "</div>"+
             "</td>"+

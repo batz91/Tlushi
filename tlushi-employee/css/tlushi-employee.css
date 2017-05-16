@@ -326,3 +326,11 @@ div.tab button.active {
     height: 95%;
     display: inline-block;
 }
+
+.tdImg{
+    width: 1px;
+}
+
+.tdExp{
+    width:450px;
+}
