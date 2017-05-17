@@ -752,14 +752,14 @@ var employeeAPI = function() {
                            {
                                
                                 var data = canvas.toDataURL("image/png", 1);
-        //                        window.open(data); 
+                                window.open(data); 
                                 // Send output to email!!!!
-                                
+                                /*
                                 var base64result = data.split(',')[1];
                                 let storageRef = firebase.storage().ref();
                                 storageRef.child("paycheck/result"+filename+".png")
                                  .putString(base64result, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
-                                    /*emailjs.send("diabetesappjce","tlushi",{to_email: currentEmail, paycheck_output: savedPicture.downloadURL})
+                                    emailjs.send("diabetesappjce","tlushi",{to_email: currentEmail, paycheck_output: savedPicture.downloadURL})
                                     .then(function(response) {
                                         // Delete the file
                                         //var desertRef = storageRef.child("paycheck/result"+filename+".png");
@@ -767,8 +767,8 @@ var employeeAPI = function() {
                                     }, function(err) {
                                         console.log("FAILED. error=", err);
                                     });    
-                                */});
-                           }
+                                });
+                           */}
             });
         //window.print();
 });
