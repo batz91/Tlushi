@@ -136,7 +136,8 @@ var employeeAPI = function() {
     };
     // מחיקת משתמשים שנשמרו
     var deleteSaved = function(){
-        /*
+        var protectLoop= true;
+        let storageRef = firebase.storage().ref();
         var database = firebase.database();
         var leadsRef = database.ref('user');
         leadsRef.on('value', function(snapshot) {
@@ -145,7 +146,7 @@ var employeeAPI = function() {
                     if(childData.status == "saved")
                     {
                         
-                        var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
+        /*                var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
                         // Delete the file
                         desertRef.delete().then(function() {
                         // File deleted successfully
@@ -155,17 +156,24 @@ var employeeAPI = function() {
                        var desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
                         // Delete the   
                         desertRef.delete().then(function() {
+                            alert("output delete");
                         // File deleted successfully
                         }).catch(function(error) {
+                            alart("output delete feild");
                         // Uh-oh, an error occurred!
                         });
-                        ref.child(childSnapshot.key).remove();
+                        leadsRef.child(childSnapshot.key).remove();
                     }
                 });
-                alert("המשתמשים נמחקו");
-                location.reload();
+                if(protectLoop)
+                {
+                    protectLoop= false;
+                    alert("המשתמשים נמחקו");
+                    location.reload();
+                }
         });
-        */
+        */return false;
+        
     }
     // גיבוי טפסים שסוימו לקובץ אקסל
     var backUp = function(){
