@@ -114,8 +114,7 @@ var employeeAPI = function() {
         alert("השינויים בוצעו בהצלחה");
         location.reload();        
     }
-    // הצגת הדף למנהל עם עידכון הפרטים האפשריים
-
+    // הצגת דוח מוכן למנהל
     var findEndForm= function(){
         if($("#txtFindForm").val() == undefined)
         {
@@ -130,16 +129,125 @@ var employeeAPI = function() {
                 if($("#txtFindForm").val() == childData.email && childData.status == "done")
                 {
                     var preview = document.getElementById('loadFormAdmin'); //selects the query named img
-                    preview.src = childData.paycheck;
+                    preview.src = childData.outPut;
                 }
              });
         });
     };
-
+    // מחיקת משתמשים שנשמרו
+    var deleteSaved = function(){
+        /*
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        leadsRef.on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                    if(childData.status == "saved")
+                    {
+                        
+                        var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
+                        // Delete the file
+                        desertRef.delete().then(function() {
+                        // File deleted successfully
+                        }).catch(function(error) {
+                        // Uh-oh, an error occurred!
+                        });
+                       var desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
+                        // Delete the   
+                        desertRef.delete().then(function() {
+                        // File deleted successfully
+                        }).catch(function(error) {
+                        // Uh-oh, an error occurred!
+                        });
+                        ref.child(childSnapshot.key).remove();
+                    }
+                });
+                alert("המשתמשים נמחקו");
+                location.reload();
+        });
+        */
+    }
+    // גיבוי טפסים שסוימו לקובץ אקסל
+    var backUp = function(){
+        var flag= false;
+        var protectLoop= true;
+        var database = firebase.database();
+        var leadsRef = database.ref('user');
+        var table=
+                        "<table>"+
+                             "<tr>"+
+                                "<th>אימייל לקוח</th>"+
+                                "<th>שם ממלא הטופס</th>"+
+                                "<th>תאריך</th>"+
+                                "<th>ימי עבודה</th>"+
+                                "<th>שכר לשעה</th>"+
+                                "<th>ותק שנים</th>"+
+                                "<th>שעות עבודה רגילות בתלוש</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה רגילות</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה נוספות 125</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה נוספות 150</th>"+
+                                "<th>נסיעות חודשי חופשי</th>"+
+                                "<th>הפרשת עובד לפנסיה</th>"+
+                                "<th>הפרשת מעביד פנסיה</th>"+
+                                "<th>מספר ימי חופשה שנצברו</th>"+
+                                "<th>דמי הבראה</th>"+
+                                "<th>פרמיה</th>"+
+                                "<th>ניכויים סכום</th>"+
+                                "<th>ניכויים מלל</th>"+
+                                "<th>תלוש משכורת</th>"+
+                                "<th>דוח סופי</th>"+
+                            "</tr>";
+        leadsRef.on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {                     
+                var childData = childSnapshot.val();
+                    if(childData.status == "done")
+                    {
+                        flag=true;
+                        table+= "<tr>"+
+                                    "<th>"+childData.email+"</th>"+
+                                    "<th>"+childData.inputFields.EmployeeName+"</th>"+
+                                    "<th>"+childData.inputFields.Date+"</th>"+
+                                    "<th>"+childData.inputFields.WorkDays+"</th>"+
+                                    "<th>"+childData.inputFields.HourlyWage+"</th>"+
+                                    "<th>"+childData.inputFields.Seniority+"</th>"+
+                                    "<th>"+childData.inputFields.WorkHours+"</th>"+
+                                    "<th>"+childData.inputFields.RegularHoursPay+"</th>"+
+                                    "<th>"+childData.inputFields.Pay125+"</th>"+
+                                    "<th>"+childData.inputFields.Pay150+"</th>"+
+                                    "<th>"+childData.inputFields.Travel+"</th>"+
+                                    "<th>"+childData.inputFields.WorkerPension+"</th>"+
+                                    "<th>"+childData.inputFields.EmployerPension+"</th>"+
+                                    "<th>"+childData.inputFields.DaysOff+"</th>"+
+                                    "<th>"+childData.inputFields.Convalescence+"</th>"+
+                                    "<th>"+childData.inputFields.PremiumWage+"</th>"+
+                                    "<th>"+childData.inputFields.Deduction+"</th>"+
+                                    "<th>"+childData.inputFields.DeductionText+"</th>"+
+                                    "<th><img src="+childData.paycheck+"alt=''/></th>"+
+                                    "<th><img src="+childData.outPut+"alt=''/></th>"+
+                                    "</tr>";
+                        var key=childSnapshot.key;
+                        database.ref("user/"+key+"/status").set("saved");
+                    }
+                });
+            if(flag && protectLoop)
+            {
+                protectLoop= false;
+                table+="</table>";
+                $("#dvData").html(table);
+                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#dvData').html()));
+                location.reload();
+            }
+            if(!flag){
+                alert("אין מידע לגיבוי");
+                return false;
+            }
+        });
+    }
     var adminSettings= function(){
         var content= "<div class='tab'>"+
                         "<button class='tablinks' id='defaultOpen'>משתנים</button>"+
                         "<button class='tablinks' id='showReportsId'>צפיה בדוחות</button>"+
+                        "<button class='tablinks' id='showBackUP'>גיבוי</button>"+
                      "</div>"+
                      "<div id='changeValues' class='tabcontent'>"+
                         "<label>שכר מינימום לשעה:</label>"+
@@ -170,7 +278,13 @@ var employeeAPI = function() {
                             "<div id ='container'>"+
                                 "<img src='' id='loadFormAdmin' height='100%' width='100%'>"+
                             "</div>"+
-                        "</div>"+       
+                        "</div>"+
+                        "</div>"+ 
+                        "<div id='showBackUPText' class='tabcontent'>"+    
+                            "<button id= 'buttonBackUp' type='button'>גבה נתונים</button>"+
+                            "<button id= 'buttonDeleteSaved' type='button'>מחק</button>"+
+                            "<div class='excel' id= 'dvData'></div>"+
+                        "</div>"+  
                      "</div>";        
         $("#footerPopUp").html("");
         $("#containarPopUp").html(content);
@@ -182,18 +296,30 @@ var employeeAPI = function() {
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
         $('#buttonUpdateAdmin').click(updateAdminValues);
         $('#buttonFindForm').click(findEndForm);
+        $('#buttonBackUp').click(backUp);
+        $('#buttonDeleteSaved').click(deleteSaved);
          tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
+            tabcontent[2].style.display = "none";
         $('#defaultOpen').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[0].style.display = "block";
+            tabcontent[2].style.display = "none";
             return false;
-        });        
+        });
+        $('#showBackUP').click(function(){
+            tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent[0].style.display = "none";
+            tabcontent[1].style.display = "none";
+            tabcontent[2].style.display = "block";
+            return false;
+        });
         $('#showReportsId').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "block";
+            tabcontent[2].style.display = "none";
             $('#zoom-inAdmin').click({msg: 'admin'},zoomIn); 
             $('#zoom-outAdmin').click({msg: 'admin'},zoomOut);
             $('#reset-zoomAdmin').click({msg: 'admin'},zoomReset);
@@ -771,7 +897,6 @@ var employeeAPI = function() {
             "</div>";
         $("body").html(text);
         $("#save").click(function(){
-            const filename = Math.floor(Date.now() / 1000);
             document.getElementById('save').style.visibility='hidden';
             html2canvas(document.body, 
             {
@@ -783,11 +908,11 @@ var employeeAPI = function() {
                                 // Send output to email!!!!
                                 var base64result = data.split(',')[1];
                                 let storageRef = firebase.storage().ref();
-                                storageRef.child('/result'+filename+'.png')
+                                var key=currentSnapshot.key;
+                                storageRef.child('output/'+key+'.png')
                                  .putString(base64result, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
                                     // update output field
                                     var database = firebase.database();
-                                    var key=currentSnapshot.key;
                                     database.ref("user/"+key+"/outPut").set(savedPicture.downloadURL);
                                     updateInputFields();
 /*                                    emailjs.send("diabetesappjce","tlushi",{to_email: currentEmail, paycheck_output: savedPicture.downloadURL})

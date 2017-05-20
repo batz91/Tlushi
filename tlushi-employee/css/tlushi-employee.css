@@ -333,3 +333,6 @@ div.tab button.active {
 .tdExp{
     width:450px;
 }
+.excel{
+    display: none;
+}
