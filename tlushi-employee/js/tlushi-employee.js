@@ -140,13 +140,13 @@ var employeeAPI = function() {
         let storageRef = firebase.storage().ref();
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+       /* leadsRef.on('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "saved")
                     {
                         
-        /*                var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
+                        var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
                         // Delete the file
                         desertRef.delete().then(function() {
                         // File deleted successfully
