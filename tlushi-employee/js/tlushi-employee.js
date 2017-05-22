@@ -128,6 +128,7 @@ var employeeAPI = function() {
                 var childData = childSnapshot.val();
                 if($("#txtFindForm").val() == childData.email && childData.status == "done")
                 {
+                    flag= true;
                     var preview = document.getElementById('loadFormAdmin'); //selects the query named img
                     preview.src = childData.outPut;
                 }
@@ -140,7 +141,7 @@ var employeeAPI = function() {
         let storageRef = firebase.storage().ref();
         var database = firebase.database();
         var leadsRef = database.ref('user');
-       /* leadsRef.on('value', function(snapshot) {
+        leadsRef.on('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "saved")
@@ -172,7 +173,7 @@ var employeeAPI = function() {
                     location.reload();
                 }
         });
-        */return false;
+        return false;
         
     }
     // גיבוי טפסים שסוימו לקובץ אקסל
@@ -230,8 +231,8 @@ var employeeAPI = function() {
                                     "<th>"+childData.inputFields.PremiumWage+"</th>"+
                                     "<th>"+childData.inputFields.Deduction+"</th>"+
                                     "<th>"+childData.inputFields.DeductionText+"</th>"+
-                                    "<th><img src="+childData.paycheck+"alt=''/></th>"+
-                                    "<th><img src="+childData.outPut+"alt=''/></th>"+
+                                    "<th><img src="+childData.paycheck+"alt='' height='10px' width='10px'/></th>"+
+                                    "<th><img src="+childData.outPut+"alt='' height='10px' width='10px'/></th>"+
                                     "</tr>";
                         var key=childSnapshot.key;
                         database.ref("user/"+key+"/status").set("saved");
@@ -686,6 +687,7 @@ var employeeAPI = function() {
             outPutSumText= " נראה כי תלוש המשכורת שלך תקין!";
         text=
             "<div class='output' dir='rtl'>"+
+            "<img class='homeButton' id='homeButton' src='./home.png'>"+
             "<img src="+imgTlushiBase64+" height='100px' width='200px'>"+
                 "<table cellpadding='0' cellspacing='0' border='0'>"+
                 "<tbody>"+
@@ -904,8 +906,13 @@ var employeeAPI = function() {
                 "<button id = 'save' class='form-style-9'>שמור</button>"+
             "</div>";
         $("body").html(text);
+        $("#homeButton").click(function(){
+            location.reload();
+            return false;
+        });
         $("#save").click(function(){
-            document.getElementById('save').style.visibility='hidden';
+            document.getElementById('save').style.visibility='none';
+            document.getElementById('homeButton').style.display='hidden';
             html2canvas(document.body, 
             {
                            background:'#fff',
@@ -934,8 +941,9 @@ var employeeAPI = function() {
   */                              });
                            }
             });
+            document.getElementById('save').style.visibility='visible';
+            document.getElementById('homeButton').style.visibility='block';
 });
-    document.getElementById('save').style.visibility='visible';
     }
 
     return {
