@@ -23,6 +23,17 @@ header{
     height: 100%;
 }
 
+.footer {
+  clear: both;
+  color: #666;  
+  margin-top: 20px; 
+  width: 100%;
+  padding: 5px 0;
+  text-align: center;
+  background: #F8F7F7;
+  border-top: 1px solid #F2F2F2;  
+}
+
 .topic{
     margin-bottom: 10px;
 }
@@ -99,7 +110,7 @@ td, th {
 .form-style-9{
     background: #FAFAFA;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-left: 2px;
     margin-right: 2px;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
@@ -179,7 +190,7 @@ td, th {
 .textPopUP{
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 8px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
