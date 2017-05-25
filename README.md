@@ -56,7 +56,7 @@ Please visit our wiki for furthur project info:
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)
 - [Iteration 1 - Application basic design & functionality](https://github.com/batz91/Tlushi/wiki/Iter1---Application-basic-design-&-functionality)
 - [Iteration 2 - Firebase](https://github.com/batz91/Tlushi/wiki/Iteration-2---Firebase)
-- [Iteration 3 - Feature Y]()
+- [Iteration 3 - Report Features](https://github.com/batz91/Tlushi/wiki/iteration-3---report-features)
 - [Iteration 4 - Feature Z]()
 
 
