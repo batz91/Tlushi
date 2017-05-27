@@ -24,7 +24,7 @@ var employeeAPI = function() {
 	var initModule = function() {
         var database = firebase.database();
         var leadsRef = database.ref('Settings');
-        leadsRef.on('value', function(snapshot) { 
+        leadsRef.once('value', function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             minHour= parseFloat(childData.minHour);
@@ -99,7 +99,7 @@ var employeeAPI = function() {
         var recoveryArray = ($("#txtDaysRecoveryArray").val().split(",")).map(Number);
         var database = firebase.database();
         var leadsRef = database.ref('Settings');
-        leadsRef.on('value', function(snapshot) { 
+        leadsRef.once('value', function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             var key=childSnapshot.key;
@@ -116,6 +116,7 @@ var employeeAPI = function() {
     }
     // הצגת דוח מוכן למנהל
     var findEndForm= function(){
+        var flag= false;
         if($("#txtFindForm").val() == undefined)
         {
             alert('הכנס אימייל לקוח');
@@ -123,7 +124,7 @@ var employeeAPI = function() {
         }
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if($("#txtFindForm").val() == childData.email && childData.status == "done")
@@ -133,15 +134,20 @@ var employeeAPI = function() {
                     preview.src = childData.outPut;
                 }
              });
+             if(!flag)
+             {
+                 alert('לא קיים טופס לאימייל זה');
+                 return false;
+             }
         });
     };
     // מחיקת משתמשים שנשמרו
     var deleteSaved = function(){
-        var protectLoop= true;
+        var flag= true;
         let storageRef = firebase.storage().ref();
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "saved")
@@ -166,11 +172,11 @@ var employeeAPI = function() {
                         leadsRef.child(childSnapshot.key).remove();
                     }
                 });
-                if(protectLoop)
+                if(flag)
                 {
-                    protectLoop= false;
+                    flag= false;
                     alert("המשתמשים נמחקו");
-                    location.reload();
+                    //location.reload();
                 }
         });
         return false;
@@ -179,7 +185,6 @@ var employeeAPI = function() {
     // גיבוי טפסים שסוימו לקובץ אקסל
     var backUp = function(){
         var flag= false;
-        var protectLoop= true;
         var database = firebase.database();
         var leadsRef = database.ref('user');
         var table=
@@ -206,7 +211,7 @@ var employeeAPI = function() {
                                 "<th>תלוש משכורת</th>"+
                                 "<th>דוח סופי</th>"+
                             "</tr>";
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "done")
@@ -238,13 +243,11 @@ var employeeAPI = function() {
                         database.ref("user/"+key+"/status").set("saved");
                     }
                 });
-            if(flag && protectLoop)
+            if(flag)
             {
-                protectLoop= false;
                 table+="</table>";
                 $("#dvData").html(table);
                 window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#dvData').html()));
-                location.reload();
             }
             if(!flag){
                 alert("אין מידע לגיבוי");
@@ -356,7 +359,7 @@ var employeeAPI = function() {
         var flag= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(flag == false)
                 {                     
@@ -375,7 +378,6 @@ var employeeAPI = function() {
              });
              if(flag == false){
                 alert("אין טופס לבדיקה"); 
-                location.reload();  
              }
         });
 };
@@ -384,7 +386,7 @@ var employeeAPI = function() {
         list.empty();
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if(childData.status == "true")
@@ -399,7 +401,7 @@ var employeeAPI = function() {
     var uploadInProgress = function(){
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if($("#progress option:selected").text() == childData.email)
