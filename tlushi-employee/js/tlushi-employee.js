@@ -386,6 +386,8 @@ var employeeAPI = function() {
              if(!flag && !protectLoop){
                 protectLoop= true;
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
+                var rand = Math.round(Math.random() * (30000 - 5000)) + 5000; // generate new time (between 3sec and 500"s)
+                setTimeout(myFunction, rand);
              }
         });
         }();
