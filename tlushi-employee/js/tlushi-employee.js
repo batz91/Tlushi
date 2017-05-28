@@ -366,12 +366,12 @@ var employeeAPI = function() {
                     var childData = childSnapshot.val();
                     if(childData.status == "false")
                     {
+                        database.ref("user/"+key+"/status").set("true");
                         currentSnapshot= childSnapshot;
                         flag= true;
                         var preview = document.getElementById('pic'); //selects the query named img
                         preview.src = childData.paycheck;
                         var key=childSnapshot.key;
-                        database.ref("user/"+key+"/status").set("true");
                         currentEmail= childData.email;
                     }
                 }
