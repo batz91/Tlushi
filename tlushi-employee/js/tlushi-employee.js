@@ -364,20 +364,18 @@ var employeeAPI = function() {
                 if(!flag)
                 {
                     var rand = Math.round(Math.random() * (3000 - 500)) + 500; // generate new time (between 3sec and 500"s)
-                    setTimeout(myFunction, rand);
-                    function myFunction(){                     
+                    setTimeout(myFunction, rand);                     
                     var childData = childSnapshot.val();
                     if(childData.status == "false")
                     {
+                        var key=childSnapshot.key;
                         database.ref("user/"+key+"/status").set("true");
                         currentSnapshot= childSnapshot;
                         flag= true;
                         var preview = document.getElementById('pic'); //selects the query named img
                         preview.src = childData.paycheck;
-                        var key=childSnapshot.key;
                         currentEmail= childData.email;
                     }
-                }
                 }
              });
              if(!flag){
