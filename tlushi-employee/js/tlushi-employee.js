@@ -424,14 +424,14 @@ var employeeAPI = function() {
         var allInput = $("Input");
         allInput.removeClass("error");
         var errorFlag=false;
-        for(var i=0;i<allInput.length;i++){
+        for(var i=2;i<18;i++){
             if(allInput[i].value==""){
                 allInput[i].className+=" error";
                 errorFlag=true;
             }
         }
-        if(errorFlag==true)
-            return(false);
+        if(errorFlag)
+            return false;
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
