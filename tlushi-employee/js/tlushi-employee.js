@@ -364,7 +364,8 @@ var employeeAPI = function() {
                 if(!flag)
                 {
                     var rand = Math.round(Math.random() * (3000 - 500)) + 500; // generate new time (between 3sec and 500"s)
-                    setTimeout(myFunction, rand);                     
+                    setTimeout(myFunction, rand);
+                    function myFunction(){                     
                     var childData = childSnapshot.val();
                     if(childData.status == "false")
                     {
@@ -376,6 +377,7 @@ var employeeAPI = function() {
                         preview.src = childData.paycheck;
                         currentEmail= childData.email;
                     }
+                }
                 }
              });
              if(!flag){
