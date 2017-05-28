@@ -703,9 +703,8 @@ var employeeAPI = function() {
             outPutSumText= " נראה כי תלוש המשכורת שלך תקין!";
         text=
             "<div class='output' dir='rtl'>"+
-            "<img class='homeButton' id='homeButton' src='./home.png'>"+
-            "<img class='homeButton' id='homePageButton' src='./undo.png'>"+
-            "<img src="+imgTlushiBase64+" height='100px' width='200px'>"+
+            "<img class='homeButton' id='homePageButton' src='./back.png'>"+
+            "<img class= 'tlushiLogo' src="+imgTlushiBase64+" height='90px' width='180px'>"+
                 "<table cellpadding='0' cellspacing='0' border='0'>"+
                 "<tbody>"+
                 "<tr>"+
@@ -923,10 +922,6 @@ var employeeAPI = function() {
                 "<button id = 'save' class='form-style-9'>שמור</button>"+
             "</div>";
         $("body").html(text);
-        $("#homeButton").click(function(){
-            location.reload();
-            return false;
-        });
         $("#homePageButton").click(function(){
             $("body").html(currentPage);
             var input= $("input");
@@ -962,7 +957,8 @@ var employeeAPI = function() {
                                         alert("email send")
                                     }, function(err) {
                                         alert("FAILED. error=", err);
-                                    });    
+                                    });   
+                                    location.reload(); 
   */                              });
                            }
             });
