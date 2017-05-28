@@ -361,7 +361,7 @@ var employeeAPI = function() {
         var database = firebase.database();
         var leadsRef = database.ref('user');
         var myFunction =function(){
-        leadsRef.on('value', function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
                 {              
