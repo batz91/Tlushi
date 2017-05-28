@@ -421,6 +421,17 @@ var employeeAPI = function() {
 
     var calc = function() {
         var goodOutPut= "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+"<font color='blue'> בדיקה מלאה</font>";
+        var allInput = $("Input");
+        allInput.removeClass("error");
+        var errorFlag=false;
+        for(var i=0;i<allInput.length;i++){
+            if(allInput[i].value==""){
+                allInput[i].className+=" error";
+                errorFlag=true;
+            }
+        }
+        if(errorFlag==true)
+            return(false);
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
