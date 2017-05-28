@@ -360,7 +360,7 @@ var employeeAPI = function() {
         var protectLoop= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        function myFunction(){
+        var myFunction =function(){
         leadsRef.on('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
@@ -388,7 +388,7 @@ var employeeAPI = function() {
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
              }
         });
-        }
+        }();
 };
     var openProgress = function(){
         var flag= false;
