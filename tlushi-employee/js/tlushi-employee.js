@@ -357,6 +357,7 @@ var employeeAPI = function() {
     }
     var openPic = function(){
         var flag= false;
+        var protectLoop= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
         leadsRef.on('value', function(snapshot) {
@@ -380,7 +381,8 @@ var employeeAPI = function() {
                 }
                 }
              });
-             if(!flag){
+             if(!flag && !protectLoop){
+                protectLoop= true;
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
              }
         });
