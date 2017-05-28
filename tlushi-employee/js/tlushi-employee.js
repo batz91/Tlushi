@@ -361,8 +361,11 @@ var employeeAPI = function() {
         var leadsRef = database.ref('user');
         leadsRef.on('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
-                if(flag == false)
-                {                     
+                if(!flag)
+                {
+                    var rand = Math.round(Math.random() * (3000 - 500)) + 500; // generate new time (between 3sec and 500"s)
+                    setTimeout(myFunction, rand);
+                    function myFunction(){                     
                     var childData = childSnapshot.val();
                     if(childData.status == "false")
                     {
@@ -375,9 +378,10 @@ var employeeAPI = function() {
                         currentEmail= childData.email;
                     }
                 }
+                }
              });
              if(!flag){
-                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת"); 
+                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
              }
         });
 };
