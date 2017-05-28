@@ -357,10 +357,8 @@ var employeeAPI = function() {
     }
     var openPic = function(){
         var flag= false;
-        var protectLoop= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        var myFunction =function(){
         leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
@@ -378,19 +376,10 @@ var employeeAPI = function() {
                     }
                 }
              });
-             if(protectLoop)
-            {
-                var rand = Math.round(Math.random() * (30000 - 5000)) + 5000; // generate new time (between 3sec and 500"s)
-                setTimeout(myFunction, rand);       
-            }
-             if(!flag && !protectLoop){
-                protectLoop= true;
-                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
-                var rand = Math.round(Math.random() * (30000 - 5000)) + 5000; // generate new time (between 3sec and 500"s)
-                setTimeout(myFunction, rand);
+             if(!flag){
+                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");;
              }
         });
-        }();
 };
     var openProgress = function(){
         var flag= false;
