@@ -359,7 +359,7 @@ var employeeAPI = function() {
         var flag= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        leadsRef.on('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(flag == false)
                 {                     
@@ -376,12 +376,13 @@ var employeeAPI = function() {
                     }
                 }
              });
-             if(flag == false){
-                alert("אין טופס לבדיקה"); 
+             if(!flag){
+                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת"); 
              }
         });
 };
     var openProgress = function(){
+        var flag= false;
         var list = $("#progress");
         list.empty();
         var database = firebase.database();
@@ -391,9 +392,12 @@ var employeeAPI = function() {
                 var childData = childSnapshot.val();
                 if(childData.status == "true")
                 {
+                    flag= true;
                     list.append(new Option(childData.email, childData.email));
                 }
              });
+             if(!flag)
+                alert('אין טפסים בתהליך');
         });
         return false;
     };
