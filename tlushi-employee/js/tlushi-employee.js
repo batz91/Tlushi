@@ -360,13 +360,11 @@ var employeeAPI = function() {
         var protectLoop= false;
         var database = firebase.database();
         var leadsRef = database.ref('user');
+        function myFunction(){
         leadsRef.on('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
-                {
-                    var rand = Math.round(Math.random() * (30000 - 5000)) + 5000; // generate new time (between 3sec and 500"s)
-                    setTimeout(myFunction, rand);
-                    function myFunction(){                     
+                {              
                     var childData = childSnapshot.val();
                     if(childData.status == "false")
                     {
@@ -379,13 +377,18 @@ var employeeAPI = function() {
                         currentEmail= childData.email;
                     }
                 }
-                }
              });
+             if(protectLoop)
+            {
+                var rand = Math.round(Math.random() * (30000 - 5000)) + 5000; // generate new time (between 3sec and 500"s)
+                setTimeout(myFunction, rand);       
+            }
              if(!flag && !protectLoop){
                 protectLoop= true;
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
              }
         });
+        }
 };
     var openProgress = function(){
         var flag= false;
