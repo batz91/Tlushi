@@ -376,9 +376,8 @@ var employeeAPI = function() {
                     }
                 }
              });
-             if(!flag){
-                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");;
-             }
+             if(!flag)
+                alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
         });
 };
     var openProgress = function(){
