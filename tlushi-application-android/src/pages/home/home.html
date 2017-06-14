@@ -7,8 +7,9 @@
 <ion-fab top right >
    <button ion-fab style="margin-top:10px; margin-right:10px;"><ion-icon name="md-more"></ion-icon></button>
    <ion-fab-list side="bottom">
-     <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-     <button ion-fab><ion-icon name="globe"></ion-icon></button>
+     <button ion-fab href="#" onclick="window.open('https://www.facebook.com/Tlooshy1', '_system', 'location=yes');return false;"><ion-icon name="logo-facebook"></ion-icon></button>
+     <button ion-fab href="#" onclick="window.open('https://www.tlooshy.com/', '_system', 'location=yes');return false;"><ion-icon name="globe"></ion-icon></button>
+     <button ion-fab><ion-icon name="call"></ion-icon></button>
    </ion-fab-list>
  </ion-fab>
  <ion-fab top left>
@@ -19,17 +20,17 @@
   <ion-item class="input">
     <ion-input #email type="email" required placeholder="הכנס כתובת אימייל"></ion-input>
   </ion-item>
-  <br>
-          כתובת מייל לקבלת דו"ח חזרה בלבד
-  <br>
-  <ion-item>
-  <ion-label>מאשר את תנאי השימוש</ion-label>
-      <ion-checkbox color="green" (ionChange)="updateTerms()"></ion-checkbox>
-  </ion-item>
+   <ion-label style="font-size: 10px ; margin-right:18%;">*מייל לשליחת דוח חזרה בלבד</ion-label>
+ 
 
 </ion-list>
 
 <ion-row class= "pictureButton">
+       <ion-item style="background-color:transparent; direction:rtl;">
+          <ion-label>מאשר את תנאי השימוש</ion-label>
+          <ion-checkbox style="text-align:center;"  color="green" (ionChange)="updateTerms()"></ion-checkbox>
+      </ion-item>
+      <br><br><br>
      <ion-col>
         <button ion-button icon-right round style= "background : gray; font-size:16px;" (click)= "validation(name, number, email)"> צלם/העלה תלוש <ion-icon name="camera"></ion-icon> </button>
       </ion-col>

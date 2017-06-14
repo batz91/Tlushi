@@ -130,6 +130,10 @@ export class HomePage {
   }
 
    selectFromGallery() {
+    let loading = this.loadingCtrl.create({
+             content: 'התלוש בתהליך שליחה...',
+             dismissOnPageChange:true
+    });
     var options = {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -140,6 +144,7 @@ export class HomePage {
         allowEdit: true,
         correctOrientation: true  //Corrects Android orientation quirks
     };
+    loading.present();
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
       this.allowEdit = true;
@@ -151,12 +156,6 @@ export class HomePage {
     });
   }
    uploadObj() {
-     let loading = this.loadingCtrl.create({
-             content: 'התלוש בתהליך שליחה...',
-             dismissOnPageChange:true
-        });
-
-         loading.present();
       var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
