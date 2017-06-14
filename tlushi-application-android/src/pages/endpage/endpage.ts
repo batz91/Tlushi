@@ -14,10 +14,8 @@ import { HomePage } from '../home/home';
   templateUrl: 'endpage.html',
 })
 export class EndPage {
-  userName;
   userEmail; 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userName=navParams.get('userName');
     this.userEmail=navParams.get('userEmail');
   }
 

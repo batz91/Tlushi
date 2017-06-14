@@ -19,9 +19,7 @@ import * as firebase from 'firebase';
 })
 
 export class HomePage {
-  @Input() userName;
   @Input() userEmail;
-  @Input() userPhone;
   photoTaken: boolean;
   cameraUrl: string;
   photoSelected: boolean;
@@ -67,21 +65,9 @@ export class HomePage {
  }
 
   validation(name, number, email) {
-    this.userName = name.value;
     this.userEmail = email.value;
-    this.userPhone = number.value;
-    var nameFalg, emailFlag, userPhoneFlag;
+    var emailFlag;
     var message ="";
-    if(!(/^[a-z\u0590-\u05fe]+(\s)+[a-z\u0590-\u05fe]+$/i.test(this.userName)))
-     {
-       nameFalg = true;
-       message+="<p> שם מלא לא חוקי</p>";
-      }
-     if(!(/^[0-9]{9,10}$/.test(this.userPhone)))
-      {
-          userPhoneFlag= true;
-          message+="<p> מספר טלפון לא חוקי </p>"
-      }
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
       {
         emailFlag=true;
@@ -98,12 +84,11 @@ export class HomePage {
       return false;
     }
     this.presentActionSheet();
-    //this.navCtrl.push(Picture, {userName: this.userName, userPhone: this.userPhone, userEmail:this.userEmail});
   }
   openCamera() {
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
-     destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.DATA_URL,
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
@@ -147,17 +132,15 @@ export class HomePage {
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // firebase upload image to storage
-    storageRef.child(`paycheck/${this.userName}${filename}.png`)
+    storageRef.child(`paycheck/${this.userEmail}${filename}.png`)
           .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
     // create new user in DB
     this.user.push({
-      name: this.userName, 
-      phone: this.userPhone, 
       email: this.userEmail, 
       paycheck: savedPicture.downloadURL,
       status: "false"});
         });
-     this.navCtrl.push(EndPage, {userName: this.userName, userEmail:this.userEmail});
+     this.navCtrl.push(EndPage, {userEmail:this.userEmail});
 
 }
 }
