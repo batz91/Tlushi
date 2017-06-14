@@ -936,8 +936,8 @@ var employeeAPI = function() {
             return false;
         });
         $("#save").click(function(){
-            document.getElementById('save').style.visibility='none';
-            document.getElementById('homePageButton').style.visibility='none';
+            document.getElementById('save').style.visibility='hidden';
+            document.getElementById('homePageButton').style.visibility='hidden';
             html2canvas(document.body, 
             {
                            background:'#fff',
@@ -959,16 +959,15 @@ var employeeAPI = function() {
                                     .then(function(response) {
                                         // status = done
                                         database.ref("user/"+key+"/status").set("done");
-                                        alert("email send")
+                                        alert("email sent successfully");
+                                        location.reload(); 
                                     }, function(err) {
                                         alert("FAILED. error=", err);
                                     });   
-                                    location.reload(); 
+                                    
                                 });
                            }
             });
-            document.getElementById('save').style.visibility='visible';
-            document.getElementById('homePageButton').style.visibility='none';
 });
     }
 
