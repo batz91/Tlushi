@@ -686,6 +686,7 @@ var employeeAPI = function() {
         var key=currentSnapshot.key;
         database.ref("user/"+key+"/inputFields").set(inputFieldsObject);
     }
+
     var fillOutput = function(){
         var values= $("input");
         var currentPaycheck= $("#pic");
@@ -927,6 +928,7 @@ var employeeAPI = function() {
         $("body").html(text);
         $("#homePageButton").click(function(){
             $("body").html(currentPage);
+            initModule();
             var input= $("input");
             for(var i=2; i<18; i++)
                 input[i].value=values[i].value;
@@ -935,7 +937,7 @@ var employeeAPI = function() {
         });
         $("#save").click(function(){
             document.getElementById('save').style.visibility='none';
-            document.getElementById('homeButton').style.display='hidden';
+            document.getElementById('homePageButton').style.visibility='none';
             html2canvas(document.body, 
             {
                            background:'#fff',
@@ -958,7 +960,7 @@ var employeeAPI = function() {
                                         // status = done
                                         database.ref("user/"+key+"/status").set("done");
                                         alert("email send")
-                                    }, function(err) {
+                                    }).catch(function(err) {
                                         alert("FAILED. error=", err);
                                     });   
                                     location.reload(); 
@@ -966,7 +968,7 @@ var employeeAPI = function() {
                            }
             });
             document.getElementById('save').style.visibility='visible';
-            document.getElementById('homeButton').style.visibility='block';
+            document.getElementById('homePageButton').style.visibility='none';
 });
     }
 
