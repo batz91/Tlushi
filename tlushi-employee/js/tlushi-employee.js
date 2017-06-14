@@ -960,7 +960,7 @@ var employeeAPI = function() {
                                         // status = done
                                         database.ref("user/"+key+"/status").set("done");
                                         alert("email send")
-                                    }).catch(function(err) {
+                                    }, function(err) {
                                         alert("FAILED. error=", err);
                                     });   
                                     location.reload(); 
