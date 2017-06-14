@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import {Picture} from '../picture/picture';
-import { ActionSheetController, NavParams } from 'ionic-angular'
+import { ActionSheetController, NavParams, LoadingController } from 'ionic-angular'
 
 import { Camera } from '@ionic-native/camera';
 import { EndPage } from '../endpage/endpage';
@@ -25,11 +25,28 @@ export class HomePage {
   photoSelected: boolean;
   allowEdit: boolean;
   user: FirebaseListObservable<any>;
+  terms: boolean;
 
-
-  constructor(public _DomSanitizationService: DomSanitizer, private navParams: NavParams, private af: AngularFireDatabase, private camera: Camera, public actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, public navCtrl : NavController) {
+  constructor(public loadingCtrl: LoadingController ,public _DomSanitizationService: DomSanitizer, private navParams: NavParams, private af: AngularFireDatabase, private camera: Camera, public actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, public navCtrl : NavController) {
     this.user = af.list('/user');
     this.photoTaken = false;
+    this.terms=false;
+  }
+
+  updateTerms(){
+      this.terms=!(this.terms); 
+  }
+
+  showInfo(){
+     let alert = this.alertCtrl.create({
+          cssClass:'buttons',
+          title: 'מידע',
+          subTitle: "אלאלאלאלאלאה",
+          buttons: ['אשר']
+          });
+          alert.present(); 
+         
+        
   }
 
    presentActionSheet() {
@@ -65,6 +82,7 @@ export class HomePage {
  }
 
   validation(name, number, email) {
+   
     this.userEmail = email.value;
     var emailFlag;
     var message ="";
@@ -74,15 +92,25 @@ export class HomePage {
         message+="<p> אימייל לא חוקי </p>";
       }
       if(message!=""){
-       let alert = this.alertCtrl.create({
-       cssClass:'buttons',
-       title: 'שדה חסר',
-       subTitle: message,
-       buttons: ['אשר']
-       });
-      alert.present();
-      return false;
-    }
+          let alert = this.alertCtrl.create({
+          cssClass:'buttons',
+          title: 'שדה חסר',
+          subTitle: message,
+          buttons: ['אשר']
+          });
+          alert.present();
+          return false;
+      }
+     if(this.terms==false)
+      {
+        let alert = this.alertCtrl.create({
+              cssClass:'buttons',
+              subTitle: 'יש לאשר את תנאי השימוש',
+              buttons: ['אשר']
+        });
+        alert.present();
+        return false;
+     }
     this.presentActionSheet();
   }
   openCamera() {
@@ -123,6 +151,12 @@ export class HomePage {
     });
   }
    uploadObj() {
+     let loading = this.loadingCtrl.create({
+             content: 'התלוש בתהליך שליחה...',
+             dismissOnPageChange:true
+        });
+
+         loading.present();
       var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
         image= "none";
@@ -140,6 +174,7 @@ export class HomePage {
       paycheck: savedPicture.downloadURL,
       status: "false"});
         });
+
      this.navCtrl.push(EndPage, {userEmail:this.userEmail});
 
 }
