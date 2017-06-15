@@ -1,6 +1,10 @@
 page-end-page {
 
 }
+.homeBackground{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .text{
     direction: rtl;
     text-align: center;
@@ -18,4 +22,10 @@ page-end-page {
 ion-footer{
     text-align:center;
     margin-bottom: 20px;
+}
+.topic{
+    font-size: 25px;
+}
+.answer{
+    font-size: 18px;
 }

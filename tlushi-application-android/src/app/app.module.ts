@@ -7,7 +7,6 @@ import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {Picture} from '../pages/picture/picture';
 import { EndPage } from '../pages/endpage/endpage';
 
 
@@ -27,7 +26,6 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    Picture,
     EndPage
   ],
   imports: [
@@ -40,7 +38,6 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    Picture,
     EndPage,
   ],
   providers: [

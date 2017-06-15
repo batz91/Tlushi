@@ -13,15 +13,17 @@
 </ion-header>
 
 
-<ion-content padding>
-<img class="confirmImg" src="img/confirm.png">
+<ion-content class="homeBackground" style="background-image: url('img/home-background.jpg');" scroll="false">
+<img class="confirmImg" src="img/confirm2.png">
 <div class="text">
-  <h1> התלוש נשלח בהצלחה ! </h1>
+  <div class="topic"> התלוש נשלח בהצלחה ! </div>
+  <div class="answer">
   תשובה תשלח למייל :
   <br>
   {{userEmail}}
+  </div>
 </div>
   <ion-footer>
-     <button ion-button color="secondary" round (click)="backHomePage()">למסך הבית</button>
+     <button ion-button icon-right round style= "background : gray; font-size:16px;" (click)="backHomePage()">למסך הבית</button>
   </ion-footer>
 </ion-content>

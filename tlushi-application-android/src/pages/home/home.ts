@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
-import {Picture} from '../picture/picture';
 import { ActionSheetController, NavParams, LoadingController } from 'ionic-angular'
 
 import { Camera } from '@ionic-native/camera';
@@ -114,6 +113,11 @@ export class HomePage {
     this.presentActionSheet();
   }
   openCamera() {
+    let loading = this.loadingCtrl.create({
+             content: '...התלוש בתהליך טעינה',
+             dismissOnPageChange:true
+    });
+    loading.present();
     var options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -125,15 +129,17 @@ export class HomePage {
       this.photoSelected = true;
       this.uploadObj();
     }, (err) => {
+        loading.dismiss();
         console.log(err);
     });
   }
 
    selectFromGallery() {
     let loading = this.loadingCtrl.create({
-             content: 'התלוש בתהליך שליחה...',
+             content: '...התלוש בתהליך טעינה',
              dismissOnPageChange:true
     });
+    loading.present();
     var options = {
         quality: 50,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -144,7 +150,6 @@ export class HomePage {
         allowEdit: true,
         correctOrientation: true  //Corrects Android orientation quirks
     };
-    loading.present();
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
       this.allowEdit = true;
@@ -152,9 +157,11 @@ export class HomePage {
       this.photoTaken = true;
       this.uploadObj();
   }, (err) => {
+        loading.dismiss();
         console.log(err);
     });
   }
+
    uploadObj() {
       var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
@@ -176,6 +183,6 @@ export class HomePage {
 
      this.navCtrl.push(EndPage, {userEmail:this.userEmail});
 
-}
+  }
 }
 
