@@ -214,7 +214,7 @@ var employeeAPI = function() {
         leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                    if(childData.status == "done")
+                    if(childData.status == "done" || childData.status == "saved")
                     {
                         flag=true;
                         table+= "<tr>"+
