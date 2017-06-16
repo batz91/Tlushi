@@ -32,6 +32,15 @@ export class HomePage {
     this.terms=false;
   }
 
+  showTerms(){
+    let alert = this.alertCtrl.create({
+          cssClass:'buttons',
+          title: 'תנאי שימוש',
+          message: 'לחלחלחלחל',
+          buttons: ['אשר']
+          });
+          alert.present();
+  }
   updateTerms(){
       this.terms=!(this.terms); 
   }
@@ -40,7 +49,7 @@ export class HomePage {
      let alert = this.alertCtrl.create({
           cssClass:'buttons',
           title: 'מידע',
-          subTitle: "אלאלאלאלאלאה",
+          message: "אלאלאלאלאלאה",
           buttons: ['אשר']
           });
           alert.present(); 
