@@ -923,7 +923,7 @@ var employeeAPI = function() {
     "</tbody>"+
 "</table>"+
 "</div>"+
-                "<button id = 'save' class='form-style-9'>שמור</button>"+
+                "<button id = 'save' class='form-style-9' style='cursor: pointer;'>שלח דוח</button>"+
             "</div>";
         $("body").html(text);
         $("#homePageButton").click(function(){
