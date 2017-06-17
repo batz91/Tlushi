@@ -239,7 +239,7 @@ var employeeAPI = function() {
                                     "<th><img src="+childData.paycheck+"alt='' height='10px' width='10px'/></th>"+
                                     "<th><img src="+childData.outPut+"alt='' height='10px' width='10px'/></th>"+
                                     "</tr>";
-                        var key=childSnapshot.key;
+                        var key=childSnapshot.key; 
                         database.ref("user/"+key+"/status").set("saved");
                     }
                 });
