@@ -57,7 +57,7 @@ Please visit our wiki for furthur project info:
 - [Iteration 1 - Application basic design & functionality](https://github.com/batz91/Tlushi/wiki/Iter1---Application-basic-design-&-functionality)
 - [Iteration 2 - Firebase](https://github.com/batz91/Tlushi/wiki/Iteration-2---Firebase)
 - [Iteration 3 - Report Features & Desings](https://github.com/batz91/Tlushi/wiki/iteration-3--report-features-&-designs)
-- [Iteration 4 - Feature Z]()
+- [Iteration 4 - Software testing and final product extraction](https://github.com/batz91/Tlushi/wiki/Iteration-4---Software-testing-and-final-product-extraction)
 
 
 
