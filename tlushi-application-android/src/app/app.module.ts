@@ -12,6 +12,8 @@ import { EndPage } from '../pages/endpage/endpage';
 
 // fire base import
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Must export the config
 export const firebaseConfig = {
@@ -32,6 +34,8 @@ export const firebaseConfig = {
     BrowserModule,
     //fire base
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
