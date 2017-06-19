@@ -531,7 +531,7 @@ var employeeAPI = function() {
         if(regularWorkHours > 186)
             daysRecoveryLoss= daysRecoverySeniority*378-convalescencePay;
         else
-            daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378;
+            daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378/12;
         if(daysRecoveryLoss > 0)
         {
             daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color='red'>"+Math.round(daysRecoveryLoss)+"₪</font>";
