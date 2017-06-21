@@ -55,7 +55,7 @@ var employeeAPI = function() {
         var auth = firebase.auth();
         var email =$("#emailAdmin").val();
         auth.sendPasswordResetEmail(email).then(function() {
-            alert("נשלח אימייל לשחזור סיסמא")
+            alert("נשלח אימייל לשחזור סיסמא");
         // Email sent.
     }, function(error) {
         // An error happened.
