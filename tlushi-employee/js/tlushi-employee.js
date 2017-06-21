@@ -300,6 +300,44 @@ var employeeAPI = function() {
             tabcontent[2].style.display = "block";
             return false;
         });
+        var zoomIn = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()*1.2);
+            $('#pic').height($('#pic').height()*1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()*1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()*1.2);
+        }
+}
+
+    var zoomOut = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()/1.2);
+            $('#pic').height($('#pic').height()/1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()/1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()/1.2);
+        }
+    }
+
+    var zoomReset = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width("100%");
+            $('#pic').height("100%");
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width("100%");
+            $('#loadFormAdmin').height("100%");
+        }    
+    }
         $('#showReportsId').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
@@ -592,45 +630,6 @@ var employeeAPI = function() {
         console.log("deductionsLoss= "+ deductionsLoss);
         fillOutput();
     };
-
-    var zoomIn = function(e){
-        if(e.data.msg == "pic")
-        {
-            $('#pic').width($('#pic').width()*1.2);
-            $('#pic').height($('#pic').height()*1.2);
-        }
-        if(e.data.msg =="admin")
-        {
-            $('#loadFormAdmin').width($('#loadFormAdmin').width()*1.2);
-            $('#loadFormAdmin').height($('#loadFormAdmin').height()*1.2);
-        }
-}
-
-    var zoomOut = function(e){
-        if(e.data.msg == "pic")
-        {
-            $('#pic').width($('#pic').width()/1.2);
-            $('#pic').height($('#pic').height()/1.2);
-        }
-        if(e.data.msg =="admin")
-        {
-            $('#loadFormAdmin').width($('#loadFormAdmin').width()/1.2);
-            $('#loadFormAdmin').height($('#loadFormAdmin').height()/1.2);
-        }
-    }
-
-    var zoomReset = function(e){
-        if(e.data.msg == "pic")
-        {
-            $('#pic').width("100%");
-            $('#pic').height("100%");
-        }
-        if(e.data.msg =="admin")
-        {
-            $('#loadFormAdmin').width("100%");
-            $('#loadFormAdmin').height("100%");
-        }    
-    }
 
     var rotate = function(){
         img = document.getElementById('container');
