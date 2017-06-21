@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { Camera } from '@ionic-native/camera';
+import { BrowserModule } from "@angular/platform-browser";
+import { ErrorHandler, NgModule } from "@angular/core";
+import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
+import { Camera } from "@ionic-native/camera";
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { EndPage } from '../pages/endpage/endpage';
+import { MyApp } from "./app.component";
+import { HomePage } from "../pages/home/home";
+import { EndPage } from "../pages/endpage/endpage";
 
 
 // fire base import
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
 
 // Must export the config
 export const firebaseConfig = {
@@ -32,7 +32,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    //fire base
+    // fire base
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

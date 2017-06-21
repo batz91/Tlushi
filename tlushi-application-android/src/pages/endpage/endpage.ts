@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { Component } from "@angular/core";
+import { NavController, NavParams } from "ionic-angular";
+import { HomePage } from "../home/home";
 
 /**
  * Generated class for the EndPage page.
@@ -10,18 +10,17 @@ import { HomePage } from '../home/home';
  */
 
 @Component({
-  selector: 'page-endpage',
-  templateUrl: 'endpage.html',
+  selector: "page-endpage",
+  templateUrl: "endpage.html",
 })
 export class EndPage {
-  userEmail; 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userEmail=navParams.get('userEmail');
+  userEmail: string; 
+  constructor(public navCtrl:NavController, public navParams:NavParams) {
+    this.userEmail= navParams.get("userEmail");
   }
 
-backHomePage(){
+backHomePage()
+{
      this.navCtrl.push(HomePage);
 }
- 
-
 }
