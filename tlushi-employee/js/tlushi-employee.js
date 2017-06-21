@@ -44,7 +44,7 @@ var employeeAPI = function() {
           }
           }).catch(function(error) {
             // Handle Errors here.
-            alert("להרשמת מנהל חדש יש להכניס אימייל וסיסמא של מנהל נוכחי")
+            alert("להרשמת מנהל חדש יש להכניס אימייל וסיסמא של מנהל נוכחי");
             // ...
         });
         return false;
@@ -64,7 +64,7 @@ var employeeAPI = function() {
         // alert(errorCode);
          alert(errorMessage);
         });
-    }
+    };
 
     // עידכון המשתנים הקבועים במסד נתונים
     var updateAdminValues= function(){
@@ -86,7 +86,7 @@ var employeeAPI = function() {
         });
         alert("השינויים בוצעו בהצלחה");
         location.reload();        
-    }
+    };
     // הצגת דוח מוכן למנהל
     var findEndForm= function(){
         var flag= false;
@@ -159,7 +159,7 @@ var employeeAPI = function() {
     var backUp = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref('user');
+        var leadsRef = database.ref("user");
         var table=
                         "<table>"+
                              "<tr>"+
@@ -279,22 +279,22 @@ var employeeAPI = function() {
         $("#txtTravelDay").val(travelDay);
         $("#txtDaysHolidayArray").val(daysHolidayArray);
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
-        $('#buttonUpdateAdmin').click(updateAdminValues);
-        $('#buttonFindForm').click(findEndForm);
-        $('#buttonBackUp').click(backUp);
-        $('#buttonDeleteSaved').click(deleteSaved);
-         tabcontent = document.getElementsByClassName("tabcontent");
-            tabcontent[1].style.display = "none";
-            tabcontent[2].style.display = "none";
-        $('#defaultOpen').click(function(){
-            tabcontent = document.getElementsByClassName("tabcontent");
+        $("#buttonUpdateAdmin").click(updateAdminValues);
+        $("#buttonFindForm").click(findEndForm);
+        $("#buttonBackUp").click(backUp);
+        $("#buttonDeleteSaved").click(deleteSaved);
+        var tabcontent = document.getElementsByClassName("tabcontent");
+        tabcontent[1].style.display = "none";
+        tabcontent[2].style.display = "none";
+        $("#defaultOpen").click(function(){
+            var tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[0].style.display = "block";
             tabcontent[2].style.display = "none";
             return false;
         });
-        $('#showBackUP').click(function(){
-            tabcontent = document.getElementsByClassName("tabcontent");
+        $("#showBackUP").click(function(){
+            var tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "none";
             tabcontent[2].style.display = "block";
@@ -459,17 +459,22 @@ var employeeAPI = function() {
         var deductionsAmount= parseFloat($("#txtInvalidDeduction").val());      // ניכויים סכום
         // פער משכר מינימום
         var minWageGap = 0;
-        if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             minWageGap = Math.round((minHour-hourWage)*regularWorkHours);
-        
+        }
         // פער משכר יסוד
         var basicWageGap = 0;
-        if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             basicWageGap=minHour*regularWorkHours-regularPayment;
+        }
         else
         {
             if(hourWage*regularWorkHours>regularPayment)
+            {
                  basicWageGap=hourWage*regularWorkHours-regularPayment;
+            }
         }
         if (basicWageGap > 0)
         {
@@ -961,13 +966,13 @@ var employeeAPI = function() {
         $("#fileInput").click(openPic);
         $("#fileProgress").click(openProgress);
         $("#fileProgressUpload").click(uploadInProgress);
-        $('#zoom-in').click({msg: 'pic'},zoomIn); 
-        $('#zoom-out').click({msg: "pic"},zoomOut);
-        $('#reset-zoom').click({msg: 'pic'},zoomReset);
-        $('#rotate').click(rotate);
-        $('#buttonLogInAdmin').click(buttonPopUp);
-        $('#forgetPassword').click(forgetPassword);
-        $('#signUpAdmin').click(signUpAdmin);
+        $("#zoom-in").click({msg: "pic"},zoomIn); 
+        $("#zoom-out").click({msg: "pic"},zoomOut);
+        $("#reset-zoom").click({msg: "pic"},zoomReset);
+        $("#rotate").click(rotate);
+        $("#buttonLogInAdmin").click(buttonPopUp);
+        $("#forgetPassword").click(forgetPassword);
+        $("#signUpAdmin").click(signUpAdmin);
     };
     return {
         initModule : initModule,

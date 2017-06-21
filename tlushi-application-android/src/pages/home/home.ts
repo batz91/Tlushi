@@ -35,7 +35,7 @@ export class HomePage {
   showTerms()
   {
     let alert = this.alertCtrl.create({
-          cssClass:"buttons",
+          cssClass: "buttons",
           title: "תנאי שימוש",
           message: "לחלחלחלחל",
           buttons: ["אשר"]
@@ -57,10 +57,9 @@ export class HomePage {
           });
           alert.present(); 
   }
-
-   presentActionSheet() 
-   {
-   let actionSheet = this.actionSheetCtrl.create({
+  presentActionSheet() 
+  {
+    let actionSheet = this.actionSheetCtrl.create({
     cssClass: "buttons",
 //     title: ":מקור תמונה",
      buttons: [
@@ -90,29 +89,29 @@ export class HomePage {
    });
    actionSheet.present();
  }
-
-  validation(name, number, email) 
-  {
+ validation(name, number, email) 
+ {
     this.userEmail = email.value;
     var emailFlag;
     var message ="";
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
-      {
+    {
         emailFlag=true;
         message+="<p> אימייל לא חוקי </p>";
-      }
-      if(message !== ""){
+    }
+    if(message !== "")
+    {
           let alert = this.alertCtrl.create({
-          cssClass:"buttons",
-          title: "שדה חסר",
-          subTitle: message,
-          buttons: ["אשר"]
+            cssClass:"buttons",
+            title: "שדה חסר",
+            subTitle: message,
+            buttons: ["אשר"]
           });
           alert.present();
           return false;
-      }
-     if(this.terms === false)
-      {
+    }
+    if(this.terms === false)
+    {
         let alert = this.alertCtrl.create({
               cssClass:"buttons",
               subTitle: "יש לאשר את תנאי השימוש",
@@ -121,9 +120,10 @@ export class HomePage {
         alert.present();
         return false;
      }
-    this.presentActionSheet();
+     this.presentActionSheet();
   }
-  openCamera() {
+  openCamera() 
+  {
     let loading = this.loadingCtrl.create({
              content: "...התלוש בתהליך טעינה",
              dismissOnPageChange:true
@@ -144,9 +144,8 @@ export class HomePage {
         console.log(err);
     });
   }
-
-   selectFromGallery() 
-   {
+  selectFromGallery() 
+  {
     let loading = this.loadingCtrl.create({
              content: "...התלוש בתהליך טעינה",
              dismissOnPageChange:true
@@ -172,14 +171,12 @@ export class HomePage {
         loading.dismiss();
         console.log(err);
     });
-  }
-
-   uploadObj() 
-   {
+  };
+  uploadObj() 
+  {
       var image=  this.cameraUrl;
       if(this.cameraUrl == undefined)
-        image= "none";
-    
+        image= "none";  
     // firebase storage folder
     let storageRef = firebase.storage().ref();
     // Create a timestamp as filename
@@ -196,5 +193,4 @@ export class HomePage {
 
      this.navCtrl.push(EndPage, {userEmail:this.userEmail});
   }
-}
-
+};

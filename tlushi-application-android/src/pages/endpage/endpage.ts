@@ -15,12 +15,11 @@ import { HomePage } from "../home/home";
 })
 export class EndPage {
   userEmail: string; 
-  constructor(public navCtrl:NavController, public navParams:NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.userEmail= navParams.get("userEmail");
   }
-
-backHomePage()
-{
+  backHomePage()
+  {
      this.navCtrl.push(HomePage);
-}
+  }
 }
