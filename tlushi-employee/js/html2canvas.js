@@ -24,7 +24,7 @@ _html2canvas.Util.log = function(a) {
 
 _html2canvas.Util.trimText = (function(isNative){
   return function(input) {
-    return isNative ? isNative.apply(input) : ((input || '') + '').replace( /^\s+|\s+$/g , '' );
+    return isNative ? isNative.apply(input) : ((input || "") + "").replace( /^\s+|\s+$/g , "" );
   };
 })(String.prototype.trim);
 
@@ -37,7 +37,7 @@ _html2canvas.Util.asFloat = function(v) {
   var TEXT_SHADOW_PROPERTY = /((rgba|rgb)\([^\)]+\)(\s-?\d+px){0,})/g;
   var TEXT_SHADOW_VALUES = /(-?\d+px)|(#.+)|(rgb\(.+\))|(rgba\(.+\))/g;
   _html2canvas.Util.parseTextShadows = function (value) {
-    if (!value || value === 'none') {
+    if (!value || value === "none") {
       return [];
     }
 
@@ -71,8 +71,8 @@ _html2canvas.Util.parseBackgroundImage = function (value) {
             if(definition) {
                 args.push(definition);
             }
-            if(method.substr( 0, 1 ) === '-' &&
-                    (prefix_i = method.indexOf( '-', 1 ) + 1) > 0) {
+            if(method.substr( 0, 1 ) === "-" &&
+                    (prefix_i = method.indexOf( "-", 1 ) + 1) > 0) {
                 prefix = method.substr( 0, prefix_i);
                 method = method.substr( prefix_i );
             }
@@ -87,7 +87,7 @@ _html2canvas.Util.parseBackgroundImage = function (value) {
         method =
             prefix =
             definition =
-            block = '';
+            block = "";
     };
 
     appendResult();
@@ -117,7 +117,7 @@ _html2canvas.Util.parseBackgroundImage = function (value) {
                 }
                 break;
 
-            case ')':
+            case ")":
                 if(quote) { break; }
                 else if(mode === 1) {
                     if(numParen === 0) {
@@ -232,9 +232,9 @@ function asInt(val) {
 }
 
 function parseBackgroundSizePosition(value, element, attribute, index) {
-    value = (value || '').split(',');
+    value = (value || '').split(",");
     value = value[index || 0] || value[0] || 'auto';
-    value = _html2canvas.Util.trimText(value).split(' ');
+    value = _html2canvas.Util.trimText(value).split(" ");
 
     if(attribute === 'backgroundSize' && (!value[0] || value[0].match(/cover|contain|auto/))) {
         //these values will be handled in the parent function
@@ -279,7 +279,7 @@ _html2canvas.Util.resizeBounds = function( current_width, current_height, target
     current_ratio = current_width / current_height,
     output_width, output_height;
 
-  if(!stretch_mode || stretch_mode === 'auto') {
+  if(!stretch_mode || stretch_mode === "auto") {
     output_width = target_width;
     output_height = target_height;
   } else if(target_ratio < current_ratio ^ stretch_mode === 'contain') {
