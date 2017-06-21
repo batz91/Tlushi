@@ -90,7 +90,7 @@ var employeeAPI = function() {
     // הצגת דוח מוכן למנהל
     var findEndForm= function(){
         var flag= false;
-        if($("#txtFindForm").val() === undefined)
+        if($("#txtFindForm").val() == undefined)
         {
             alert('הכנס אימייל לקוח');
             return;
@@ -133,7 +133,7 @@ var employeeAPI = function() {
                         }).catch(function(error) {
                         // Uh-oh, an error occurred!
                         });
-                        desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
+                        desertRef = storageRef.child("output/"+childSnapshot.key+".png");
                         // Delete the   
                         desertRef.delete().then(function() {
                             alert("output delete");
