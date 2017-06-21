@@ -92,7 +92,7 @@ var employeeAPI = function() {
         var flag= false;
         if($("#txtFindForm").val() == undefined)
         {
-            alert("הכנס אימייל לקוח");
+            alert("'הכנס אימייל לקוח");
             return;
         }
         var database = firebase.database();
@@ -159,7 +159,7 @@ var employeeAPI = function() {
     var backUp = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref("user");
+        var leadsRef = database.ref('user');
         var table=
                         "<table>"+
                              "<tr>"+
@@ -170,9 +170,9 @@ var employeeAPI = function() {
                                 "<th>שכר לשעה</th>"+
                                 "<th>ותק שנים</th>"+
                                 "<th>שעות עבודה רגילות בתלוש</th>"+
-                                "<th>סה""כ תשלום על שעות עבודה רגילות</th>"+
-                                "<th>סה""כ תשלום על שעות עבודה נוספות 125</th>"+
-                                "<th>סה""כ תשלום על שעות עבודה נוספות 150</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה רגילות</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה נוספות 125</th>"+
+                                "<th>סה''כ תשלום על שעות עבודה נוספות 150</th>"+
                                 "<th>נסיעות חודשי חופשי</th>"+
                                 "<th>הפרשת עובד לפנסיה</th>"+
                                 "<th>הפרשת מעביד פנסיה</th>"+
@@ -209,8 +209,8 @@ var employeeAPI = function() {
                                     "<th>"+childData.inputFields.PremiumWage+"</th>"+
                                     "<th>"+childData.inputFields.Deduction+"</th>"+
                                     "<th>"+childData.inputFields.DeductionText+"</th>"+
-                                    "<th><img src="+childData.paycheck+"alt="" height="10px" width="10px"/></th>"+
-                                    "<th><img src="+childData.outPut+"alt="" height="10px" width="10px"/></th>"+
+                                    "<th><img src="+childData.paycheck+"alt='' height='10px' width='10px'/></th>"+
+                                    "<th><img src="+childData.outPut+"alt='' height='10px' width='10px'/></th>"+
                                     "</tr>";
                         var key=childSnapshot.key;
                         database.ref("user/"+key+"/status").set("saved");
@@ -229,46 +229,46 @@ var employeeAPI = function() {
         });
     }
     var adminSettings= function(){
-        var content= "<div class="tab">"+
-                        "<button class="tablinks" id="defaultOpen">משתנים</button>"+
-                        "<button class="tablinks" id="showReportsId">צפיה בדוחות</button>"+
-                        "<button class="tablinks" id="showBackUP">גיבוי</button>"+
+        var content= "<div class='tab'>"+
+                        "<button class='tablinks' id='defaultOpen'>משתנים</button>"+
+                        "<button class='tablinks' id='showReportsId'>צפיה בדוחות</button>"+
+                        "<button class='tablinks' id='showBackUP'>גיבוי</button>"+
                      "</div>"+
-                     "<div id="changeValues" class="tabcontent">"+
+                     "<div id='changeValues' class='tabcontent'>"+
                         "<label>שכר מינימום לשעה:</label>"+
-                        "<input type="number" class="textPopUp" id="txtSettingsMinHour" step="0.01" required>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsMinHour' step='0.01' required>"+
                         "<label>שכר מינימום חודשי:</label>"+
-                        "<input type="number" class="textPopUp" id="txtSettingsMinMounth" step="0.01" required>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsMinMounth' step='0.01' required>"+
                         "<label>מספר שעות עבודה בחודש:</label>"+
-                        "<input type="number" class="textPopUp" id="txtSettingsWeekHours" step="0.01" required>"+
+                        "<input type='number' class='textPopUp' id='txtSettingsWeekHours' step='0.01' required>"+
                         "<label>דמי נסיעות:</label>"+
-                        "<input type="number" class="textPopUp" id="txtTravelDay" step="0.01" required>"+
+                        "<input type='number' class='textPopUp' id='txtTravelDay' step='0.01' required>"+
                         "<label>ימי חופשה לפי ותק (מערך):</label>"+
-                        "<input class="textPopUp" id="txtDaysHolidayArray" required>"+
+                        "<input class='textPopUp' id='txtDaysHolidayArray' required>"+
                         "<label>ימי הבראה לפי ותק (מערך):</label>"+
-                        "<input class="textPopUp" id="txtDaysRecoveryArray" required>"+
-                        "<button id= "buttonUpdateAdmin" class="buttonPopUp" type="button">עדכן נתונים</button>"+
+                        "<input class='textPopUp' id='txtDaysRecoveryArray' required>"+
+                        "<button id= 'buttonUpdateAdmin' class='buttonPopUp' type='button'>עדכן נתונים</button>"+
                      "</div>"+
-                     "<div id="showReports" class="tabcontent">"+
-                        "<div class="form-style-9">"+
+                     "<div id='showReports' class='tabcontent'>"+
+                        "<div class='form-style-9'>"+
                             "<label>חפש דוחות לפי אימייל לקוח:</label>"+
-                            "<input type="text" id = "txtFindForm" placeholder= "אימייל">"+
-                            "<button id= "buttonFindForm" type="button">חפש</button>"+
-                            "<div id="zoom" class="zoom">"+
-                                    "<img alt="" id="reset-zoomAdmin" height="25" src="./reset-zoom-icon.png" width="25">"+
-                                    "<img alt="" id="rotateAdmin" height="25" src="./rotate-icon.png" width="25">"+
-                                    "<img alt="" id="zoom-outAdmin" height="25" src="./zoom-out-icon.png" width="25">"+
-                                    "<img alt="" id="zoom-inAdmin" height="25" src="./zoom-in-icon.png" width="25">"+
+                            "<input type='text' id = 'txtFindForm' placeholder= 'אימייל'>"+
+                            "<button id= 'buttonFindForm' type='button'>חפש</button>"+
+                            "<div id='zoom' class='zoom'>"+
+                                    "<img alt='' id='reset-zoomAdmin' height='25' src='./reset-zoom-icon.png' width='25'>"+
+                                    "<img alt='' id='rotateAdmin' height='25' src='./rotate-icon.png' width='25'>"+
+                                    "<img alt='' id='zoom-outAdmin' height='25' src='./zoom-out-icon.png' width='25'>"+
+                                    "<img alt='' id='zoom-inAdmin' height='25' src='./zoom-in-icon.png' width='25'>"+
                             "</div>"+
-                            "<div id ="container">"+
-                                "<img src="" id="loadFormAdmin" height="100%" width="100%">"+
+                            "<div id ='container'>"+
+                                "<img src='' id='loadFormAdmin' height='100%' width='100%'>"+
                             "</div>"+
                         "</div>"+
                         "</div>"+ 
-                        "<div id="showBackUPText" class="tabcontent">"+    
-                            "<button id= "buttonBackUp" type="button">גבה נתונים</button>"+
-                            "<button id= "buttonDeleteSaved" type="button">מחק</button>"+
-                            "<div class="excel" id= "dvData"></div>"+
+                        "<div id='showBackUPText' class='tabcontent'>"+    
+                            "<button id= 'buttonBackUp' type='button'>גבה נתונים</button>"+
+                            "<button id= 'buttonDeleteSaved' type='button'>מחק</button>"+
+                            "<div class='excel' id= 'dvData'></div>"+
                         "</div>"+  
                      "</div>";        
         $("#footerPopUp").html("");
@@ -279,21 +279,21 @@ var employeeAPI = function() {
         $("#txtTravelDay").val(travelDay);
         $("#txtDaysHolidayArray").val(daysHolidayArray);
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
-        $("#buttonUpdateAdmin").click(updateAdminValues);
-        $("#buttonFindForm").click(findEndForm);
-        $("#buttonBackUp").click(backUp);
-        $("#buttonDeleteSaved").click(deleteSaved);
+        $('#buttonUpdateAdmin').click(updateAdminValues);
+        $('#buttonFindForm').click(findEndForm);
+        $('#buttonBackUp').click(backUp);
+        $('#buttonDeleteSaved').click(deleteSaved);
          tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[2].style.display = "none";
-        $("#defaultOpen").click(function(){
+        $('#defaultOpen').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[0].style.display = "block";
             tabcontent[2].style.display = "none";
             return false;
         });
-        $("#showBackUP").click(function(){
+        $('#showBackUP').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "none";
@@ -430,7 +430,7 @@ var employeeAPI = function() {
     };
 
     var calc = function() {
-        var goodOutPut= "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+"<font color="blue"> בדיקה מלאה</font>";
+        var goodOutPut= "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+"<font color='blue'> בדיקה מלאה</font>";
         var allInput = $("Input");
         allInput.removeClass("error");
         var errorFlag=false;
@@ -473,7 +473,7 @@ var employeeAPI = function() {
         }
         if (basicWageGap > 0)
         {
-            salaryOutPut= "נראה כי המעסיק לא שילם לך שכר בסך "+ "<font color="red">"+Math.round(basicWageGap)+"</font>";
+            salaryOutPut= "נראה כי המעסיק לא שילם לך שכר בסך "+ "<font color='red'>"+Math.round(basicWageGap)+"</font>";
             outPutSum+= basicWageGap;
         }
         else
@@ -498,7 +498,7 @@ var employeeAPI = function() {
         if(travelPayment<daysOfWork*travelDay)
         {
             travelFeesLoss = daysOfWork*travelDay-travelPayment;
-            travelFeesOutPut= "נראה כי המעסיק לא שילם לך עבור נסיעות בסך של "+ "<font color="red">"+Math.round(travelFeesLoss)+"₪</font>";
+            travelFeesOutPut= "נראה כי המעסיק לא שילם לך עבור נסיעות בסך של "+ "<font color='red'>"+Math.round(travelFeesLoss)+"₪</font>";
             outPutSum+= travelFeesLoss;
         }
         else
@@ -513,7 +513,7 @@ var employeeAPI = function() {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
         if(extraHouresLoss > 0)
         {
-            extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ "<font color="red">"+Math.round(extraHouresLoss)+"₪</font>";
+            extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ "<font color='red'>"+Math.round(extraHouresLoss)+"₪</font>";
             outPutSum+=extraHouresLoss;
         }
         else
@@ -529,7 +529,7 @@ var employeeAPI = function() {
         if(accumulatedDaysOff < daysOffSeniority)
             daysOffDeserve= daysOffSeniority- accumulatedDaysOff;
         if(daysOffDeserve > 0)
-            daysHolidayOutPut= "נראה כי קיימים ימי חופשה נוספים שמגיעים לך בסך של "+"<font color="red">"+ daysOffDeserve+" ימים</font>";
+            daysHolidayOutPut= "נראה כי קיימים ימי חופשה נוספים שמגיעים לך בסך של "+"<font color='red'>"+ daysOffDeserve+" ימים</font>";
         else
             daysHolidayOutPut= goodOutPut;
         // הפסד כסף על חישוב הבראה לא נכון
@@ -545,7 +545,7 @@ var employeeAPI = function() {
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378/12;
         if(daysRecoveryLoss > 0)
         {
-            daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color="red">"+Math.round(daysRecoveryLoss)+"₪</font>";
+            daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color='red'>"+Math.round(daysRecoveryLoss)+"₪</font>";
             outPutSum+= daysRecoveryLoss;
         }
         else
@@ -574,7 +574,7 @@ var employeeAPI = function() {
         if(deductionsText == "אחר")
         {
             deductionsLoss= deductionsAmount;
-            deductionsOutPut= "נראה כי הפסדת עבור ניכויים בסך של " + "<font color="red">"+Math.round(deductionsLoss)+"₪</font>";
+            deductionsOutPut= "נראה כי הפסדת עבור ניכויים בסך של " + "<font color='red'>"+Math.round(deductionsLoss)+"₪</font>";
             outPutSum+= deductionsLoss;
         }
         else
@@ -583,7 +583,7 @@ var employeeAPI = function() {
         var employeePensionSum= employeePensionGap+employeePremiumGap;
         if(employeePensionSum > 0)
         {
-            employeePensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color="red">"+Math.round(employeePensionSum)+"₪</font>";
+            employeePensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color='red'>"+Math.round(employeePensionSum)+"₪</font>";
             outPutSum+= employeePensionSum;
         }
         else
@@ -592,7 +592,7 @@ var employeeAPI = function() {
         var employerPensionSum= employerPensionGap+employerPremiumGap;
         if(employerPensionSum > 0)
         {
-            employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color="red">"+Math.round(employerPensionSum)+"₪</font>";
+            employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color='red'>"+Math.round(employerPensionSum)+"₪</font>";
             outPutSum+= employerPensionSum;
         }
         else 
@@ -674,19 +674,19 @@ var employeeAPI = function() {
         var imgNoteBase64= "data:image/png;base64,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";
         var outPutSumText;
         if(outPutSum > 0)
-            outPutSumText =  "<font color="red">"+" נראה כי הנך זכאי\ת ל: "+Math.round(outPutSum)+"₪ נוספים בתלוש המשכורת כל חודש!</font>";
+            outPutSumText =  "<font color='red'>"+" נראה כי הנך זכאי\ת ל: "+Math.round(outPutSum)+"₪ נוספים בתלוש המשכורת כל חודש!</font>";
         else
             outPutSumText= " נראה כי תלוש המשכורת שלך תקין!";
         text=
-            "<div class="output" dir="rtl">"+
-            "<img class="homeButton" id="homePageButton" src="./back.png">"+
-            "<img class= "tlushiLogo" src="+imgTlushiBase64+" height="90px" width="180px">"+
-                "<table cellpadding="0" cellspacing="0" border="0">"+
+            "<div class='output' dir='rtl'>"+
+            "<img class='homeButton' id='homePageButton' src='./back.png'>"+
+            "<img class= 'tlushiLogo' src="+imgTlushiBase64+" height='90px' width='180px'>"+
+                "<table cellpadding='0' cellspacing='0' border='0'>"+
                 "<tbody>"+
                 "<tr>"+
                     "<td>"+
                         "<div>"+
-                            "<p align="center" style="font-size:25px;" dir="rtl">"+
+                            "<p align='center' style='font-size:25px;' dir='rtl'>"+
                             "תלוש השכר שלך במילים פשוטות"+
                             "</p>"+
                         "</div>"+
@@ -694,54 +694,54 @@ var employeeAPI = function() {
                 "</tr>"+
                 "</tbody>"+
                 "</table>"+
-                "<p align="center" style="font-size:20px;" dir="rtl">"+
+                "<p align='center' style='font-size:20px;' dir='rtl'>"+
                 "<strong><u>מה בדקנו:</u></strong>"+
                 "</p>"+
-                "<div align="right" dir="rtl">"+
-    "<table dir="rtl" border="2" cellspacing="0" cellpadding="0">"+
+                "<div align='right' dir='rtl'>"+
+    "<table dir='rtl' border='2' cellspacing='0' cellpadding='0'>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                     "<img src="+imgMoneyBase64+" height="45px" width="45px">"+
+                "<td class='tdImg' valign='top'>"+
+                     "<img src="+imgMoneyBase64+" height='45px' width='45px'>"+
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "שכר"+
                     "</p>"+
                         salaryOutPut+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                     "<img src="+imgClockBase64+" height="45px" width="45px">"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src="+imgClockBase64+" height='45px' width='45px'>"+                
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "תשלום על שעות נוספות"+
                     "</p>"+
                         extraHouresOutPut+
                 "</td>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                     "<img src="+imgCarBase64+" height="45px" width="45px">"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src="+imgCarBase64+" height='45px' width='45px'>"+                
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "נסיעות"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                         travelFeesOutPut+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                   "<img src="+imgOldManBase64+" height="45px" width="45px">"+
+                "<td class='tdImg' valign='top'>"+
+                   "<img src="+imgOldManBase64+" height='45px' width='45px'>"+
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "הפרשה לפנסיה"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                         "<strong>עובד </strong>"+
                         employeePensionOutPut+
                     "</p>"+
@@ -750,47 +750,47 @@ var employeeAPI = function() {
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                "<img src="+imgUndoBase64+" height="45px" width="45px">"+
+                "<td class='tdImg' valign='top'>"+
+                "<img src="+imgUndoBase64+" height='45px' width='45px'>"+
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "דמי הבראה"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                        daysRecoveryOutPut+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                     "<img src="+imgSizBase64+" height="45px" width="45px">"+                
+                "<td class='tdImg' valign='top'>"+
+                     "<img src="+imgSizBase64+" height='45px' width='45px'>"+                
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "<strong>ניכויי רשות</strong>"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                        deductionsOutPut+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td class="tdImg" valign="top">"+
-                      "<img src="+imgHolidayBase64+" height="45px" width="45px">"+               
+                "<td class='tdImg' valign='top'>"+
+                      "<img src="+imgHolidayBase64+" height='45px' width='45px'>"+               
                 "</td>"+
-                "<td class="tdExp">"+
-                    "<p align="right" dir="RTL">"+
+                "<td class='tdExp'>"+
+                    "<p align='right' dir='RTL'>"+
                         "חופשה"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                        daysHolidayOutPut+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width="554" colspan="2">"+
-                    "<p align="center" dir="RTL">"+
+                "<td width='554' colspan='2'>"+
+                    "<p align='center' dir='RTL'>"+
                         "<u>סיכום</u>"+
                         outPutSumText+
                     "</p>"+
@@ -798,51 +798,51 @@ var employeeAPI = function() {
             "</tr>"+
     "</table>"+
 "</div>"+
-"<p dir="RTL">"+
+"<p dir='RTL'>"+
     "<u></u>"+
 "</p>"+
- "<p align="center" style="font-size:20px;" dir="rtl">"+
+ "<p align='center' style='font-size:20px;' dir='rtl'>"+
     "<strong><u>מה לא בדקנו:</u></strong>"+
 "</p>"+
-"<div align="right" dir="rtl">"+
-    "<table dir="rtl" border="0" cellspacing="0" cellpadding="0" width="558">"+
+"<div align='right' dir='rtl'>"+
+    "<table dir='rtl' border='0' cellspacing='0' cellpadding='0' width='558'>"+
         "<tbody>"+
             "<tr>"+
-                "<td width="558">"+
-                    "<p align="right" dir="RTL">"+
-                        "<img src="+imgNoteBase64+" height="22px" width="37px">"+
+                "<td width='558'>"+
+                    "<p align='right' dir='RTL'>"+
+                        "<img src="+imgNoteBase64+" height='22px' width='37px'>"+
                         "<strong>אימות הנתונים והניתוח באופן ודאי ועל פי נתונים אישיים</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width="558">"+
-                    "<p align="right" dir="RTL">"+
-                        "<img src="+imgNoteBase64+" height="22px" width="37px">"+
+                "<td width='558'>"+
+                    "<p align='right' dir='RTL'>"+
+                        "<img src="+imgNoteBase64+" height='22px' width='37px'>"+
                         "<strong>בחינה שנתית של הניתוח</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width="558">"+
-                    "<p align="right" dir="RTL">"+
-                        "<img src="+imgNoteBase64+" height="22px" width="37px">"+
+                "<td width='558'>"+
+                    "<p align='right' dir='RTL'>"+
+                        "<img src="+imgNoteBase64+" height='22px' width='37px'>"+
                         "<strong>התאמה של הנתונים לדוח השעות</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width="558">"+
-                    "<p align="right" dir="RTL">"+
-                        "<img src="+imgNoteBase64+" height="22px" width="37px">"+
+                "<td width='558'>"+
+                    "<p align='right' dir='RTL'>"+
+                        "<img src="+imgNoteBase64+" height='22px' width='37px'>"+
                         "<strong>צבירת ימי מחלה</strong>"+
                     "</p>"+
                 "</td>"+
             "</tr>"+
             "<tr>"+
-                "<td width="558">"+
-                    "<p align="right" dir="RTL">"+
-                        "<img src="+imgNoteBase64+" height="22px" width="37px">"+
+                "<td width='558'>"+
+                    "<p align='right' dir='RTL'>"+
+                        "<img src="+imgNoteBase64+" height='22px' width='37px'>"+
                         "<strong>ביטוח לאומי</strong>"+
                     "</p>"+
                 "</td>"+
@@ -850,16 +850,16 @@ var employeeAPI = function() {
         "</tbody>"+
     "</table>"+
 "</div>"+
-"<table cellpadding="0" cellspacing="0" width="100%">"+
+"<table cellpadding='0' cellspacing='0' width='100%'>"+
     "<tbody>"+
         "<tr>"+
             "<td>"+
                 "<div>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                         "<u>הבהרה</u>"+
                         ":"+
                     "</p>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                         "הנתונים המופיעים בדוח אינם מהווים ייעוץ משפטי או"+
                         " חשבונאי או ייעוץ מכל סוג שהוא, אלא סיכום של ניתוח"+
                         " נתונים המבוסס על תלוש משכורת אחד, אשר אין בידו לספק"+
@@ -881,12 +881,12 @@ var employeeAPI = function() {
         "</tr>"+
     "</tbody>"+
 "</table>"+
-"<table cellpadding="0" cellspacing="0" width="100%">"+
+"<table cellpadding='0' cellspacing='0' width='100%'>"+
     "<tbody>"+
         "<tr>"+
             "<td>"+
                 "<div>"+
-                    "<p align="right" dir="RTL">"+
+                    "<p align='right' dir='RTL'>"+
                         "<u>זיהוי משתמש: "+currentEmail+"</u>"+
                     "</p>"+
                 "</div>"+
@@ -895,7 +895,7 @@ var employeeAPI = function() {
     "</tbody>"+
 "</table>"+
 "</div>"+
-                "<button id = "save" class="form-style-9" style="cursor: pointer;">שלח דוח</button>"+
+                "<button id = 'save' class='form-style-9' style='cursor: pointer;'>שלח דוח</button>"+
             "</div>";
         $("body").html(text);
         $("#homePageButton").click(function(){
@@ -908,21 +908,21 @@ var employeeAPI = function() {
             return false;
         });
         $("#save").click(function(){
-            document.getElementById("save").style.visibility="hidden";
-            document.getElementById("homePageButton").style.visibility="hidden";
+            document.getElementById('save').style.visibility='hidden';
+            document.getElementById('homePageButton').style.visibility='hidden';
             html2canvas(document.body, 
             {
-                           background:"#fff",
+                           background:'#fff',
                            onrendered: function(canvas) 
                            {           
                                 var data = canvas.toDataURL("image/png", 1);
                                 //window.open(data); 
                                 // Send output to email!!!!
-                                var base64result = data.split(",")[1];
+                                var base64result = data.split(',')[1];
                                 let storageRef = firebase.storage().ref();
                                 var key=currentSnapshot.key;
-                                storageRef.child("output/"+key+".png")
-                                 .putString(base64result, "base64", { contentType: "image/png" }).then((savedPicture) => {
+                                storageRef.child('output/'+key+'.png')
+                                 .putString(base64result, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
                                     // update output field
                                     var database = firebase.database();
                                     database.ref("user/"+key+"/outPut").set(savedPicture.downloadURL);
@@ -945,8 +945,8 @@ var employeeAPI = function() {
 //	Create the initial appearance of the site
 	var initModule = function() {
         var database = firebase.database();
-        var leadsRef = database.ref("Settings");
-        leadsRef.once("value", function(snapshot) { 
+        var leadsRef = database.ref('Settings');
+        leadsRef.once('value', function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             minHour= parseFloat(childData.minHour);
@@ -961,13 +961,13 @@ var employeeAPI = function() {
         $("#fileInput").click(openPic);
         $("#fileProgress").click(openProgress);
         $("#fileProgressUpload").click(uploadInProgress);
-        $("#zoom-in").click({msg: "pic"},zoomIn); 
-        $("#zoom-out").click({msg: "pic"},zoomOut);
-        $("#reset-zoom").click({msg: "pic"},zoomReset);
-        $("#rotate").click(rotate);
-        $("#buttonLogInAdmin").click(buttonPopUp);
-        $("#forgetPassword").click(forgetPassword);
-        $("#signUpAdmin").click(signUpAdmin);
+        $('#zoom-in').click({msg: 'pic'},zoomIn); 
+        $('#zoom-out').click({msg: "pic"},zoomOut);
+        $('#reset-zoom').click({msg: 'pic'},zoomReset);
+        $('#rotate').click(rotate);
+        $('#buttonLogInAdmin').click(buttonPopUp);
+        $('#forgetPassword').click(forgetPassword);
+        $('#signUpAdmin').click(signUpAdmin);
     };
     return {
         initModule : initModule,
