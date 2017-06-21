@@ -29,11 +29,9 @@ export class HomePage {
   constructor(public loadingCtrl:LoadingController ,public _DomSanitizationService:DomSanitizer, private navParams:NavParams, private af:AngularFireDatabase, private camera:Camera, public actionSheetCtrl:ActionSheetController, private alertCtrl:AlertController, public navCtrl :NavController) {
     this.user = af.list("/user");
     this.photoTaken = false;
-    this.terms=false;
+    this.terms= false;
   }
-
-  showTerms()
-  {
+  showTerms(){
     let alert = this.alertCtrl.create({
           cssClass: "buttons",
           title: "תנאי שימוש",
@@ -46,11 +44,10 @@ export class HomePage {
   {
       this.terms= !(this.terms); 
   }
-
   showInfo()
   {
      let alert = this.alertCtrl.create({
-          cssClass:"buttons",
+          cssClass: "buttons",
           title: "מידע",
           message: "אלאלאלאלאלאה",
           buttons: ["אשר"]
@@ -89,15 +86,15 @@ export class HomePage {
    });
    actionSheet.present();
  }
- validation(name, number, email) 
+ validation(email) 
  {
     this.userEmail = email.value;
-    var emailFlag;
-    var message ="";
+    let emailFlag;
+    let message = "";
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
     {
-        emailFlag=true;
-        message+="<p> אימייל לא חוקי </p>";
+        emailFlag = true;
+        message += "<p> אימייל לא חוקי </p>";
     }
     if(message !== "")
     {
@@ -126,10 +123,10 @@ export class HomePage {
   {
     let loading = this.loadingCtrl.create({
              content: "...התלוש בתהליך טעינה",
-             dismissOnPageChange:true
+             dismissOnPageChange: true
     });
     loading.present();
-    var options = {
+    let options = {
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.DATA_URL,
     };
@@ -159,7 +156,7 @@ export class HomePage {
         encodingType: this.camera.EncodingType.PNG,
         mediaType: this.camera.MediaType.PICTURE,
         allowEdit: true,
-        correctOrientation: true  //Corrects Android orientation quirks
+        correctOrientation: true  // Corrects Android orientation quirks
     };
     this.camera.getPicture(options).then((imageData) => {
       this.cameraUrl = imageData;
@@ -174,8 +171,8 @@ export class HomePage {
   };
   uploadObj() 
   {
-      var image=  this.cameraUrl;
-      if(this.cameraUrl == undefined)
+      let image= this.cameraUrl;
+      if(this.cameraUrl === undefined)
         image= "none";  
     // firebase storage folder
     let storageRef = firebase.storage().ref();
@@ -191,6 +188,6 @@ export class HomePage {
       status: "false"});
         });
 
-     this.navCtrl.push(EndPage, {userEmail:this.userEmail});
+     this.navCtrl.push(EndPage, {userEmail: this.userEmail});
   }
 };

@@ -21,5 +21,5 @@ export class EndPage {
   backHomePage()
   {
      this.navCtrl.push(HomePage);
-  }
+  };
 }

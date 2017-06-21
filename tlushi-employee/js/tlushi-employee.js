@@ -28,7 +28,8 @@ var employeeAPI = function() {
           var newEmail= window.prompt("הכנס אימייל ליצירת משתמש");
           var newPassword= window.prompt("הכנס סיסמא (אורך הסיסמא לפחות 6 תווים)");
           var newPasswordRe= window.prompt("חזור על הסיסמא");
-          if(newPassword !== newPasswordRe || newPassword.length < 6){
+          if(newPassword !== newPasswordRe || newPassword.length < 6)
+          {
               alert("סיסמא לא תקינה");
               return false;
           }
@@ -388,9 +389,11 @@ var employeeAPI = function() {
                 }
              });
              if(!flag)
+             {
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
+             }
         });
-};
+    };
     var openProgress = function(){
         var flag= false;
         var list = $("#progress");
@@ -407,7 +410,9 @@ var employeeAPI = function() {
                 }
              });
              if(!flag)
+             {
                 alert("אין טפסים בתהליך");
+             }
         });
         return false;
     };
@@ -435,13 +440,16 @@ var employeeAPI = function() {
         allInput.removeClass("error");
         var errorFlag=false;
         for(var i=2;i<18;i++){
-            if(allInput[i].value==""){
+            if(allInput[i].value=="")
+            {
                 allInput[i].className+=" error";
                 errorFlag=true;
             }
         }
         if(errorFlag)
+        {
             return false;
+        }
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
@@ -482,22 +490,29 @@ var employeeAPI = function() {
             outPutSum+= basicWageGap;
         }
         else
+        {
             salaryOutPut= goodOutPut;
+        }
         // פער בהפרשת פנסיה של העובד
         var employeePensionGap = 0;
-        if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             employeePensionGap = minHour*regularWorkHours*0.06-employeePension;
+        }
         else
+        {
             employeePensionGap = hourWage*regularWorkHours*0.06-employeePension;
-
-        
+        }
         // פער בהפרשת פנסיה של המעביד
         var employerPensionGap = 0;
-         if(hourWage<minHour)
+        if(hourWage<minHour)
+        {
             employerPensionGap = minHour*regularWorkHours*0.125-employerPension;
+        }
         else
+        {
             employerPensionGap = hourWage*regularWorkHours*0.125-employerPension;
-
+        }
         // סה"כ הפסד בש"ח על בסיס דמי נסיעות
         var travelFeesLoss = 0;
         if(travelPayment<daysOfWork*travelDay)
@@ -507,72 +522,106 @@ var employeeAPI = function() {
             outPutSum+= travelFeesLoss;
         }
         else
+        {
             travelFeesOutPut= goodOutPut;
+        }
         // סה"כ הפסד על שעות נוספות
         var extraHouresLoss= 0;
         if(regularWorkHours == 187)
+        {
             extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25);
+        }
         if(regularWorkHours == 188)
+        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2);
+        }
         if(regularWorkHours > 188)
+        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
+        }
         if(extraHouresLoss > 0)
         {
             extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ "<font color='red'>"+Math.round(extraHouresLoss)+"₪</font>";
             outPutSum+=extraHouresLoss;
         }
         else
+        {
             extraHouresOutPut= goodOutPut;
-
+        }
         // ימי חופשה נוספים שמגיעים לך
         var daysOffDeserve= 0;
         var daysOffSeniority= 0;
         if(seniorYears > 14)
+        {
             daysOffSeniority= 20;
+        }
         else
+        {
             daysOffSeniority= daysHolidayArray[seniorYears-1];
+        }
         if(accumulatedDaysOff < daysOffSeniority)
             daysOffDeserve= daysOffSeniority- accumulatedDaysOff;
         if(daysOffDeserve > 0)
+        {
             daysHolidayOutPut= "נראה כי קיימים ימי חופשה נוספים שמגיעים לך בסך של "+"<font color='red'>"+ daysOffDeserve+" ימים</font>";
+        }
         else
+        {
             daysHolidayOutPut= goodOutPut;
+        }
         // הפסד כסף על חישוב הבראה לא נכון
         var daysRecoveryLoss= 0;
         var daysRecoverySeniority= 0;
         if(seniorYears > 20)
+        {
             daysRecoverySeniority= 10;
+        }
         else
+        {
             daysRecoverySeniority= daysRecoveryArray[seniorYears-1];
+        }
         if(regularWorkHours > 186)
+        {
             daysRecoveryLoss= daysRecoverySeniority*378-convalescencePay;
+        }
         else
+        {
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378/12;
+        }
         if(daysRecoveryLoss > 0)
         {
             daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color='red'>"+Math.round(daysRecoveryLoss)+"₪</font>";
             outPutSum+= daysRecoveryLoss;
         }
         else
+        {
             daysRecoveryOutPut= goodOutPut;
+        }
         // פער בהפרשת פנסיה של העובד עם פרמיה
         var employeePremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
             if(hourWage < minHour)
+            {
                 employeePremiumGap= (minHour*regularWorkHours+premiumWage)*0.06-employeePension;
+            }
             else
+            {
                  employeePremiumGap= (hourWage*regularWorkHours+premiumWage)*0.06-employeePension;
+            }
         }
-
         // פער בהפרשה פנסיה של המעביד עם פרמיה
         var employerPremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
              if(hourWage < minHour)
+             {
                 employerPremiumGap= (minHour*regularWorkHours+premiumWage)*0.125-employerPension;
+             }
              else
+             {
                  employerPremiumGap= (hourWage*regularWorkHours+premiumWage)*0.125-employerPension;
+             }
         }
         // הפסד על דמי חבר וניכויים
         var deductionsLoss= 0;
@@ -583,7 +632,9 @@ var employeeAPI = function() {
             outPutSum+= deductionsLoss;
         }
         else
+        {
             deductionsOutPut= goodOutPut;
+        }
         // פנסיה עובד רגילה+פרמיה
         var employeePensionSum= employeePensionGap+employeePremiumGap;
         if(employeePensionSum > 0)
@@ -592,7 +643,9 @@ var employeeAPI = function() {
             outPutSum+= employeePensionSum;
         }
         else
+        {
             employeePensionOutPut= goodOutPut;
+        }
         // פנסיה הפרשת מעביד+פרמיה
         var employerPensionSum= employerPensionGap+employerPremiumGap;
         if(employerPensionSum > 0)
@@ -600,8 +653,10 @@ var employeeAPI = function() {
             employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color='red'>"+Math.round(employerPensionSum)+"₪</font>";
             outPutSum+= employerPensionSum;
         }
-        else 
+        else
+        { 
             employerPensionOutPut= goodOutPut;
+        }
         inputFieldsObject = 
         {
             EmployeeName : $("#txtName").val(),
@@ -622,17 +677,6 @@ var employeeAPI = function() {
             Deduction: parseFloat($("#txtInvalidDeduction").val()),
             DeductionText: $("#selectDeductions option:selected").text()  
         }
-        console.log("minWageGap = "+minWageGap);
-        console.log("basicWageGap = "+basicWageGap);
-        console.log("employeePensionGap = "+employeePensionGap);
-        console.log("employerPensionGap = "+employerPensionGap);
-        console.log("travelFeesLoss = "+ travelFeesLoss);
-        console.log("extraHouresLoss = "+ extraHouresLoss);
-        console.log("daysOffDeserve = "+ daysOffDeserve);
-        console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
-        console.log("employeePremiumGap= "+employeePremiumGap);
-        console.log("employerPremiumGap= "+employerPremiumGap);
-        console.log("deductionsLoss= "+ deductionsLoss);
         fillOutput();
     };
 
@@ -651,19 +695,20 @@ var employeeAPI = function() {
             preview.src = reader.result;
         }
        
-        if (file) {
+        if (file) 
+        {
             reader.readAsDataURL(file); //reads the data as a URL
-        } else {
+        }
+        else 
+        {
             preview.src = "";
         }
    }
-
     var updateInputFields = function(){
         var database = firebase.database();
         var key=currentSnapshot.key;
         database.ref("user/"+key+"/inputFields").set(inputFieldsObject);
     }
-
     var fillOutput = function(){
         var values= $("input");
         var currentPaycheck= $("#pic");
@@ -950,8 +995,8 @@ var employeeAPI = function() {
 //	Create the initial appearance of the site
 	var initModule = function() {
         var database = firebase.database();
-        var leadsRef = database.ref('Settings');
-        leadsRef.once('value', function(snapshot) { 
+        var leadsRef = database.ref("Settings");
+        leadsRef.once("value", function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             minHour= parseFloat(childData.minHour);
