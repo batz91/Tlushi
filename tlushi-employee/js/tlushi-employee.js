@@ -20,33 +20,6 @@ var employeeAPI = function() {
     var deductionsOutPut;
     var daysHolidayOutPut;
     var outPutSum=0;
-//	Create the initial appearance of the site
-	var initModule = function() {
-        var database = firebase.database();
-        var leadsRef = database.ref('Settings');
-        leadsRef.once('value', function(snapshot) { 
-            snapshot.forEach(function(childSnapshot) {             
-            var childData = childSnapshot.val();
-            minHour= parseFloat(childData.minHour);
-            minMonth= parseFloat(childData.minMonth);
-            travelDay= parseFloat(childData.travelDay);
-            weekHours= parseFloat(childData.weekHours);
-            daysHolidayArray= childData.daysOff;
-            daysRecoveryArray= childData.daysRecovery;
-            });
-        });
-		$("#butCalc").click(calc);
-        $("#fileInput").click(openPic);
-        $("#fileProgress").click(openProgress);
-        $("#fileProgressUpload").click(uploadInProgress);
-        $('#zoom-in').click({msg: 'pic'},zoomIn); 
-        $('#zoom-out').click({msg: 'pic'},zoomOut);
-        $('#reset-zoom').click({msg: 'pic'},zoomReset);
-        $('#rotate').click(rotate);
-        $('#buttonLogInAdmin').click(buttonPopUp);
-        $('#forgetPassword').click(forgetPassword);
-        $('#signUpAdmin').click(signUpAdmin);
-    };
     // הרשמת מנהל נוסף
     var signUpAdmin= function(){
          var email =$("#emailAdmin").val();
@@ -55,7 +28,7 @@ var employeeAPI = function() {
           var newEmail= window.prompt("הכנס אימייל ליצירת משתמש");
           var newPassword= window.prompt("הכנס סיסמא (אורך הסיסמא לפחות 6 תווים)");
           var newPasswordRe= window.prompt("חזור על הסיסמא");
-          if(newPassword != newPasswordRe || newPassword.length < 6){
+          if(newPassword !== newPasswordRe || newPassword.length < 6){
               alert("סיסמא לא תקינה");
               return false;
           }
@@ -117,7 +90,7 @@ var employeeAPI = function() {
     // הצגת דוח מוכן למנהל
     var findEndForm= function(){
         var flag= false;
-        if($("#txtFindForm").val() == undefined)
+        if($("#txtFindForm").val() === undefined)
         {
             alert('הכנס אימייל לקוח');
             return;
@@ -127,7 +100,7 @@ var employeeAPI = function() {
         leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                if($("#txtFindForm").val() == childData.email && childData.status == "done")
+                if($("#txtFindForm").val() === childData.email && childData.status === "done")
                 {
                     flag= true;
                     var preview = document.getElementById('loadFormAdmin'); //selects the query named img
@@ -150,7 +123,7 @@ var employeeAPI = function() {
         leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                    if(childData.status == "saved")
+                    if(childData.status === "saved")
                     {
                         
                         var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
@@ -160,7 +133,7 @@ var employeeAPI = function() {
                         }).catch(function(error) {
                         // Uh-oh, an error occurred!
                         });
-                       var desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
+                        desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
                         // Delete the   
                         desertRef.delete().then(function() {
                             alert("output delete");
@@ -214,7 +187,7 @@ var employeeAPI = function() {
         leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                    if(childData.status == "done" || childData.status == "saved")
+                    if(childData.status === "done" || childData.status === "saved")
                     {
                         flag=true;
                         table+= "<tr>"+
@@ -970,7 +943,33 @@ var employeeAPI = function() {
             });
 });
     }
-
+//	Create the initial appearance of the site
+	var initModule = function() {
+        var database = firebase.database();
+        var leadsRef = database.ref('Settings');
+        leadsRef.once('value', function(snapshot) { 
+            snapshot.forEach(function(childSnapshot) {             
+            var childData = childSnapshot.val();
+            minHour= parseFloat(childData.minHour);
+            minMonth= parseFloat(childData.minMonth);
+            travelDay= parseFloat(childData.travelDay);
+            weekHours= parseFloat(childData.weekHours);
+            daysHolidayArray= childData.daysOff;
+            daysRecoveryArray= childData.daysRecovery;
+            });
+        });
+		$("#butCalc").click(calc);
+        $("#fileInput").click(openPic);
+        $("#fileProgress").click(openProgress);
+        $("#fileProgressUpload").click(uploadInProgress);
+        $('#zoom-in').click({msg: 'pic'},zoomIn); 
+        $('#zoom-out').click({msg: 'pic'},zoomOut);
+        $('#reset-zoom').click({msg: 'pic'},zoomReset);
+        $('#rotate').click(rotate);
+        $('#buttonLogInAdmin').click(buttonPopUp);
+        $('#forgetPassword').click(forgetPassword);
+        $('#signUpAdmin').click(signUpAdmin);
+    };
     return {
         initModule : initModule,
     };
