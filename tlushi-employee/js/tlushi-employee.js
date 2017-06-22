@@ -20,6 +20,33 @@ var employeeAPI = function() {
     var deductionsOutPut;
     var daysHolidayOutPut;
     var outPutSum=0;
+//	Create the initial appearance of the site
+	var initModule = function() {
+        var database = firebase.database();
+        var leadsRef = database.ref('Settings');
+        leadsRef.once('value', function(snapshot) { 
+            snapshot.forEach(function(childSnapshot) {             
+            var childData = childSnapshot.val();
+            minHour= parseFloat(childData.minHour);
+            minMonth= parseFloat(childData.minMonth);
+            travelDay= parseFloat(childData.travelDay);
+            weekHours= parseFloat(childData.weekHours);
+            daysHolidayArray= childData.daysOff;
+            daysRecoveryArray= childData.daysRecovery;
+            });
+        });
+		$("#butCalc").click(calc);
+        $("#fileInput").click(openPic);
+        $("#fileProgress").click(openProgress);
+        $("#fileProgressUpload").click(uploadInProgress);
+        $('#zoom-in').click({msg: 'pic'},zoomIn); 
+        $('#zoom-out').click({msg: 'pic'},zoomOut);
+        $('#reset-zoom').click({msg: 'pic'},zoomReset);
+        $('#rotate').click(rotate);
+        $('#buttonLogInAdmin').click(buttonPopUp);
+        $('#forgetPassword').click(forgetPassword);
+        $('#signUpAdmin').click(signUpAdmin);
+    };
     // הרשמת מנהל נוסף
     var signUpAdmin= function(){
          var email =$("#emailAdmin").val();
@@ -28,8 +55,7 @@ var employeeAPI = function() {
           var newEmail= window.prompt("הכנס אימייל ליצירת משתמש");
           var newPassword= window.prompt("הכנס סיסמא (אורך הסיסמא לפחות 6 תווים)");
           var newPasswordRe= window.prompt("חזור על הסיסמא");
-          if(newPassword !== newPasswordRe || newPassword.length < 6)
-          {
+          if(newPassword != newPasswordRe || newPassword.length < 6){
               alert("סיסמא לא תקינה");
               return false;
           }
@@ -45,18 +71,18 @@ var employeeAPI = function() {
           }
           }).catch(function(error) {
             // Handle Errors here.
-            alert("להרשמת מנהל חדש יש להכניס אימייל וסיסמא של מנהל נוכחי");
+            alert("להרשמת מנהל חדש יש להכניס אימייל וסיסמא של מנהל נוכחי")
             // ...
         });
         return false;
-    };
+    }
 
     // מנהל שכח סיסמא
     var forgetPassword= function(){
         var auth = firebase.auth();
         var email =$("#emailAdmin").val();
         auth.sendPasswordResetEmail(email).then(function() {
-            alert("נשלח אימייל לשחזור סיסמא");
+            alert("נשלח אימייל לשחזור סיסמא")
         // Email sent.
     }, function(error) {
         // An error happened.
@@ -65,15 +91,15 @@ var employeeAPI = function() {
         // alert(errorCode);
          alert(errorMessage);
         });
-    };
+    }
 
     // עידכון המשתנים הקבועים במסד נתונים
     var updateAdminValues= function(){
         var holidayArray = ($("#txtDaysHolidayArray").val().split(",")).map(Number);
         var recoveryArray = ($("#txtDaysRecoveryArray").val().split(",")).map(Number);
         var database = firebase.database();
-        var leadsRef = database.ref("Settings");
-        leadsRef.once("value", function(snapshot) { 
+        var leadsRef = database.ref('Settings');
+        leadsRef.once('value', function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             var key=childSnapshot.key;
@@ -87,30 +113,30 @@ var employeeAPI = function() {
         });
         alert("השינויים בוצעו בהצלחה");
         location.reload();        
-    };
+    }
     // הצגת דוח מוכן למנהל
     var findEndForm= function(){
         var flag= false;
         if($("#txtFindForm").val() == undefined)
         {
-            alert("'הכנס אימייל לקוח");
+            alert('הכנס אימייל לקוח');
             return;
         }
         var database = firebase.database();
-        var leadsRef = database.ref("user");
-        leadsRef.once("value", function(snapshot) {
+        var leadsRef = database.ref('user');
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                if($("#txtFindForm").val() === childData.email && childData.status === "done")
+                if($("#txtFindForm").val() == childData.email && childData.status == "done")
                 {
                     flag= true;
-                    var preview = document.getElementById("loadFormAdmin"); //selects the query named img
+                    var preview = document.getElementById('loadFormAdmin'); //selects the query named img
                     preview.src = childData.outPut;
                 }
              });
              if(!flag)
              {
-                 alert("לא קיים טופס לאימייל זה");
+                 alert('לא קיים טופס לאימייל זה');
                  return false;
              }
         });
@@ -120,27 +146,27 @@ var employeeAPI = function() {
         var flag= true;
         let storageRef = firebase.storage().ref();
         var database = firebase.database();
-        var leadsRef = database.ref("user");
-        leadsRef.once("value", function(snapshot) {
+        var leadsRef = database.ref('user');
+        leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                    if(childData.status === "saved")
+                    if(childData.status == "saved")
                     {
                         
-                        var desertRef = storageRef.child("paycheck/"+childData.email+childData.fileName+".png");
+                        var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
                         // Delete the file
                         desertRef.delete().then(function() {
                         // File deleted successfully
                         }).catch(function(error) {
                         // Uh-oh, an error occurred!
                         });
-                        desertRef = storageRef.child("output/"+childSnapshot.key+".png");
+                       var desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
                         // Delete the   
                         desertRef.delete().then(function() {
                             alert("output delete");
                         // File deleted successfully
                         }).catch(function(error) {
-                            alert("output delete feild");
+                            alart("output delete feild");
                         // Uh-oh, an error occurred!
                         });
                         leadsRef.child(childSnapshot.key).remove();
@@ -160,7 +186,7 @@ var employeeAPI = function() {
     var backUp = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref("user");
+        var leadsRef = database.ref('user');
         var table=
                         "<table>"+
                              "<tr>"+
@@ -185,10 +211,10 @@ var employeeAPI = function() {
                                 "<th>תלוש משכורת</th>"+
                                 "<th>דוח סופי</th>"+
                             "</tr>";
-        leadsRef.once("value", function(snapshot) {
+        leadsRef.once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
-                    if(childData.status === "done" || childData.status === "saved")
+                    if(childData.status == "done" || childData.status == "saved")
                     {
                         flag=true;
                         table+= "<tr>"+
@@ -221,7 +247,7 @@ var employeeAPI = function() {
             {
                 table+="</table>";
                 $("#dvData").html(table);
-                window.open("data:application/vnd.ms-excel," + encodeURIComponent($("#dvData").html()));
+                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#dvData').html()));
             }
             if(!flag){
                 alert("אין מידע לגיבוי");
@@ -280,74 +306,36 @@ var employeeAPI = function() {
         $("#txtTravelDay").val(travelDay);
         $("#txtDaysHolidayArray").val(daysHolidayArray);
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
-        $("#buttonUpdateAdmin").click(updateAdminValues);
-        $("#buttonFindForm").click(findEndForm);
-        $("#buttonBackUp").click(backUp);
-        $("#buttonDeleteSaved").click(deleteSaved);
-        var tabcontent = document.getElementsByClassName("tabcontent");
-        tabcontent[1].style.display = "none";
-        tabcontent[2].style.display = "none";
-        $("#defaultOpen").click(function(){
-            var tabcontent = document.getElementsByClassName("tabcontent");
+        $('#buttonUpdateAdmin').click(updateAdminValues);
+        $('#buttonFindForm').click(findEndForm);
+        $('#buttonBackUp').click(backUp);
+        $('#buttonDeleteSaved').click(deleteSaved);
+         tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent[1].style.display = "none";
+            tabcontent[2].style.display = "none";
+        $('#defaultOpen').click(function(){
+            tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[0].style.display = "block";
             tabcontent[2].style.display = "none";
             return false;
         });
-        $("#showBackUP").click(function(){
-            var tabcontent = document.getElementsByClassName("tabcontent");
+        $('#showBackUP').click(function(){
+            tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "none";
             tabcontent[2].style.display = "block";
             return false;
         });
-        var zoomIn = function(e){
-        if(e.data.msg == "pic")
-        {
-            $("#pic").width($("#pic").width()*1.2);
-            $("#pic").height($("#pic").height()*1.2);
-        }
-        if(e.data.msg =="admin")
-        {
-            $("#loadFormAdmin").width($("#loadFormAdmin").width()*1.2);
-            $("#loadFormAdmin").height($("#loadFormAdmin").height()*1.2);
-        }
-}
-
-    var zoomOut = function(e){
-        if(e.data.msg == "pic")
-        {
-            $("#pic").width($("#pic").width()/1.2);
-            $("#pic").height($("#pic").height()/1.2);
-        }
-        if(e.data.msg =="admin")
-        {
-            $("#loadFormAdmin").width($("#loadFormAdmin").width()/1.2);
-            $("#loadFormAdmin").height($("#loadFormAdmin").height()/1.2);
-        }
-    }
-
-    var zoomReset = function(e){
-        if(e.data.msg == "pic")
-        {
-            $("#pic").width("100%");
-            $("#pic").height("100%");
-        }
-        if(e.data.msg =="admin")
-        {
-            $("#loadFormAdmin").width("100%");
-            $("#loadFormAdmin").height("100%");
-        }    
-    }
-        $("#showReportsId").click(function(){
+        $('#showReportsId').click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "block";
             tabcontent[2].style.display = "none";
-            $("#zoom-inAdmin").click({msg: "admin"},zoomIn); 
-            $("#zoom-outAdmin").click({msg: "admin"},zoomOut);
-            $("#reset-zoomAdmin").click({msg: "admin"},zoomReset);
-            $("#rotateAdmin").click(rotate);   
+            $('#zoom-inAdmin').click({msg: 'admin'},zoomIn); 
+            $('#zoom-outAdmin').click({msg: 'admin'},zoomOut);
+            $('#reset-zoomAdmin').click({msg: 'admin'},zoomReset);
+            $('#rotateAdmin').click(rotate);   
             return false;
         });        
     }
@@ -370,8 +358,8 @@ var employeeAPI = function() {
     var openPic = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref("user");
-        leadsRef.once("value", function(snapshot) {
+        var leadsRef = database.ref('user');
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
                 {              
@@ -382,25 +370,23 @@ var employeeAPI = function() {
                         database.ref("user/"+key+"/status").set("true");
                         currentSnapshot= childSnapshot;
                         flag= true;
-                        var preview = document.getElementById("pic"); //selects the query named img
+                        var preview = document.getElementById('pic'); //selects the query named img
                         preview.src = childData.paycheck;
                         currentEmail= childData.email;
                     }
                 }
              });
              if(!flag)
-             {
                 alert("אין טופס לבדיקה! ברגע שיעלה טופס חדש הוא יטען למערכת");
-             }
         });
-    };
+};
     var openProgress = function(){
         var flag= false;
         var list = $("#progress");
         list.empty();
         var database = firebase.database();
-        var leadsRef = database.ref("user");
-        leadsRef.once("value", function(snapshot) {
+        var leadsRef = database.ref('user');
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if(childData.status == "true")
@@ -410,24 +396,22 @@ var employeeAPI = function() {
                 }
              });
              if(!flag)
-             {
-                alert("אין טפסים בתהליך");
-             }
+                alert('אין טפסים בתהליך');
         });
         return false;
     };
 
     var uploadInProgress = function(){
         var database = firebase.database();
-        var leadsRef = database.ref("user");
-        leadsRef.once("value", function(snapshot) {
+        var leadsRef = database.ref('user');
+        leadsRef.once('value', function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if($("#progress option:selected").text() == childData.email)
                 {
                     currentSnapshot= childSnapshot;
                     currentEmail= childData.email;
-                    var preview = document.getElementById("pic"); //selects the query named img
+                    var preview = document.getElementById('pic'); //selects the query named img
                     preview.src = childData.paycheck;
                 }
              });
@@ -440,16 +424,13 @@ var employeeAPI = function() {
         allInput.removeClass("error");
         var errorFlag=false;
         for(var i=2;i<18;i++){
-            if(allInput[i].value=="")
-            {
+            if(allInput[i].value==""){
                 allInput[i].className+=" error";
                 errorFlag=true;
             }
         }
         if(errorFlag)
-        {
             return false;
-        }
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
@@ -467,22 +448,17 @@ var employeeAPI = function() {
         var deductionsAmount= parseFloat($("#txtInvalidDeduction").val());      // ניכויים סכום
         // פער משכר מינימום
         var minWageGap = 0;
-        if(hourWage < minHour)
-        {
+        if(hourWage<minHour)
             minWageGap = Math.round((minHour-hourWage)*regularWorkHours);
-        }
+        
         // פער משכר יסוד
         var basicWageGap = 0;
-        if(hourWage < minHour)
-        {
+        if(hourWage<minHour)
             basicWageGap=minHour*regularWorkHours-regularPayment;
-        }
         else
         {
             if(hourWage*regularWorkHours>regularPayment)
-            {
                  basicWageGap=hourWage*regularWorkHours-regularPayment;
-            }
         }
         if (basicWageGap > 0)
         {
@@ -490,29 +466,22 @@ var employeeAPI = function() {
             outPutSum+= basicWageGap;
         }
         else
-        {
             salaryOutPut= goodOutPut;
-        }
         // פער בהפרשת פנסיה של העובד
         var employeePensionGap = 0;
-        if(hourWage < minHour)
-        {
+        if(hourWage<minHour)
             employeePensionGap = minHour*regularWorkHours*0.06-employeePension;
-        }
         else
-        {
             employeePensionGap = hourWage*regularWorkHours*0.06-employeePension;
-        }
+
+        
         // פער בהפרשת פנסיה של המעביד
         var employerPensionGap = 0;
-        if(hourWage<minHour)
-        {
+         if(hourWage<minHour)
             employerPensionGap = minHour*regularWorkHours*0.125-employerPension;
-        }
         else
-        {
             employerPensionGap = hourWage*regularWorkHours*0.125-employerPension;
-        }
+
         // סה"כ הפסד בש"ח על בסיס דמי נסיעות
         var travelFeesLoss = 0;
         if(travelPayment<daysOfWork*travelDay)
@@ -522,106 +491,72 @@ var employeeAPI = function() {
             outPutSum+= travelFeesLoss;
         }
         else
-        {
             travelFeesOutPut= goodOutPut;
-        }
         // סה"כ הפסד על שעות נוספות
         var extraHouresLoss= 0;
         if(regularWorkHours == 187)
-        {
             extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25);
-        }
         if(regularWorkHours == 188)
-        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2);
-        }
         if(regularWorkHours > 188)
-        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
-        }
         if(extraHouresLoss > 0)
         {
             extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ "<font color='red'>"+Math.round(extraHouresLoss)+"₪</font>";
             outPutSum+=extraHouresLoss;
         }
         else
-        {
             extraHouresOutPut= goodOutPut;
-        }
+
         // ימי חופשה נוספים שמגיעים לך
         var daysOffDeserve= 0;
         var daysOffSeniority= 0;
         if(seniorYears > 14)
-        {
             daysOffSeniority= 20;
-        }
         else
-        {
             daysOffSeniority= daysHolidayArray[seniorYears-1];
-        }
         if(accumulatedDaysOff < daysOffSeniority)
             daysOffDeserve= daysOffSeniority- accumulatedDaysOff;
         if(daysOffDeserve > 0)
-        {
             daysHolidayOutPut= "נראה כי קיימים ימי חופשה נוספים שמגיעים לך בסך של "+"<font color='red'>"+ daysOffDeserve+" ימים</font>";
-        }
         else
-        {
             daysHolidayOutPut= goodOutPut;
-        }
         // הפסד כסף על חישוב הבראה לא נכון
         var daysRecoveryLoss= 0;
         var daysRecoverySeniority= 0;
         if(seniorYears > 20)
-        {
             daysRecoverySeniority= 10;
-        }
         else
-        {
             daysRecoverySeniority= daysRecoveryArray[seniorYears-1];
-        }
         if(regularWorkHours > 186)
-        {
             daysRecoveryLoss= daysRecoverySeniority*378-convalescencePay;
-        }
         else
-        {
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378/12;
-        }
         if(daysRecoveryLoss > 0)
         {
             daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color='red'>"+Math.round(daysRecoveryLoss)+"₪</font>";
             outPutSum+= daysRecoveryLoss;
         }
         else
-        {
             daysRecoveryOutPut= goodOutPut;
-        }
         // פער בהפרשת פנסיה של העובד עם פרמיה
         var employeePremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
             if(hourWage < minHour)
-            {
                 employeePremiumGap= (minHour*regularWorkHours+premiumWage)*0.06-employeePension;
-            }
             else
-            {
                  employeePremiumGap= (hourWage*regularWorkHours+premiumWage)*0.06-employeePension;
-            }
         }
+
         // פער בהפרשה פנסיה של המעביד עם פרמיה
         var employerPremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
              if(hourWage < minHour)
-             {
                 employerPremiumGap= (minHour*regularWorkHours+premiumWage)*0.125-employerPension;
-             }
              else
-             {
                  employerPremiumGap= (hourWage*regularWorkHours+premiumWage)*0.125-employerPension;
-             }
         }
         // הפסד על דמי חבר וניכויים
         var deductionsLoss= 0;
@@ -632,9 +567,7 @@ var employeeAPI = function() {
             outPutSum+= deductionsLoss;
         }
         else
-        {
             deductionsOutPut= goodOutPut;
-        }
         // פנסיה עובד רגילה+פרמיה
         var employeePensionSum= employeePensionGap+employeePremiumGap;
         if(employeePensionSum > 0)
@@ -643,9 +576,7 @@ var employeeAPI = function() {
             outPutSum+= employeePensionSum;
         }
         else
-        {
             employeePensionOutPut= goodOutPut;
-        }
         // פנסיה הפרשת מעביד+פרמיה
         var employerPensionSum= employerPensionGap+employerPremiumGap;
         if(employerPensionSum > 0)
@@ -653,10 +584,8 @@ var employeeAPI = function() {
             employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color='red'>"+Math.round(employerPensionSum)+"₪</font>";
             outPutSum+= employerPensionSum;
         }
-        else
-        { 
+        else 
             employerPensionOutPut= goodOutPut;
-        }
         inputFieldsObject = 
         {
             EmployeeName : $("#txtName").val(),
@@ -677,38 +606,87 @@ var employeeAPI = function() {
             Deduction: parseFloat($("#txtInvalidDeduction").val()),
             DeductionText: $("#selectDeductions option:selected").text()  
         }
+        console.log("minWageGap = "+minWageGap);
+        console.log("basicWageGap = "+basicWageGap);
+        console.log("employeePensionGap = "+employeePensionGap);
+        console.log("employerPensionGap = "+employerPensionGap);
+        console.log("travelFeesLoss = "+ travelFeesLoss);
+        console.log("extraHouresLoss = "+ extraHouresLoss);
+        console.log("daysOffDeserve = "+ daysOffDeserve);
+        console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
+        console.log("employeePremiumGap= "+employeePremiumGap);
+        console.log("employerPremiumGap= "+employerPremiumGap);
+        console.log("deductionsLoss= "+ deductionsLoss);
         fillOutput();
     };
 
+    var zoomIn = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()*1.2);
+            $('#pic').height($('#pic').height()*1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()*1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()*1.2);
+        }
+}
+
+    var zoomOut = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width($('#pic').width()/1.2);
+            $('#pic').height($('#pic').height()/1.2);
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width($('#loadFormAdmin').width()/1.2);
+            $('#loadFormAdmin').height($('#loadFormAdmin').height()/1.2);
+        }
+    }
+
+    var zoomReset = function(e){
+        if(e.data.msg == "pic")
+        {
+            $('#pic').width("100%");
+            $('#pic').height("100%");
+        }
+        if(e.data.msg =="admin")
+        {
+            $('#loadFormAdmin').width("100%");
+            $('#loadFormAdmin').height("100%");
+        }    
+    }
+
     var rotate = function(){
-        img = document.getElementById("container");
+        img = document.getElementById('container');
         angle = (angle + 90) % 360;
         img.className = "rotate" + angle;
     }
 
      var previewFile = function(){
-        var preview = document.getElementById("pic"); //selects the query named img
-        var input = document.getElementById("fileInput");
+        var preview = document.getElementById('pic'); //selects the query named img
+        var input = document.getElementById('fileInput');
         var file = input.files[0];
         var reader  = new FileReader();
         reader.onloadend = function () {
             preview.src = reader.result;
         }
        
-        if (file) 
-        {
+        if (file) {
             reader.readAsDataURL(file); //reads the data as a URL
-        }
-        else 
-        {
+        } else {
             preview.src = "";
         }
    }
+
     var updateInputFields = function(){
         var database = firebase.database();
         var key=currentSnapshot.key;
         database.ref("user/"+key+"/inputFields").set(inputFieldsObject);
     }
+
     var fillOutput = function(){
         var values= $("input");
         var currentPaycheck= $("#pic");
@@ -992,33 +970,7 @@ var employeeAPI = function() {
             });
 });
     }
-//	Create the initial appearance of the site
-	var initModule = function() {
-        var database = firebase.database();
-        var leadsRef = database.ref("Settings");
-        leadsRef.once("value", function(snapshot) { 
-            snapshot.forEach(function(childSnapshot) {             
-            var childData = childSnapshot.val();
-            minHour= parseFloat(childData.minHour);
-            minMonth= parseFloat(childData.minMonth);
-            travelDay= parseFloat(childData.travelDay);
-            weekHours= parseFloat(childData.weekHours);
-            daysHolidayArray= childData.daysOff;
-            daysRecoveryArray= childData.daysRecovery;
-            });
-        });
-		$("#butCalc").click(calc);
-        $("#fileInput").click(openPic);
-        $("#fileProgress").click(openProgress);
-        $("#fileProgressUpload").click(uploadInProgress);
-        $("#zoom-in").click({msg: "pic"},zoomIn); 
-        $("#zoom-out").click({msg: "pic"},zoomOut);
-        $("#reset-zoom").click({msg: "pic"},zoomReset);
-        $("#rotate").click(rotate);
-        $("#buttonLogInAdmin").click(buttonPopUp);
-        $("#forgetPassword").click(forgetPassword);
-        $("#signUpAdmin").click(signUpAdmin);
-    };
+
     return {
         initModule : initModule,
     };

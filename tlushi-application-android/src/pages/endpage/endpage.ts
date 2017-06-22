@@ -14,12 +14,15 @@ import { HomePage } from "../home/home";
   templateUrl: "endpage.html",
 })
 export class EndPage {
-  userEmail: string; 
+  userEmail; 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userEmail= navParams.get("userEmail");
+    this.userEmail=navParams.get("userEmail");
   }
-  backHomePage()
-  {
+
+backHomePage()
+{
      this.navCtrl.push(HomePage);
-  };
+}
+ 
+
 }
