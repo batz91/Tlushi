@@ -1,20 +1,20 @@
-import { Component, Input } from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {AlertController} from 'ionic-angular';
-import { ActionSheetController, NavParams, LoadingController } from 'ionic-angular'
+import { Component, Input } from "@angular/core";
+import {NavController} from "ionic-angular";
+import {AlertController} from "ionic-angular";
+import { ActionSheetController, NavParams, LoadingController } from "ionic-angular"
 
-import { Camera } from '@ionic-native/camera';
-import { EndPage } from '../endpage/endpage';
+import { Camera } from "@ionic-native/camera";
+import { EndPage } from "../endpage/endpage";
 
 //  FireBase import
-import { AngularFire } from 'angularfire/AngularFire';
-import {DomSanitizer} from '@angular/platform-browser';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import * as firebase from 'firebase';
+import { AngularFire } from "angularfire/AngularFire";
+import {DomSanitizer} from "@angular/platform-browser";
+import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
+import * as firebase from "firebase";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: "page-home",
+  templateUrl: "home.html"
 })
 
 export class HomePage {
@@ -27,30 +27,30 @@ export class HomePage {
   terms: boolean;
 
   constructor(public loadingCtrl: LoadingController ,public _DomSanitizationService: DomSanitizer, private navParams: NavParams, private af: AngularFireDatabase, private camera: Camera, public actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, public navCtrl : NavController) {
-    this.user = af.list('/user');
+    this.user = af.list("/user");
     this.photoTaken = false;
-    this.terms=false;
+    this.terms= false;
   }
 
   showTerms(){
     let alert = this.alertCtrl.create({
-          cssClass:'buttons',
-          title: 'תנאי שימוש',
-          message: 'לחלחלחלחל',
-          buttons: ['אשר']
+          cssClass: "buttons",
+          title: "תנאי שימוש",
+          message: "לחלחלחלחל",
+          buttons: ["אשר"]
           });
           alert.present();
   }
   updateTerms(){
-      this.terms=!(this.terms); 
+      this.terms= !(this.terms); 
   }
 
   showInfo(){
      let alert = this.alertCtrl.create({
-          cssClass:'buttons',
-          title: 'מידע',
+          cssClass: "buttons",
+          title: "מידע",
           message: "אלאלאלאלאלאה",
-          buttons: ['אשר']
+          buttons: ["אשר"]
           });
           alert.present(); 
          
@@ -59,29 +59,29 @@ export class HomePage {
 
    presentActionSheet() {
    let actionSheet = this.actionSheetCtrl.create({
-    cssClass: 'buttons',
-//     title: ':מקור תמונה',
+    cssClass: "buttons",
+//     title: ":מקור תמונה",
      buttons: [
        {
-         cssClass: 'buttons',
-         text: 'מצלמה ',
+         cssClass: "buttons",
+         text: "מצלמה ",
          handler: () => {
             this.openCamera();
           }
        },
        {
-         cssClass: 'buttons',
-         text: 'גלריה ',
+         cssClass: "buttons",
+         text: "גלריה ",
          handler: () => {
            this.selectFromGallery();
          }
        },
        {
-         cssClass: 'buttons',
-         text: 'ביטול ',
-         role: 'destructive',
+         cssClass: "buttons",
+         text: "ביטול ",
+         role: "destructive",
          handler: () => {
-           console.log('Cancel clicked');
+           console.log("Cancel clicked");
          }
        }
      ]
@@ -101,10 +101,10 @@ export class HomePage {
       }
       if(message!=""){
           let alert = this.alertCtrl.create({
-          cssClass:'buttons',
-          title: 'שדה חסר',
+          cssClass:"buttons",
+          title: "שדה חסר",
           subTitle: message,
-          buttons: ['אשר']
+          buttons: ["אשר"]
           });
           alert.present();
           return false;
@@ -112,9 +112,9 @@ export class HomePage {
      if(this.terms==false)
       {
         let alert = this.alertCtrl.create({
-              cssClass:'buttons',
-              subTitle: 'יש לאשר את תנאי השימוש',
-              buttons: ['אשר']
+              cssClass:"buttons",
+              subTitle: "יש לאשר את תנאי השימוש",
+              buttons: ["אשר"]
         });
         alert.present();
         return false;
@@ -123,7 +123,7 @@ export class HomePage {
   }
   openCamera() {
     let loading = this.loadingCtrl.create({
-             content: '...התלוש בתהליך טעינה',
+             content: "...התלוש בתהליך טעינה",
              dismissOnPageChange:true
     });
     loading.present();
@@ -145,7 +145,7 @@ export class HomePage {
 
    selectFromGallery() {
     let loading = this.loadingCtrl.create({
-             content: '...התלוש בתהליך טעינה',
+             content: "...התלוש בתהליך טעינה",
              dismissOnPageChange:true
     });
     loading.present();
@@ -182,7 +182,7 @@ export class HomePage {
     const filename = Math.floor(Date.now() / 1000);
     // firebase upload image to storage
     storageRef.child(`paycheck/${this.userEmail}${filename}.png`)
-          .putString(image, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
+          .putString(image, "base64", { contentType: "image/png" }).then((savedPicture) => {
     // create new user in DB
     this.user.push({
       email: this.userEmail, 
