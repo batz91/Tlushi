@@ -55,7 +55,8 @@ var employeeAPI = function() {
           var newEmail= window.prompt("הכנס אימייל ליצירת משתמש");
           var newPassword= window.prompt("הכנס סיסמא (אורך הסיסמא לפחות 6 תווים)");
           var newPasswordRe= window.prompt("חזור על הסיסמא");
-          if(newPassword != newPasswordRe || newPassword.length < 6){
+          if(newPassword != newPasswordRe || newPassword.length < 6)
+          {
               alert("סיסמא לא תקינה");
               return false;
           }
@@ -249,7 +250,8 @@ var employeeAPI = function() {
                 $("#dvData").html(table);
                 window.open("data:application/vnd.ms-excel," + encodeURIComponent($("#dvData").html()));
             }
-            if(!flag){
+            if(!flag)
+            {
                 alert("אין מידע לגיבוי");
                 return false;
             }
@@ -395,8 +397,10 @@ var employeeAPI = function() {
                     list.append(new Option(childData.email, childData.email));
                 }
              });
-             if(!flag)
+            if(!flag)
+            {
                 alert("אין טפסים בתהליך");
+            }
         });
         return false;
     };
@@ -424,13 +428,16 @@ var employeeAPI = function() {
         allInput.removeClass("error");
         var errorFlag=false;
         for(var i=2;i<18;i++){
-            if(allInput[i].value==""){
+            if(allInput[i].value == "")
+            {
                 allInput[i].className+=" error";
                 errorFlag=true;
             }
         }
         if(errorFlag)
+        {
             return false;
+        }
         var hourWage = parseFloat($("#txtPayForHour").val());    // שכר לשעה
         var regularWorkHours = parseFloat($("#txtRegularWorkHours").val()); // שעות עבודה רגילות
         var regularPayment = parseFloat($("#txtRegularPayment").val()); // תשלום על שעות עבודה רגילות
@@ -448,17 +455,22 @@ var employeeAPI = function() {
         var deductionsAmount= parseFloat($("#txtInvalidDeduction").val());      // ניכויים סכום
         // פער משכר מינימום
         var minWageGap = 0;
-        if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             minWageGap = Math.round((minHour-hourWage)*regularWorkHours);
-        
+        }
         // פער משכר יסוד
         var basicWageGap = 0;
-        if(hourWage<minHour)
-            basicWageGap=minHour*regularWorkHours-regularPayment;
+        if(hourWage < minHour)
+        {
+            basicWageGap= minHour*regularWorkHours-regularPayment;
+        }
         else
         {
-            if(hourWage*regularWorkHours>regularPayment)
+            if(hourWage*regularWorkHours > regularPayment)
+            {
                  basicWageGap=hourWage*regularWorkHours-regularPayment;
+            }
         }
         if (basicWageGap > 0)
         {
@@ -466,97 +478,140 @@ var employeeAPI = function() {
             outPutSum+= basicWageGap;
         }
         else
+        {
             salaryOutPut= goodOutPut;
+        }
         // פער בהפרשת פנסיה של העובד
         var employeePensionGap = 0;
-        if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             employeePensionGap = minHour*regularWorkHours*0.06-employeePension;
+        }
         else
+        {
             employeePensionGap = hourWage*regularWorkHours*0.06-employeePension;
-
-        
+        }
         // פער בהפרשת פנסיה של המעביד
         var employerPensionGap = 0;
-         if(hourWage<minHour)
+        if(hourWage < minHour)
+        {
             employerPensionGap = minHour*regularWorkHours*0.125-employerPension;
+        }
         else
+        {
             employerPensionGap = hourWage*regularWorkHours*0.125-employerPension;
-
+        }
         // סה"כ הפסד בש"ח על בסיס דמי נסיעות
         var travelFeesLoss = 0;
-        if(travelPayment<daysOfWork*travelDay)
+        if(travelPayment < daysOfWork*travelDay)
         {
-            travelFeesLoss = daysOfWork*travelDay-travelPayment;
+            travelFeesLoss= daysOfWork*travelDay-travelPayment;
             travelFeesOutPut= "נראה כי המעסיק לא שילם לך עבור נסיעות בסך של "+ "<font color='red'>"+Math.round(travelFeesLoss)+"₪</font>";
             outPutSum+= travelFeesLoss;
         }
         else
+        {
             travelFeesOutPut= goodOutPut;
+        }
         // סה"כ הפסד על שעות נוספות
         var extraHouresLoss= 0;
         if(regularWorkHours == 187)
+        {
             extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25);
+        }
         if(regularWorkHours == 188)
+        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2);
+        }
         if(regularWorkHours > 188)
+        {
              extraHouresLoss= (extraHours125Pays+extraHours150Pays)-(hourWage*1.25*2)+((regularWorkHours-188)*1.5*hourWage);
+        }
         if(extraHouresLoss > 0)
         {
             extraHouresOutPut=  "נראה כי המעסיק לא שילם לך שעות נוספות בסך של "+ "<font color='red'>"+Math.round(extraHouresLoss)+"₪</font>";
-            outPutSum+=extraHouresLoss;
+            outPutSum+= extraHouresLoss;
         }
         else
+        {
             extraHouresOutPut= goodOutPut;
-
+        }
         // ימי חופשה נוספים שמגיעים לך
         var daysOffDeserve= 0;
         var daysOffSeniority= 0;
         if(seniorYears > 14)
+        {
             daysOffSeniority= 20;
+        }
         else
+        {
             daysOffSeniority= daysHolidayArray[seniorYears-1];
+        }
         if(accumulatedDaysOff < daysOffSeniority)
+        {
             daysOffDeserve= daysOffSeniority- accumulatedDaysOff;
+        }
         if(daysOffDeserve > 0)
+        {
             daysHolidayOutPut= "נראה כי קיימים ימי חופשה נוספים שמגיעים לך בסך של "+"<font color='red'>"+ daysOffDeserve+" ימים</font>";
+        }
         else
+        {
             daysHolidayOutPut= goodOutPut;
+        }
         // הפסד כסף על חישוב הבראה לא נכון
         var daysRecoveryLoss= 0;
         var daysRecoverySeniority= 0;
         if(seniorYears > 20)
+        {
             daysRecoverySeniority= 10;
+        }
         else
+        {
             daysRecoverySeniority= daysRecoveryArray[seniorYears-1];
+        }
         if(regularWorkHours > 186)
+        {
             daysRecoveryLoss= daysRecoverySeniority*378-convalescencePay;
+        }
         else
+        {
             daysRecoveryLoss= (regularWorkHours/186)*daysRecoverySeniority*378/12;
+        }
         if(daysRecoveryLoss > 0)
         {
             daysRecoveryOutPut=  "נראה כי התלוש אינו כולל דמי הבראה על סך "+ "<font color='red'>"+Math.round(daysRecoveryLoss)+"₪</font>";
             outPutSum+= daysRecoveryLoss;
         }
         else
+        {
             daysRecoveryOutPut= goodOutPut;
+        }
         // פער בהפרשת פנסיה של העובד עם פרמיה
         var employeePremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
             if(hourWage < minHour)
+            {
                 employeePremiumGap= (minHour*regularWorkHours+premiumWage)*0.06-employeePension;
+            }
             else
+            {
                  employeePremiumGap= (hourWage*regularWorkHours+premiumWage)*0.06-employeePension;
+            }
         }
-
         // פער בהפרשה פנסיה של המעביד עם פרמיה
         var employerPremiumGap= 0;
         if(!(isNaN(premiumWage)))
         {
              if(hourWage < minHour)
+             {
                 employerPremiumGap= (minHour*regularWorkHours+premiumWage)*0.125-employerPension;
+             }
              else
+             {
                  employerPremiumGap= (hourWage*regularWorkHours+premiumWage)*0.125-employerPension;
+             }
         }
         // הפסד על דמי חבר וניכויים
         var deductionsLoss= 0;
@@ -567,7 +622,9 @@ var employeeAPI = function() {
             outPutSum+= deductionsLoss;
         }
         else
+        {
             deductionsOutPut= goodOutPut;
+        }
         // פנסיה עובד רגילה+פרמיה
         var employeePensionSum= employeePensionGap+employeePremiumGap;
         if(employeePensionSum > 0)
@@ -576,7 +633,9 @@ var employeeAPI = function() {
             outPutSum+= employeePensionSum;
         }
         else
+        {
             employeePensionOutPut= goodOutPut;
+        }
         // פנסיה הפרשת מעביד+פרמיה
         var employerPensionSum= employerPensionGap+employerPremiumGap;
         if(employerPensionSum > 0)
@@ -584,8 +643,10 @@ var employeeAPI = function() {
             employerPensionOutPut= "נראה כי המעסיק לא הפריש עבורך לפנסיה בסך של " + "<font color='red'>"+Math.round(employerPensionSum)+"₪</font>";
             outPutSum+= employerPensionSum;
         }
-        else 
+        else
+        { 
             employerPensionOutPut= goodOutPut;
+        }
         inputFieldsObject = 
         {
             EmployeeName : $("#txtName").val(),
@@ -606,17 +667,6 @@ var employeeAPI = function() {
             Deduction: parseFloat($("#txtInvalidDeduction").val()),
             DeductionText: $("#selectDeductions option:selected").text()  
         }
-        console.log("minWageGap = "+minWageGap);
-        console.log("basicWageGap = "+basicWageGap);
-        console.log("employeePensionGap = "+employeePensionGap);
-        console.log("employerPensionGap = "+employerPensionGap);
-        console.log("travelFeesLoss = "+ travelFeesLoss);
-        console.log("extraHouresLoss = "+ extraHouresLoss);
-        console.log("daysOffDeserve = "+ daysOffDeserve);
-        console.log("daysRecoveryLoss= "+ daysRecoveryLoss);
-        console.log("employeePremiumGap= "+employeePremiumGap);
-        console.log("employerPremiumGap= "+employerPremiumGap);
-        console.log("deductionsLoss= "+ deductionsLoss);
         fillOutput();
     };
 
@@ -631,8 +681,7 @@ var employeeAPI = function() {
             $("#loadFormAdmin").width($("#loadFormAdmin").width()*1.2);
             $("#loadFormAdmin").height($("#loadFormAdmin").height()*1.2);
         }
-}
-
+    }
     var zoomOut = function(e){
         if(e.data.msg == "pic")
         {
@@ -645,7 +694,6 @@ var employeeAPI = function() {
             $("#loadFormAdmin").height($("#loadFormAdmin").height()/1.2);
         }
     }
-
     var zoomReset = function(e){
         if(e.data.msg == "pic")
         {
@@ -658,13 +706,11 @@ var employeeAPI = function() {
             $("#loadFormAdmin").height("100%");
         }    
     }
-
     var rotate = function(){
         img = document.getElementById("container");
         angle = (angle + 90) % 360;
         img.className = "rotate" + angle;
     }
-
      var previewFile = function(){
         var preview = document.getElementById("pic"); //selects the query named img
         var input = document.getElementById("fileInput");
@@ -672,21 +718,19 @@ var employeeAPI = function() {
         var reader  = new FileReader();
         reader.onloadend = function () {
             preview.src = reader.result;
-        }
-       
+        }  
         if (file) {
             reader.readAsDataURL(file); //reads the data as a URL
         } else {
             preview.src = "";
         }
-   }
+    }
 
     var updateInputFields = function(){
         var database = firebase.database();
-        var key=currentSnapshot.key;
+        var key= currentSnapshot.key;
         database.ref("user/"+key+"/inputFields").set(inputFieldsObject);
     }
-
     var fillOutput = function(){
         var values= $("input");
         var currentPaycheck= $("#pic");
@@ -702,9 +746,13 @@ var employeeAPI = function() {
         var imgNoteBase64= "data:image/png;base64,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";
         var outPutSumText;
         if(outPutSum > 0)
+        {
             outPutSumText =  "<font color='red'>"+" נראה כי הנך זכאי\ת ל: "+Math.round(outPutSum)+"₪ נוספים בתלוש המשכורת כל חודש!</font>";
+        }
         else
+        {
             outPutSumText= " נראה כי תלוש המשכורת שלך תקין!";
+        }
         text=
             "<div class='output' dir='rtl'>"+
             "<img class='homeButton' id='homePageButton' src='./back.png'>"+
@@ -931,7 +979,9 @@ var employeeAPI = function() {
             initModule();
             var input= $("input");
             for(var i=2; i<18; i++)
+            {
                 input[i].value=values[i].value;
+            }
             $("#pic").src= currentPaycheck.src;
             return false;
         });
