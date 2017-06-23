@@ -23,8 +23,8 @@ var employeeAPI = function() {
 //	Create the initial appearance of the site
 	var initModule = function() {
         var database = firebase.database();
-        var leadsRef = database.ref('Settings');
-        leadsRef.once('value', function(snapshot) { 
+        var leadsRef = database.ref("Settings");
+        leadsRef.once("value", function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             minHour= parseFloat(childData.minHour);
@@ -39,13 +39,13 @@ var employeeAPI = function() {
         $("#fileInput").click(openPic);
         $("#fileProgress").click(openProgress);
         $("#fileProgressUpload").click(uploadInProgress);
-        $('#zoom-in').click({msg: 'pic'},zoomIn); 
-        $('#zoom-out').click({msg: 'pic'},zoomOut);
-        $('#reset-zoom').click({msg: 'pic'},zoomReset);
-        $('#rotate').click(rotate);
-        $('#buttonLogInAdmin').click(buttonPopUp);
-        $('#forgetPassword').click(forgetPassword);
-        $('#signUpAdmin').click(signUpAdmin);
+        $("#zoom-in").click({msg: "pic"},zoomIn); 
+        $("#zoom-out").click({msg: "pic"},zoomOut);
+        $("#reset-zoom").click({msg: "pic"},zoomReset);
+        $("#rotate").click(rotate);
+        $("#buttonLogInAdmin").click(buttonPopUp);
+        $("#forgetPassword").click(forgetPassword);
+        $("#signUpAdmin").click(signUpAdmin);
     };
     // הרשמת מנהל נוסף
     var signUpAdmin= function(){
@@ -98,8 +98,8 @@ var employeeAPI = function() {
         var holidayArray = ($("#txtDaysHolidayArray").val().split(",")).map(Number);
         var recoveryArray = ($("#txtDaysRecoveryArray").val().split(",")).map(Number);
         var database = firebase.database();
-        var leadsRef = database.ref('Settings');
-        leadsRef.once('value', function(snapshot) { 
+        var leadsRef = database.ref("Settings");
+        leadsRef.once("value", function(snapshot) { 
             snapshot.forEach(function(childSnapshot) {             
             var childData = childSnapshot.val();
             var key=childSnapshot.key;
@@ -119,24 +119,24 @@ var employeeAPI = function() {
         var flag= false;
         if($("#txtFindForm").val() == undefined)
         {
-            alert('הכנס אימייל לקוח');
+            alert("הכנס אימייל לקוח");
             return;
         }
         var database = firebase.database();
-        var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        var leadsRef = database.ref("user");
+        leadsRef.once("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if($("#txtFindForm").val() == childData.email && childData.status == "done")
                 {
                     flag= true;
-                    var preview = document.getElementById('loadFormAdmin'); //selects the query named img
+                    var preview = document.getElementById("loadFormAdmin"); //selects the query named img
                     preview.src = childData.outPut;
                 }
              });
              if(!flag)
              {
-                 alert('לא קיים טופס לאימייל זה');
+                 alert("לא קיים טופס לאימייל זה");
                  return false;
              }
         });
@@ -146,21 +146,21 @@ var employeeAPI = function() {
         var flag= true;
         let storageRef = firebase.storage().ref();
         var database = firebase.database();
-        var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        var leadsRef = database.ref("user");
+        leadsRef.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "saved")
                     {
                         
-                        var desertRef = storageRef.child('paycheck/'+childData.email+childData.fileName+'.png');
+                        var desertRef = storageRef.child("paycheck/"+childData.email+childData.fileName+".png");
                         // Delete the file
                         desertRef.delete().then(function() {
                         // File deleted successfully
                         }).catch(function(error) {
                         // Uh-oh, an error occurred!
                         });
-                       var desertRef = storageRef.child('output/'+childSnapshot.key+'.png');
+                       var desertRef = storageRef.child("output/"+childSnapshot.key+".png");
                         // Delete the   
                         desertRef.delete().then(function() {
                             alert("output delete");
@@ -186,7 +186,7 @@ var employeeAPI = function() {
     var backUp = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref('user');
+        var leadsRef = database.ref("user");
         var table=
                         "<table>"+
                              "<tr>"+
@@ -211,7 +211,7 @@ var employeeAPI = function() {
                                 "<th>תלוש משכורת</th>"+
                                 "<th>דוח סופי</th>"+
                             "</tr>";
-        leadsRef.once('value', function(snapshot) {
+        leadsRef.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                     if(childData.status == "done" || childData.status == "saved")
@@ -247,7 +247,7 @@ var employeeAPI = function() {
             {
                 table+="</table>";
                 $("#dvData").html(table);
-                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#dvData').html()));
+                window.open("data:application/vnd.ms-excel," + encodeURIComponent($("#dvData").html()));
             }
             if(!flag){
                 alert("אין מידע לגיבוי");
@@ -306,36 +306,36 @@ var employeeAPI = function() {
         $("#txtTravelDay").val(travelDay);
         $("#txtDaysHolidayArray").val(daysHolidayArray);
         $("#txtDaysRecoveryArray").val(daysRecoveryArray);
-        $('#buttonUpdateAdmin').click(updateAdminValues);
-        $('#buttonFindForm').click(findEndForm);
-        $('#buttonBackUp').click(backUp);
-        $('#buttonDeleteSaved').click(deleteSaved);
+        $("#buttonUpdateAdmin").click(updateAdminValues);
+        $("#buttonFindForm").click(findEndForm);
+        $("#buttonBackUp").click(backUp);
+        $("#buttonDeleteSaved").click(deleteSaved);
          tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[2].style.display = "none";
-        $('#defaultOpen').click(function(){
+        $("#defaultOpen").click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[1].style.display = "none";
             tabcontent[0].style.display = "block";
             tabcontent[2].style.display = "none";
             return false;
         });
-        $('#showBackUP').click(function(){
+        $("#showBackUP").click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "none";
             tabcontent[2].style.display = "block";
             return false;
         });
-        $('#showReportsId').click(function(){
+        $("#showReportsId").click(function(){
             tabcontent = document.getElementsByClassName("tabcontent");
             tabcontent[0].style.display = "none";
             tabcontent[1].style.display = "block";
             tabcontent[2].style.display = "none";
-            $('#zoom-inAdmin').click({msg: 'admin'},zoomIn); 
-            $('#zoom-outAdmin').click({msg: 'admin'},zoomOut);
-            $('#reset-zoomAdmin').click({msg: 'admin'},zoomReset);
-            $('#rotateAdmin').click(rotate);   
+            $("#zoom-inAdmin").click({msg: "admin"},zoomIn); 
+            $("#zoom-outAdmin").click({msg: "admin"},zoomOut);
+            $("#reset-zoomAdmin").click({msg: "admin"},zoomReset);
+            $("#rotateAdmin").click(rotate);   
             return false;
         });        
     }
@@ -358,8 +358,8 @@ var employeeAPI = function() {
     var openPic = function(){
         var flag= false;
         var database = firebase.database();
-        var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        var leadsRef = database.ref("user");
+        leadsRef.once("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 if(!flag)
                 {              
@@ -370,7 +370,7 @@ var employeeAPI = function() {
                         database.ref("user/"+key+"/status").set("true");
                         currentSnapshot= childSnapshot;
                         flag= true;
-                        var preview = document.getElementById('pic'); //selects the query named img
+                        var preview = document.getElementById("pic"); //selects the query named img
                         preview.src = childData.paycheck;
                         currentEmail= childData.email;
                     }
@@ -385,8 +385,8 @@ var employeeAPI = function() {
         var list = $("#progress");
         list.empty();
         var database = firebase.database();
-        var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        var leadsRef = database.ref("user");
+        leadsRef.once("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if(childData.status == "true")
@@ -396,22 +396,22 @@ var employeeAPI = function() {
                 }
              });
              if(!flag)
-                alert('אין טפסים בתהליך');
+                alert("אין טפסים בתהליך");
         });
         return false;
     };
 
     var uploadInProgress = function(){
         var database = firebase.database();
-        var leadsRef = database.ref('user');
-        leadsRef.once('value', function(snapshot) {
+        var leadsRef = database.ref("user");
+        leadsRef.once("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {                     
                 var childData = childSnapshot.val();
                 if($("#progress option:selected").text() == childData.email)
                 {
                     currentSnapshot= childSnapshot;
                     currentEmail= childData.email;
-                    var preview = document.getElementById('pic'); //selects the query named img
+                    var preview = document.getElementById("pic"); //selects the query named img
                     preview.src = childData.paycheck;
                 }
              });
@@ -623,51 +623,51 @@ var employeeAPI = function() {
     var zoomIn = function(e){
         if(e.data.msg == "pic")
         {
-            $('#pic').width($('#pic').width()*1.2);
-            $('#pic').height($('#pic').height()*1.2);
+            $("#pic").width($("#pic").width()*1.2);
+            $("#pic").height($("#pic").height()*1.2);
         }
         if(e.data.msg =="admin")
         {
-            $('#loadFormAdmin').width($('#loadFormAdmin').width()*1.2);
-            $('#loadFormAdmin').height($('#loadFormAdmin').height()*1.2);
+            $("#loadFormAdmin").width($("#loadFormAdmin").width()*1.2);
+            $("#loadFormAdmin").height($("#loadFormAdmin").height()*1.2);
         }
 }
 
     var zoomOut = function(e){
         if(e.data.msg == "pic")
         {
-            $('#pic').width($('#pic').width()/1.2);
-            $('#pic').height($('#pic').height()/1.2);
+            $("#pic").width($("#pic").width()/1.2);
+            $("#pic").height($("#pic").height()/1.2);
         }
         if(e.data.msg =="admin")
         {
-            $('#loadFormAdmin').width($('#loadFormAdmin').width()/1.2);
-            $('#loadFormAdmin').height($('#loadFormAdmin').height()/1.2);
+            $("#loadFormAdmin").width($("#loadFormAdmin").width()/1.2);
+            $("#loadFormAdmin").height($("#loadFormAdmin").height()/1.2);
         }
     }
 
     var zoomReset = function(e){
         if(e.data.msg == "pic")
         {
-            $('#pic').width("100%");
-            $('#pic').height("100%");
+            $("#pic").width("100%");
+            $("#pic").height("100%");
         }
         if(e.data.msg =="admin")
         {
-            $('#loadFormAdmin').width("100%");
-            $('#loadFormAdmin').height("100%");
+            $("#loadFormAdmin").width("100%");
+            $("#loadFormAdmin").height("100%");
         }    
     }
 
     var rotate = function(){
-        img = document.getElementById('container');
+        img = document.getElementById("container");
         angle = (angle + 90) % 360;
         img.className = "rotate" + angle;
     }
 
      var previewFile = function(){
-        var preview = document.getElementById('pic'); //selects the query named img
-        var input = document.getElementById('fileInput');
+        var preview = document.getElementById("pic"); //selects the query named img
+        var input = document.getElementById("fileInput");
         var file = input.files[0];
         var reader  = new FileReader();
         reader.onloadend = function () {
@@ -936,21 +936,21 @@ var employeeAPI = function() {
             return false;
         });
         $("#save").click(function(){
-            document.getElementById('save').style.visibility='hidden';
-            document.getElementById('homePageButton').style.visibility='hidden';
+            document.getElementById("save").style.visibility="hidden";
+            document.getElementById("homePageButton").style.visibility="hidden";
             html2canvas(document.body, 
             {
-                           background:'#fff',
+                           background: "#fff",
                            onrendered: function(canvas) 
                            {           
                                 var data = canvas.toDataURL("image/png", 1);
                                 //window.open(data); 
                                 // Send output to email!!!!
-                                var base64result = data.split(',')[1];
+                                var base64result = data.split(",")[1];
                                 let storageRef = firebase.storage().ref();
                                 var key=currentSnapshot.key;
-                                storageRef.child('output/'+key+'.png')
-                                 .putString(base64result, 'base64', { contentType: 'image/png' }).then((savedPicture) => {
+                                storageRef.child("output/"+key+".png")
+                                 .putString(base64result, "base64", { contentType: "image/png" }).then((savedPicture) => {
                                     // update output field
                                     var database = firebase.database();
                                     database.ref("user/"+key+"/outPut").set(savedPicture.downloadURL);
@@ -977,4 +977,3 @@ var employeeAPI = function() {
 }();
 
 $(document).ready(employeeAPI.initModule);
-

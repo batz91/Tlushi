@@ -23,6 +23,5 @@ backHomePage()
 {
      this.navCtrl.push(HomePage);
 }
- 
 
 }
