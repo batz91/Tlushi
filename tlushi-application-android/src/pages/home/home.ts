@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import {NavController} from "ionic-angular";
 import {AlertController} from "ionic-angular";
-import { ActionSheetController, NavParams, LoadingController } from "ionic-angular"
+import { ActionSheetController, NavParams, LoadingController } from "ionic-angular";
 
 import { Camera } from "@ionic-native/camera";
 import { EndPage } from "../endpage/endpage";
@@ -96,12 +96,12 @@ export class HomePage {
     var message ="";
     if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.userEmail)))
       {
-        emailFlag=true;
-        message+="<p> אימייל לא חוקי </p>";
+        emailFlag= true;
+        message+= "<p> אימייל לא חוקי </p>";
       }
-      if(message!=""){
+      if(message != ""){
           let alert = this.alertCtrl.create({
-          cssClass:"buttons",
+          cssClass: "buttons",
           title: "שדה חסר",
           subTitle: message,
           buttons: ["אשר"]
@@ -109,10 +109,10 @@ export class HomePage {
           alert.present();
           return false;
       }
-     if(this.terms==false)
+     if(this.terms === false)
       {
         let alert = this.alertCtrl.create({
-              cssClass:"buttons",
+              cssClass: "buttons",
               subTitle: "יש לאשר את תנאי השימוש",
               buttons: ["אשר"]
         });
@@ -124,7 +124,7 @@ export class HomePage {
   openCamera() {
     let loading = this.loadingCtrl.create({
              content: "...התלוש בתהליך טעינה",
-             dismissOnPageChange:true
+             dismissOnPageChange: true
     });
     loading.present();
     var options = {
@@ -173,7 +173,7 @@ export class HomePage {
 
    uploadObj() {
       var image=  this.cameraUrl;
-      if(this.cameraUrl == undefined)
+      if(this.cameraUrl === undefined)
         image= "none";
     
     // firebase storage folder
