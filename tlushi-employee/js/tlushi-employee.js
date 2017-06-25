@@ -423,6 +423,7 @@ var employeeAPI = function() {
     };
 
     var calc = function() {
+        outPutSum= 0;
         var goodOutPut= "נראה כי הרכיב תקין, אך לא ניתן לדעת זאת בוודאות ללא"+"<font color='blue'> בדיקה מלאה</font>";
         var allInput = $("Input");
         allInput.removeClass("error");
