@@ -1005,7 +1005,7 @@ var employeeAPI = function() {
                                     var database = firebase.database();
                                     database.ref("user/"+key+"/outPut").set(savedPicture.downloadURL);
                                     updateInputFields();
-                                    emailjs.send("diabetesappjce","tlushi",{to_email: currentEmail, paycheck_output: savedPicture.downloadURL})
+                                    emailjs.send("gmail","tlushi",{to_email: currentEmail, paycheck_output: savedPicture.downloadURL})
                                     .then(function(response) {
                                         // status = done
                                         database.ref("user/"+key+"/status").set("done");
